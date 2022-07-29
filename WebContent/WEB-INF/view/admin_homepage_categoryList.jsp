@@ -14,8 +14,9 @@
 
 <link href="<%=cp %>/css/adminStyle.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="<%=cp %>/text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="<%=cp %>/js/scripts.js"></script>
@@ -25,85 +26,12 @@
     background-color: #f5f4f2;
     color: #fca652 !important;
 }
-
-/* sweetalert */
-h2#swal2-title {
-    font-size: 23px;
-    padding-top: 40px;
-    padding-bottom: 10px;
-}
-input.swal2-input {
-    margin-bottom: 10px;
-}
-input.swal2-input:focus {
-    box-shadow: none;
-    border: 2px solid #fca652;
-}
-button.swal2-confirm.swal2-styled {
-    background-color: #fca652;
-    width: 100px;
-    margin-right: 20px;
-}
-button.swal2-cancel.swal2-styled {
-    width: 100px;
-    margin-right: 20px;
-}
-button.swal2-confirm.swal2-styled:focus {
-    box-shadow: none;
-}
-button.swal2-cancel.swal2-styled:focus {
-    box-shadow: none;
-}
-
 </style>
-<script type="text/javascript">
-			
-	$(document).ready(function()
-    {
-    	$(".saveBtn").click(function()
-    	{
-    		Swal.fire({
-    			  title: '변경사항을 저장하시겠습니까?',
-    			  showCancelButton: true,
-    			  confirmButtonText: '저장',
-    			  cancelButtonText: '취소',
-    		      reverseButtons: true
-    			}).then((result) => {
-    			  if (result.isConfirmed) {
-    			    Swal.fire({
-    			    	title: '변경 완료!',
-    			    	icon: 'success',
-    			    	confirmButtonText: '확인'
-    			    }).then(() => {
-    			    	location.href = 'admin_homepage_categoryList.jsp';
-    			    });
-    			  }
-    			});
-        });
-    	
-    	$(".cancelBtn").click(function()
-		{
-    		Swal.fire({
-    			  title: '그만하고 목록으로 돌아가시겠습니까?',
-    			  text: "변경사항이 저장되지 않습니다.",
-    			  icon: 'warning',
-    			  iconColor: '#f27474',
-    			  showCancelButton: true,
-    			  confirmButtonText: '목록으로',
-    			  cancelButtonText: '취소',
-    			}).then((result) => {
-    			  if (result.isConfirmed) {
-    				  location.href='admin_homepage_categoryList.jsp';
-    			  }
-    			})
-		});
-    });
-</script>
 </head>
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -127,11 +55,10 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -147,11 +74,11 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -167,9 +94,9 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse show" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link current-menu" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link current-menu" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -185,8 +112,8 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -202,9 +129,9 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -220,12 +147,12 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link" href="admin_accountList.jsp">
+						<a class="nav-link" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -254,78 +181,76 @@ button.swal2-cancel.swal2-styled:focus {
 								<table class="table table-hover table-borderless reportReason-table">
 									<thead>
 										<tr>
-											<th colspan="3">
+											<th colspan="2">
 												<i class="fa-solid fa-kitchen-set"></i>카테고리
-												<button type="button" class="adminBtn saveBtn">저장</button>
-												<button type="button" class="adminBtn cancelBtn">취소</button>
+												<button type="button" class="adminBtn main-categoryAdd-btn">대분류추가</button>
 											</th>
-											
 										</tr>
 									</thead>
 									<tbody>
 										<tr class="main-category">
-											<td><i class="fa-solid fa-bars"></i></td>
+											<td>1</td>
 											<td>쌀/면/빵/떡</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 쌀</td>
+											<td>- 쌀</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 면</td>
+											<td>- 면</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 빵</td>
+											<td>- 빵</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 떡</td>
+											<td>- 떡</td>
 										</tr>
 										<tr class="main-category">
-											<td><i class="fa-solid fa-bars"></i></td>
+											<td>2</td>
 											<td>과일/채소</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 과일</td>
+											<td>- 과일</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 채소</td>
+											<td>- 채소</td>
 										</tr>
 										<tr class="main-category">
-											<td><i class="fa-solid fa-bars"></i></td>
+											<td>3</td>
 											<td>수산/정육/계란</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 수산</td>
+											<td>- 수산</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 정육</td>
+											<td>- 정육</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 계란</td>
+											<td>- 계란</td>
 										</tr>
 										<tr class="main-category">
-											<td><i class="fa-solid fa-bars"></i></td>
+											<td>4</td>
 											<td>밀키트/간편식/냉동</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 밀키트</td>
+											<td>- 밀키트</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 간편식</td>
+											<td>- 간편식</td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><i class="fa-solid fa-bars"></i>- 냉동</td>
+											<td>- 냉동</td>
 										</tr>
 									</tbody>
 								</table>
@@ -338,7 +263,7 @@ button.swal2-cancel.swal2-styled:focus {
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>

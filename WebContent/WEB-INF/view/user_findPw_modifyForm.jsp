@@ -128,7 +128,7 @@ button.swal2-confirm.swal2-styled:focus {
 	</section>
 
 	<!-- import FOOTER -->
-	<c:import url="user_footer.jsp"></c:import>
+	<c:import url="/footer.lion"></c:import>
  
     <!-- js plugins -->
     <script src="<%=cp%>/js/jquery-3.3.1.min.js"></script>

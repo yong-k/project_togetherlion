@@ -28,7 +28,7 @@
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -52,11 +52,10 @@
 						<div class="collapse" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -72,11 +71,11 @@
 						<div class="collapse show" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link current-menu" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link current-menu" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -92,9 +91,9 @@
 						<div class="collapse" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -110,8 +109,8 @@
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -127,9 +126,9 @@
 						<div class="collapse" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -145,12 +144,12 @@
 						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link" href="admin_accountList.jsp">
+						<a class="nav-link" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -170,7 +169,7 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item">포인트조회</li>
 								<li class="breadcrumb-item active" aria-current="page"><a
-									href="#">포인트환불</a></li>
+									href="#">포인트결제</a></li>
 							</ol>
 						</nav>
 
@@ -194,113 +193,102 @@
 										<th>이메일(ID)</th>
 										<th>이름 </th>				
 										<th>닉네임</th>
-										<th>환불포인트</th> 
-						 				<th>환불일</th>
+										<th>결제포인트</th> 
+						 				<th>결제일</th>
 						 				<th>공동구매게시물번호</th>
-						 				<th>환불사유</th>
 									</tr>
-								</thead>
+								<thead>
 								<tbody>
 									<tr>
-										<td>287</td>
-										<td>csd1224@naver.com</td>
-										<td>윤채림</td>
-										<td>1일1독</td>
-										<td>10000</td> 
-										<td>2022-04-23</td>
-										<td>g1011</td>
-										<td>미진행</td>
-									</tr>
-									<tr>
-										<td>286</td>
-										<td>sdb01201@naver.com</td>
-										<td>김소율</td>
-										<td>순두부</td>
-										<td>15000</td> 
-										<td>2022-04-20</td>
-										<td>g1024</td>
-										<td>미진행</td>
-									</tr>
-									<tr>
-										<td>285</td>			
-										<td>sgsg020@naver.com</td>
-										<td>강우성</td>
-										<td>포뇨포뇨뇨</td>
+										<td>422</td>
+										<td>qwe0001@naver.com</td>
+										<td>김태정</td>
+										<td>고구마무스</td>
 										<td>20000</td> 
-										<td>2022-03-28</td>
-										<td>g1029</td>
-										<td>공구취소</td>
+										<td>2022-05-29</td>
+										<td>g1878</td>
 									</tr>
 									<tr>
-										<td>284</td>
-										<td>tnqkr200@naver.com</td>
-										<td>김서현</td>
-										<td>수박</td>
-										<td>24000</td> 
-										<td>2022-03-23</td>
-										<td>g1022</td>
-										<td>미진행</td>
+										<td>421</td>
+										<td>qwe0002@naver.com</td>
+										<td>이선우</td>
+										<td>sw0900</td>
+										<td>18000</td> 
+										<td>2022-05-20</td>
+										<td>g1966</td>
 									</tr>
 									<tr>
-										<td>283</td>
-										<td>satbyeol12@naver.com</td>
-										<td>이샛별</td>
-										<td>샛별</td>
-										<td>1500</td> 
-										<td>2022-03-14</td>
-										<td>g1021</td>
-										<td>차액발생</td>
+										<td>420</td>			
+										<td>qwe0003@naver.com</td>
+										<td>김지수</td>
+										<td>대롱대롱</td>
+										<td>12000</td> 
+										<td>2022-05-12</td>
+										<td>g1788</td>
 									</tr>
 									<tr>
-										<td>287</td>
-										<td>csd1224@naver.com</td>
-										<td>윤채림</td>
-										<td>1일1독</td>
-										<td>10000</td> 
-										<td>2022-04-23</td>
-										<td>g1011</td>
-										<td>미진행</td>
-									</tr>
-									<tr>
-										<td>286</td>
-										<td>sdb01201@naver.com</td>
-										<td>김소율</td>
-										<td>순두부</td>
-										<td>15000</td> 
-										<td>2022-04-20</td>
-										<td>g1024</td>
-										<td>미진행</td>
-									</tr>
-									<tr>
-										<td>285</td>			
-										<td>sgsg020@naver.com</td>
-										<td>강우성</td>
-										<td>포뇨포뇨뇨</td>
+										<td>422</td>
+										<td>qwe0001@naver.com</td>
+										<td>김태정</td>
+										<td>고구마무스</td>
 										<td>20000</td> 
-										<td>2022-03-28</td>
-										<td>g1029</td>
-										<td>공구취소</td>
+										<td>2022-05-29</td>
+										<td>g1878</td>
 									</tr>
 									<tr>
-										<td>284</td>
-										<td>tnqkr200@naver.com</td>
-										<td>김서현</td>
-										<td>수박</td>
-										<td>24000</td> 
-										<td>2022-03-23</td>
-										<td>g1022</td>
-										<td>미진행</td>
+										<td>421</td>
+										<td>qwe0002@naver.com</td>
+										<td>이선우</td>
+										<td>sw0900</td>
+										<td>18000</td> 
+										<td>2022-05-20</td>
+										<td>g1966</td>
 									</tr>
 									<tr>
-										<td>283</td>
-										<td>satbyeol12@naver.com</td>
-										<td>이샛별</td>
-										<td>샛별</td>
-										<td>1500</td> 
-										<td>2022-03-14</td>
-										<td>g1021</td>
-										<td>차액발생</td>
+										<td>420</td>			
+										<td>qwe0003@naver.com</td>
+										<td>김지수</td>
+										<td>대롱대롱</td>
+										<td>12000</td> 
+										<td>2022-05-12</td>
+										<td>g1788</td>
 									</tr>
+									<tr>
+										<td>422</td>
+										<td>qwe0001@naver.com</td>
+										<td>김태정</td>
+										<td>고구마무스</td>
+										<td>20000</td> 
+										<td>2022-05-29</td>
+										<td>g1878</td>
+									</tr>
+									<tr>
+										<td>421</td>
+										<td>qwe0002@naver.com</td>
+										<td>이선우</td>
+										<td>sw0900</td>
+										<td>18000</td> 
+										<td>2022-05-20</td>
+										<td>g1966</td>
+									</tr>
+									<tr>
+										<td>420</td>			
+										<td>qwe0003@naver.com</td>
+										<td>김지수</td>
+										<td>대롱대롱</td>
+										<td>12000</td> 
+										<td>2022-05-12</td>
+										<td>g1788</td>
+									</tr>	 
+									<tr>
+										<td>420</td>			
+										<td>qwe0003@naver.com</td>
+										<td>김지수</td>
+										<td>대롱대롱</td>
+										<td>12000</td> 
+										<td>2022-05-12</td>
+										<td>g1788</td>
+									</tr>	
 								</tbody>
 							</table>
 						</div>
@@ -333,7 +321,7 @@
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>

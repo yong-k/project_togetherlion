@@ -28,7 +28,7 @@
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -52,11 +52,10 @@
 						<div class="collapse" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -72,11 +71,11 @@
 						<div class="collapse" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -89,12 +88,12 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="homepage" aria-labelledby="headingThree"
+						<div class="collapse show" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link current-menu" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -110,8 +109,8 @@
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -127,9 +126,9 @@
 						<div class="collapse" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -142,15 +141,15 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse show" id="inquiry" aria-labelledby="headingSix"
+						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link current-menu" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link" href="admin_accountList.jsp">
+						<a class="nav-link" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -168,20 +167,25 @@
 						<!--  Breadcrumb -->
 						<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item">문의관리</li>
+								<li class="breadcrumb-item">홈페이지관리</li>
 								<li class="breadcrumb-item active" aria-current="page"><a
-									href="#">1:1문의</a></li>
+									href="#">공지사항</a></li>
 							</ol>
 						</nav>
 
-						<!-- searchBar -->
-						<form action="#">
-							<select class="form-select" aria-label="Default select example">
-								<option value="1" selected>작성자ID</option>
-							</select> 
-							<input class="form-control" type="text" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-							<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-						</form>
+						<div>
+							<!-- searchBar -->
+							<form class="search-form" action="#">
+								<select class="form-select" aria-label="Default select example">
+									<option value="1" selected>제목</option>
+									<option value="2">작성자ID</option>
+								</select> 
+								<input class="form-control" type="text" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+								<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+							</form>
+							
+							<button type="button" class="btn btn-secondary writeBtn" onclick="location.href='admin_homepage_noticeInsertForm.jsp'">글쓰기</button>
+						</div>
 
 						<div class="card-body">
 							<table class="table table-bordered table-hover">
@@ -189,57 +193,71 @@
 									<tr>
 										<th>번호</th>
 										<th>제목</th>
-										<th>작성자ID</th>
-										<th>작성일</th>
-										<th>답변상태</th>
-										<th>답변일</th>
-										<th>담당자</th>
+										<th>작성자ID</th>				
+										<th>작성일</th> 
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
+										<td>16</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">시스템 점검 안내</a></td>
+										<td>admin01</td>
+										<td>2022-05-04</td> 
+									</tr>
+									<tr>
+										<td>15</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">개인정보처리방침 개정 내용 사전 안내(6/1~)</a></td>
+										<td>admin02</td>
+										<td>2022-05-02</td>
+									</tr>
+									<tr>
+										<td>14</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">5년이상 미 사용 포인트 소멸 관련 공지사항입니다.</a></td>
+										<td>admin04</td>
+										<td>2022-04-28</td>
+									</tr>
+									<tr>
+										<td>13</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">시스템 점검 안내</a></td>
+										<td>admin01</td>
+										<td>2022-05-04</td> 
+									</tr>
+									
+									<tr>
+										<td>12</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">개인정보처리방침 개정 내용 사전 안내(6/1~)</a></td>
+										<td>admin02</td>
+										<td>2022-05-02</td>
+									</tr>
+									<tr>
+										<td>11</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">5년이상 미 사용 포인트 소멸 관련 공지사항입니다.</a></td>
+										<td>admin04</td>
+										<td>2022-04-28</td>
+									</tr>
+									<tr>
 										<td>10</td>
-										<td><a href="admin_inquiry_inquiryAnswerInsertForm.jsp">진행잔데 취소 가능한가요?</a></td>
-										<td>sus234@naver.com</td>
-										<td>2022-05-24</td>
-										<td>
-											<span class="badge rounded-pill bg-danger report-handling-badge">미답변</span>
-										</td>
-										<td></td>
-										<td></td>
+										<td><a href="admin_homepage_noticeArticle.jsp">시스템 점검 안내</a></td>
+										<td>admin01</td>
+										<td>2022-05-04</td> 
 									</tr>
 									<tr>
 										<td>9</td>
-										<td><a href="admin_inquiry_inquiryAnswerInsertForm.jsp">나눔날짜 변경가능할까요?</a></td>
-										<td>wus234@naver.com</td>
-										<td>2022-05-25</td>
-										<td>
-											<span class="badge rounded-pill bg-danger report-handling-badge">미답변</span>
-										</td>
-										<td></td>
-										<td></td>
+										<td><a href="admin_homepage_noticeArticle.jsp">개인정보처리방침 개정 내용 사전 안내(6/1~)</a></td>
+										<td>admin02</td>
+										<td>2022-05-02</td>
 									</tr>
 									<tr>
 										<td>8</td>
-										<td><a href="admin_inquiry_inquiryAnswerArticle.jsp">나눔날 못가면 어떡하나요?</a></td>
-										<td>hus234@naver.com</td>
-										<td>2022-05-24</td>
-										<td>
-											<span class="badge rounded-pill bg-secondary report-handling-badge">답변</span>
-										</td>
-										<td>2022-05-24</td>
-										<td>ej456</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">5년이상 미 사용 포인트 소멸 관련 공지사항입니다.</a></td>
+										<td>admin04</td>
+										<td>2022-04-28</td>
 									</tr>
-									<tr>
+						 			<tr>
 										<td>7</td>
-										<td><a href="admin_inquiry_inquiryAnswerArticle.jsp">상품에 문제가 있으면 어떡하나요?</a></td>
-										<td>aus234@naver.com</td>
-										<td>2022-05-23</td>
-										<td>
-											<span class="badge rounded-pill bg-secondary report-handling-badge">답변</span>
-										</td>
-										<td>2022-05-23</td>
-										<td>sj153</td>
+										<td><a href="admin_homepage_noticeArticle.jsp">5년이상 미 사용 포인트 소멸 관련 공지사항입니다.</a></td>
+										<td>admin04</td>
+										<td>2022-04-28</td>
 									</tr>
 								</tbody>
 							</table>
@@ -273,7 +291,7 @@
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IBuypostDAO">
+
+	<select id="mainCateList" resultType="com.test.mybatis.mainCategoryDTO">
+		SELECT CODE, NAME
+		FROM MAIN_CATE	
+	</select>
+
+</mapper>

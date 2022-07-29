@@ -12,7 +12,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>admin같이사자</title>
 
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 <link href="<%=cp %>/css/adminStyle.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -29,7 +28,7 @@
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -50,14 +49,13 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse" id="member" aria-labelledby="headingOne"
+						<div class="collapse show" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link current-menu" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -73,11 +71,11 @@
 						<div class="collapse" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -93,9 +91,9 @@
 						<div class="collapse" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -111,8 +109,8 @@
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -125,12 +123,12 @@
 								<i class="fas fa-angle-down"></i>
 							</div>
 						</a>
-						<div class="collapse show" id="report" aria-labelledby="headingFive"
+						<div class="collapse" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link current-menu" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -146,12 +144,12 @@
 						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link" href="admin_accountList.jsp">
+						<a class="nav-link" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -169,64 +167,154 @@
 						<!--  Breadcrumb -->
 						<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item">신고관리</li>
+								<li class="breadcrumb-item">회원조회</li>
 								<li class="breadcrumb-item active" aria-current="page"><a
-									href="#">접수내역</a></li>
+									href="#">탈퇴회원</a></li>
 							</ol>
 						</nav>
 
-						<!-- searchBar -->
-						<form action="#">
-							<select class="form-select" aria-label="Default select example">
-								<option value="1" selected>이메일(ID)</option>
-							</select> <input class="form-control" type="text"
-								aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-							<button class="btn btn-primary" id="btnNavbarSearch"
-								type="button">
-								<i class="fas fa-search"></i>
-							</button>
-						</form>
+						<div>
+							<!-- searchBar -->
+							<form class="search-form" action="#">
+								<select class="form-select" aria-label="Default select example">
+									<option value="1" selected>이메일(ID)</option>
+									<option value="2">이름</option>
+								</select> 
+								<input class="form-control" type="text" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+								<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+							</form>
+						</div>
 
 						<div class="card-body">
 							<table class="table table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>번호</th>
-										<th>피신고자ID</th>
-										<th>게시물종류</th>
-										<th>게시물번호</th>
-										<th>신고자ID</th>
-										<th>신고사유</th>
-										<th>신고접수일</th>									
+										<th>이메일(ID)</th>
+										<th>이름</th>
+										<th>전화번호</th>
+										<th>탈퇴일</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>3</td>
-										<td>saza123@gmail.com</td>
-										<td>공동구매</td>
-										<td><a href="admin_report_receptionDetail.jsp">g7512</a></td>
-										<td>gachi394@gmail.com</td>
-										<td>판매금지품목</td>
-										<td>2022-05-27</td>
+										<td>189</td>
+										<td>zzz123123@naver.com</td>
+										<td>김재희</td>
+										<td>010-1111-1111</td>
+										<td>2022-05-29</td> 
 									</tr>
+									
 									<tr>
-										<td>2</td>
-										<td>dfjad@gmail.com</td>
-										<td>커뮤니티</td>
-										<td><a href="admin_report_receptionDetail.jsp">g7512</a></td>
-										<td>elfnaj589@gmail.com</td>
-										<td>친목</td>
-										<td>2022-05-28</td>
+										<td>188</td>
+										<td>zzz12121@naver.com</td>
+										<td>신미나</td>
+										<td>010-2222-2222</td>
+										<td>2022-05-20</td> 
 									</tr>
+									
 									<tr>
-										<td>1</td>
-										<td>qosjfq@gmail.com</td>
-										<td>댓글</td>
-										<td><a href="admin_report_receptionDetail.jsp">r9582</a></td>
-										<td>xfnqp33@gmail.com</td>
-										<td>부적절한 내용</td>
-										<td>2022-05-29</td>
+										<td>187</td>			
+										<td>aaa1010@naver.com</td>
+										<td>이지혜</td>
+										<td>010-3333-3333</td>
+										<td>2022-05-12</td> 
+									</tr>
+						
+									<tr>
+										<td>189</td>
+										<td>zzz123123@naver.com</td>
+										<td>김재희</td>
+										<td>010-4444-4444</td>
+										<td>2022-05-29</td> 
+									</tr>
+									
+									<tr>
+										<td>188</td>
+										<td>zzz12121@naver.com</td>
+										<td>신미나</td>
+										<td>010-5555-5555</td>
+										<td>2022-05-20</td> 
+									</tr>
+									
+									<tr>
+										<td>187</td>			
+										<td>aaa1010@naver.com</td>
+										<td>이지혜</td>
+										<td>010-6666-6666</td>
+										<td>2022-05-12</td> 
+									</tr>
+									
+									<tr>
+										<td>189</td>
+										<td>zzz123123@naver.com</td>
+										<td>김재희</td>
+										<td>010-7777-7777</td>
+										<td>2022-05-29</td> 
+									</tr>
+									
+									<tr>
+										<td>188</td>
+										<td>zzz12121@naver.com</td>
+										<td>신미나</td>
+										<td>010-8888-8888</td>
+										<td>2022-05-20</td> 
+									</tr>
+									
+									<tr>
+										<td>187</td>			
+										<td>aaa1010@naver.com</td>
+										<td>이지혜</td>
+										<td>010-9999-9999</td>
+										<td>2022-05-12</td> 
+									</tr>
+									
+									<tr>
+										<td>189</td>
+										<td>zzz123123@naver.com</td>
+										<td>김재희</td>
+										<td>010-7777-7777</td>
+										<td>2022-05-29</td> 
+									</tr>
+									
+									<tr>
+										<td>188</td>
+										<td>zzz12121@naver.com</td>
+										<td>신미나</td>
+										<td>010-9999-9999</td>
+										<td>2022-05-20</td> 
+									</tr>
+									
+									<tr>
+										<td>187</td>			
+										<td>aaa1010@naver.com</td>
+										<td>이지혜</td>
+										<td>010-7777-7777</td>
+										<td>2022-05-12</td> 
+									</tr>
+									
+									<tr>
+										<td>189</td>
+										<td>zzz123123@naver.com</td>
+										<td>김재희</td>
+										<td>010-9999-9999</td>
+										<td>2022-05-29</td> 
+									</tr>
+									
+									<tr>
+										<td>188</td>
+										<td>zzz12121@naver.com</td>
+										<td>신미나</td>
+										<td>010-4444-4444</td>
+										<td>2022-05-20</td> 
+									</tr>
+									
+									<tr>
+										<td>187</td>			
+										<td>aaa1010@naver.com</td>
+										<td>이지혜</td>
+										<td>010-4444-4444</td>
+										<td>2022-05-12</td> 
 									</tr>
 								</tbody>
 							</table>
@@ -260,7 +348,7 @@
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>

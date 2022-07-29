@@ -125,7 +125,7 @@ button.swal2-cancel.swal2-styled:focus {
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -149,11 +149,10 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -169,11 +168,11 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -189,9 +188,9 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -207,8 +206,8 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -224,9 +223,9 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -242,12 +241,12 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link current-menu" href="admin_accountList.jsp">
+						<a class="nav-link current-menu" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -364,7 +363,7 @@ button.swal2-cancel.swal2-styled:focus {
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>	

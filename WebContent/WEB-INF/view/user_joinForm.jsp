@@ -83,7 +83,7 @@ div#swal2-html-container {
     			  confirmButtonText: '확인'
     			}).then(() => {
     				// 로그아웃 상태로 로그인창으로 이동
-			    	location.href='user_loginForm.jsp';
+			    	//location.href='loginform.lion';
 			    });
 		});
 

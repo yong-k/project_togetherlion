@@ -103,15 +103,10 @@
                             <span>전체 카테고리</span>
                         </div>
                         <ul style="display: none;">
-                            <li><a href="<%=cp %>/user/user_buypost_category.jsp">쌀/면/빵/떡</a></li>
-                            <li><a href="#">과일/채소</a></li>
-                            <li><a href="#">수산/정육/계란</a></li>
-                            <li><a href="#">밀키트/간편식/냉동</a></li>
-                            <li><a href="#">국/반찬</a></li>
-                             <li><a href="#">간식/과자</a></li>
-                            <li><a href="#">우유/유제품</a></li>
-                            <li><a href="#">물/음료/커피/차</a></li>
-                            <li><a href="#">양념/소스</a></li>
+                        	<c:forEach var="mainCate" items="${mainCateList }">
+                        	<!-- 주소에 mainCate.code 넘겨줘야 됨 -->
+                        	<li><a href="<%=cp %>/user/user_buypost_category.jsp">${mainCate.name }</a></li>
+                        	</c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -120,7 +115,6 @@
 						<ul>
 							<li class="final"><a href="<%=cp %>/user/user_buypost_final.jsp">마감임박</a></li>
 							<li class="active recent"><a href="<%=cp %>/user/user_buypost_new.jsp">최근공구</a></li>
-							<%-- <li><a href="<%=cp %>/user/user_communityMain.jsp">커뮤니티</a></li> --%>
 						</ul>
 					</nav>
 				</div>

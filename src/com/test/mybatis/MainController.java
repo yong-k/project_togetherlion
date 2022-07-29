@@ -1,5 +1,7 @@
 package com.test.mybatis;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,13 +21,31 @@ public class MainController
 	@RequestMapping("/header.lion")
 	public String header(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
 		String member_code = (String)session.getAttribute("member_code");
 		if (member_code != null)
 		{
-			String nickname = (dao.searchMember(member_code)).getNickname();
+			// header:닉네임
+			String nickname = null;
+			if (Integer.parseInt(member_code.substring(1)) > 10)
+			{
+				// 회원
+				IMemberDAO member = sqlSession.getMapper(IMemberDAO.class);
+				nickname = (member.searchMember(member_code)).getNickname();
+			}
+			else
+			{
+				// 관리자
+				IAdminDAO admin = sqlSession.getMapper(IAdminDAO.class);
+				nickname = (admin.searchAdmin(member_code)).getName() + "(관리자)";
+			}
 			model.addAttribute("nickname", nickname);
 		}
+		
+		// header:카테고리
+		IBuypostDAO buypost = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<mainCategoryDTO> mainCateList = buypost.mainCateList();
+		model.addAttribute("mainCateList", mainCateList);
+		
 		return "/WEB-INF/view/user_header.jsp";
 	}
 	

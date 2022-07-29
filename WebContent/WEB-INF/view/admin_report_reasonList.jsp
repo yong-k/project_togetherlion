@@ -10,9 +10,13 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
 <title>admin같이사자</title>
 
 <link href="<%=cp %>/css/adminStyle.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="<%=cp %>/js/scripts.js"></script>
@@ -22,13 +26,12 @@
     background-color: #f5f4f2;
     color: #fca652 !important;
 }
-</style>	
-
+</style>
 </head>
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -52,11 +55,10 @@
 						<div class="collapse" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -72,11 +74,11 @@
 						<div class="collapse" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -92,9 +94,9 @@
 						<div class="collapse" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -110,8 +112,8 @@
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -127,9 +129,9 @@
 						<div class="collapse show" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link current-menu" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link current-menu" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -145,12 +147,12 @@
 						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link" href="admin_accountList.jsp">
+						<a class="nav-link" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -163,121 +165,109 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<div class="card mb-4 admin-table-body">
+					<div class="card mb-4">
 
 						<!--  Breadcrumb -->
 						<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item">신고관리</li>
 								<li class="breadcrumb-item active" aria-current="page"><a
-									href="#">처리내역</a></li>
+									href="#">사유관리</a></li>
 							</ol>
 						</nav>
-
-						<!-- searchBar -->
-						<form action="#">
-							<select class="form-select" aria-label="Default select example">
-								<option value="1" selected>이메일(ID)</option>
-							</select> <input class="form-control" type="text"
-								aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-							<button class="btn btn-primary" id="btnNavbarSearch"
-								type="button">
-								<i class="fas fa-search"></i>
-							</button>
-						</form>
-
-						<div class="card-body">
-							<table class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>피신고자ID</th>
-										<th>게시물종류</th>
-										<th>게시물번호</th>
-										<th>신고자ID</th>
-										<th>신고사유</th>
-										<th>신고접수일</th>
-										<th>담당자ID</th>
-										<th>처리결과</th>
-										<th>신고처리일</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>3</td>
-										<td>akf39@daum.net</td>
-										<td>공동구매</td>
-										<td><a href="admin_report_handlingDetail.jsp">g7523</a></td>
-										<td>gachi394@gmail.com</td>
-										<td>판매금지품목</td>
-										<td>2022-05-29</td>
-										<td>ej456</td>
-										<td>
-											<span class="badge rounded-pill bg-danger report-handling-badge">승인</span>
-										</td>
-										<td>2022-05-31</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>afea@daum.net</td>
-										<td>커뮤니티</td>
-										<td><a href="admin_report_handlingDetail.jsp">c3834</a></td>
-										<td>dfaf2@gmail.com</td>
-										<td>친목</td>
-										<td>2022-05-28</td>
-										<td>sj293</td>
-										<td>
-											<span class="badge rounded-pill bg-secondary report-handling-badge">반려</span>
-										</td>
-										<td>2022-05-30</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>qosjfq@daum.net</td>
-										<td>댓글</td>
-										<td><a href="admin_report_handlingDetail.jsp">r9512</a></td>
-										<td>dfad33@daum.net</td>
-										<td>부적절한 내용</td>
-										<td>2022-05-28</td>
-										<td>sj293</td>
-										<td>
-											<span class="badge rounded-pill bg-danger report-handling-badge">승인</span>
-										</td>
-										<td>2022-05-29</td>
-									</tr>
-								</tbody>
-							</table>
+						
+						<!-- 공동구매게시물 신고사유 -->
+						<div class="buypost-report">
+								<div class="card-body reportReason-card-body">
+								<table class="table table-hover table-borderless reportReason-table">
+									<thead>
+										<tr>
+											<th colspan="2">
+												<i class="fa-solid fa-ban"></i>공동구매게시물
+											</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="main-category">
+											<td>1</td>
+											<td>판매금지 물품이에요</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 무허가식품</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 건강식품</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 위조식품</td>
+										</tr>
+										<tr class="main-category">
+											<td>2</td>
+											<td>필수사항을 기재하지 않았어요</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 필수항목 수정이 필요한 경우</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 잘못된 카테고리 선택</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 상품설명 부족</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 부적절한 내용 기재(음란성, 명예훼손, 저작권침해)</td>
+										</tr>
+										<tr class="main-category">
+											<td>3</td>
+											<td>전문판매업자 같아요</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 여러 계정 또는 하나의 계정으로 같은 물건의 공동구매를 진행</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 해외 구매 대행</td>
+										</tr>
+										<tr class="main-category">
+											<td>4</td>
+											<td>웹 사이트 밖에서 거래를 유도해요</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- SNS 아이디 기재</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 가짜 안전 거래 사이트 기재</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>- 개인 계좌번호 기재</td>
+										</tr>
+										<tr class="main-category">
+											<td>5</td>
+											<td>대리 구매를 요구해요</td>
+										</tr>
+									</tbody>
+								</table>
+								
+							</div>
 						</div>
-
-						<!-- page navigation -->
-						<nav aria-label="Page navigation example">
-							<ul class="pagination justify-content-center">
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);" aria-label="Previous"> <span
-										aria-hidden="true">&laquo;</span>
-								</a></li>
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);">1</a></li>
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);">2</a></li>
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);">3</a></li>
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);">4</a></li>
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);">5</a></li>
-								<li class="page-item"><a class="page-link"
-									href="javascript:void(0);" aria-label="Next"> <span
-										aria-hidden="true">&raquo;</span>
-								</a></li>
-							</ul>
-						</nav>
 					</div>
 				</div>
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>
