@@ -3,6 +3,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String member_code = (String)session.getAttribute("member_code");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +29,10 @@
     <header class="header">
         <div class="header__top lion_header_top"></div>
 
-
+		<%
+		if (member_code == null)
+		{
+		%>
         <div class="header__top">
         	<div class="header__top__right">
         		<div class="header__top__right__social">
@@ -47,15 +52,19 @@
                  </div>
              </div> 
         </div>
-
+        <%
+		}
+		else
+		{
+        %>
         <div class="header__top">
         	<div class="header__top__right">
                 <div class="header__top__right__language header__nickname">
-                	<div><span id="nickname">정용</span> 님</div>
+                	<div><span id="nickname">${nickname }</span> 님</div>
                     <span class="arrow_carrot-down"></span>
                     <ul>
                     	<li><a href="<%=cp %>/user/user_mypageMain.jsp">마이페이지</a></li>
-                    	<li><a href="<%=cp %>/main.lion">로그아웃</a></li>
+                    	<li><a href="<%=cp %>/logout.lion">로그아웃</a></li>
                     </ul>
                  </div>
                 <div class="header__top__right__language">
@@ -69,10 +78,13 @@
                  </div>
              </div> 
         </div>
+		<%
+		}
+		%>
              
         <!-- LOGO -->
         <div class="header__logo">
-        	<a href="/main.lion">
+        	<a href="<%=cp %>/main.lion">
         		<img class="user_logo" src="<%=cp %>/img/lion_logo.png"/>
         		같이사자
        		</a>
@@ -124,8 +136,7 @@
 						</div>
 						<div class="header__cart">
 							<ul>
-								<li><a href="#"><i class="bi bi-bell"></i> <span>8</span></a></li>
-								<li><a href="#"><i class="fa fa-heart-o" aria-hidden="true" title="사진첨부"></i></a></li>
+								<li><a href="#"><i class="fa fa-heart-o"></i></a></li>
 								<li><a href="<%=cp %>/user/user_buypostInsertForm.jsp"><i class="bi bi-pencil-square"></i></a></li>
 							</ul>
 						</div>

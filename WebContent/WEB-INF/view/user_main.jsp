@@ -49,7 +49,7 @@
 </head>
 <body>
 	<!-- import HEADER -->
-	<c:import url="user_header.jsp"></c:import>
+	<c:import url="/header.lion"></c:import>
     
     <!-- BANNER IMAGE -->
 	<div id="carouselExampleIndicators" class="carousel slide"
@@ -142,7 +142,7 @@
     <!-- Featured Section End -->
 
 	<!-- import FOOTER -->
-	<c:import url="user_footer.jsp"></c:import>
+	<c:import url="/footer.lion"></c:import>
  
     <!-- js plugins -->
     <script src="<%=cp %>/js/jquery-3.3.1.min.js"></script>

@@ -1,8 +1,12 @@
 package com.test.mybatis;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,7 +17,15 @@ public class MainController
 	
 	// header
 	@RequestMapping("/header.lion")
-	public String header() {
+	public String header(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code != null)
+		{
+			String nickname = (dao.searchMember(member_code)).getNickname();
+			model.addAttribute("nickname", nickname);
+		}
 		return "/WEB-INF/view/user_header.jsp";
 	}
 	

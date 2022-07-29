@@ -3,21 +3,60 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mybatis.ILoginDAO">
+ 	
+ 	<!-- 『;』 XXX!!! -->
  
  	<!-- 회원 로그인 -->
 	<select id="loginMember" resultType="java.lang.String">
 		SELECT MEMBER_CODE 
 		FROM MEMBER_INFO 
-		WHERE ID LIKE #{id} 
-		  AND PW LIKE #{pw};		
+		WHERE ID LIKE #{id} AND PW LIKE #{pw}		
+	</select>
+	
+	<!-- 영구정지 여부 확인 -->
+	<select id="checkBanMember" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM PERMANENT_BAN
+		WHERE MEMBER_CODE=#{member_code}	
+	</select>
+	
+	<!-- 영구정지 사유 -->
+	<!-- ①공동구매 게시물 체크 -->
+	<select id="banReason_article" resultType="java.lang.String">
+		SELECT (SELECT NAME
+		        FROM BUYPOST_REPORT_MAIN_CATE
+		        WHERE CODE = BPI.MAIN_CATE_CODE) "NAME" 
+		FROM BUYPOST_REPORT_OK BPO 
+		    JOIN BUYPOST_REPORT_IN BPI
+		        ON BPO.IN_CODE = BPI.CODE AND BPO.REPORT_RESULT_CODE='RRE1'
+		    JOIN BUYPOST BP
+		        ON BPI.BUYPOST_CODE = BP.CODE
+		WHERE BP.MEMBER_CODE = #{member_code}
+		  AND BPO.DATETIME = (SELECT START_DATETIME
+		                      FROM PERMANENT_BAN
+		                      WHERE MEMBER_CODE = #{member_code})	
+	</select>
+	<!-- ②공동구매 댓글 체크 -->
+	<select id="banReason_reply" resultType="java.lang.String">
+		SELECT (SELECT NAME
+		        FROM BUYPOST_REPORT_MAIN_CATE
+		        WHERE CODE = BPRI.MAIN_CATE_CODE) "NAME" 
+		FROM BUYPOST_RE_REPORT_OK BPRO 
+		    JOIN BUYPOST_RE_REPORT_IN BPRI
+		        ON BPRO.IN_CODE = BPRI.CODE AND BPRO.REPORT_RESULT_CODE='RRE1'
+		    JOIN BUYPOST_REPLY BPR
+		        ON BPRI.BUYPOST_REPLY_CODE = BPR.CODE
+		WHERE BPR.MEMBER_CODE = #{member_code}
+		  AND BPRO.DATETIME = (SELECT START_DATETIME
+		                       FROM PERMANENT_BAN
+		                       WHERE MEMBER_CODE = #{member_code})
 	</select>
 	
 	<!-- 관리자 로그인 -->
 	<select id="loginAdmin" resultType="java.lang.String">
 		SELECT MEMBER_CODE
 		FROM ADMIN_INFO
-		WHERE ID LIKE #{id}
-		  AND PW LIKE #{pw};	
+		WHERE ID LIKE #{id} AND PW LIKE #{pw}
 	</select>
 
 </mapper>

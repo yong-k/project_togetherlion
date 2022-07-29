@@ -7,6 +7,15 @@ public interface ILoginDAO
 	//public String loginMember(String id, String pw);
 	public String loginMember(MemberDTO dto);
 	
+	// 영구정지 여부 확인
+	public int checkBanMember(String member_code);
+	
+	// 영구정지 사유 
+	// ①공동구매 게시물 확인
+	public String banReason_article(String member_code);
+	// ②공동구매 댓글 확인
+	public String banReason_reply(String member_code);
+	
 	// 관리자 로그인
 	//public String loginAdmin(String id, String pw);
 	public String loginAdmin(AdminDTO dto);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IAdminDAO">
+
+	<!-- 관리자 찾기 (세션에 있는 멤버코드로) -->
+	<select id="searchAdmin" resultType="com.test.mybatis.AdminDTO">
+		SELECT NAME
+		FROM ADMIN_INFO
+		WHERE MEMBER_CODE=#{member_code}
+	</select>
+	
+
+</mapper>

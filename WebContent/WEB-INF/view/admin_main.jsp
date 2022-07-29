@@ -21,12 +21,12 @@
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 	
 	<div id="layoutSidenav">
 
 		<!-- import MENUBAR -->
-		<c:import url="admin_menubar.jsp"></c:import>
+		<c:import url="/adminmenubar.lion"></c:import>
 
 		<div id="layoutSidenav_content">
 			<main>
@@ -185,7 +185,7 @@
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>

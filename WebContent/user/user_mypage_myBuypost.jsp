@@ -88,26 +88,6 @@ button.swal2-close:focus {
 		    	  }
     			})
         });
-		
-		$(".evaluation-btn").click(function()
-    	{
-    		Swal.fire({
-    			  title: '구매확정 하시겠습니까?',
-    			  showCloseButton: true,
-    			  confirmButtonText: '구매확정',
-    			  html: '1. 아래 버튼은 진행자가 누르는 버튼입니다.<br>2. 구매확정 전 상품 상태를 확인해주세요.<br>3. 구매확정 후에는 청약철회가 불가합니다.'
-    			}).then((result) => {
-    			  if (result.isConfirmed) {
-    				  Swal.fire({
-      			    	title: '구매확정 완료',
-      			    	icon: 'success',
-      			    	confirmButtonText: '확인'
-      			    }).then(() => {
-      			    	
-      			    });
-		    	  }
-    			})
-        });
 
 	});
 </script>
@@ -155,6 +135,7 @@ button.swal2-close:focus {
 					</div>
 					
 					<!-- if, ① 내가 참여한 공구 && 모집중 
+					 		 ③ 내가 참여한 공구 && 완료
 							 ④ 내가 참여한 공구 && 취소   
 							 ⑤ 내가 진행한 공구 && 모집중
 							 ⑥ 내가 진행한 공구 && 진행중
@@ -240,53 +221,6 @@ button.swal2-close:focus {
 						</tbody>
 					</table>
 					-->
-					
-					<!-- if, ③ 내가 참여한 공구 && 완료 -->
-					<table class="table noticeTable mypage-buypostTable">
-						<thead>
-							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">제목</th>
-								<th scope="col">작성일</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">3</th>
-								<td class="title"><a href="">도지마롤 1kg 같이사요~(10/15)</a></td>
-								<td>2022-05-15</td>
-								<td>
-									<!-- if, ① 해당 공동구매 매너/비매너 평가 아직 안 한 상태 -->
-									<button type="button" class="btn btn-primary myBuypost-btn evaluation-btn">매너/비매너 평가</button>
-									<!-- if, ② 해당 공동구매 매너/비매너 평가한 상태 -->
-									<!-- 
-									<button type="button" class="btn btn-primary myBuypost-btn evaluation-btn"
-									style="background-color: #6e6d6d;"disabled>매너/비매너 평가</button>
-									 -->
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td class="title"><a href="">청경재 1kg 같이사영(8/9)</a></td>
-								<td>2022-04-04</td>
-								<td>
-									<button type="button" class="btn btn-primary myBuypost-btn evaluation-btn"
-									style="background-color: #6e6d6d;"disabled>매너/비매너 평가</button>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">1</th>
-								<td class="title"><a href="">장인약과 5kg 공구모집함(22/30)</a></td>
-								<td>2022-03-15</td>
-								<td>
-									<button type="button" class="btn btn-primary myBuypost-btn evaluation-btn"
-									style="background-color: #6e6d6d;"disabled>매너/비매너 평가</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					
 					
 					<nav class="pageNav" aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
