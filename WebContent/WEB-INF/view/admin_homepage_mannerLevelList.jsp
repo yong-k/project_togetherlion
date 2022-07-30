@@ -184,54 +184,14 @@
 									</tr>
 								</thead>
 								<tbody>
+									<c:forEach var="manner" items="${mannerList }">
 									<tr>
-										<td>8</td>
-										<td>완료된 공동구매의 모든 참여자</td>
-										<td>참여자</td>
-										<td>0.3</td>
+										<td>${manner.rownum }</td>
+										<td>${manner.condition }</td>
+										<td>${manner.target }</td>
+										<td>${manner.score }점</td>
 									</tr>
-									<tr>
-										<td>7</td>
-										<td>참여자가 있는 공동구매 취소</td>
-										<td>진행자</td>
-										<td>-1</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>공동구매취소신청 처리 완료</td>
-										<td>진행자</td>
-										<td>-1</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>매너/비매너 평가지 작성</td>
-										<td>평가자</td>
-										<td>-3</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>매너/비매너 평가 결과:매너</td>
-										<td>피평가자</td>
-										<td>0.3</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>매너/비매너 평가 결과:비매너</td>
-										<td>피평가자</td>
-										<td>-0.3</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>신고<반려>:허위신고</td>
-										<td>신고자</td>
-										<td>-3</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>신고<승인></td>
-										<td>피신고자</td>
-										<td>-3</td>
-									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

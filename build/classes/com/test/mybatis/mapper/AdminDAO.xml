@@ -11,5 +11,18 @@
 		WHERE MEMBER_CODE=#{member_code}
 	</select>
 	
+	
+	
+	
+	<!-- 홈페이지관리 - 매너지수목록 -->
+	<select id="mannerList" resultType="com.test.mybatis.MannerLevelDTO">
+		SELECT ROWNUM, CONDITION
+		     , (SELECT TARGET 
+		        FROM MANNERLEVEL_TARGET
+		        WHERE CODE = MANNERLEVEL_ITEM.MANNERLEVEL_TARGET_CODE) "TARGET"
+		     , SCORE
+		FROM MANNERLEVEL_ITEM	
+	</select>
+	
 
 </mapper>

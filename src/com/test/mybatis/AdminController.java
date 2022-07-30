@@ -1,5 +1,7 @@
 package com.test.mybatis;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -121,8 +123,11 @@ public class AdminController
 	}
 	// 매너지수
 	@RequestMapping("/admin_mannerlist.lion")
-	public String mannerList()
+	public String mannerList(Model model)
 	{
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		ArrayList<MannerLevelDTO> mannerList = dao.mannerList();
+		model.addAttribute("mannerList", mannerList);
 		return "/WEB-INF/view/admin_homepage_mannerLevelList.jsp";
 	}
 	

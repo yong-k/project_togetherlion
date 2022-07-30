@@ -183,7 +183,6 @@
 										<tr>
 											<th colspan="2">
 												<i class="fa-solid fa-kitchen-set"></i>카테고리
-												<button type="button" class="adminBtn main-categoryAdd-btn">대분류추가</button>
 											</th>
 										</tr>
 									</thead>
