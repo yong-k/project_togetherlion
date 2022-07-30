@@ -4,7 +4,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mybatis.IBuypostDAO">
 
-	<select id="mainCateList" resultType="com.test.mybatis.mainCategoryDTO">
+	<!-- 대분류 카테고리 -->
+	<select id="mainCateList" resultType="com.test.mybatis.MainCategoryDTO">
 		SELECT CODE, NAME
 		FROM MAIN_CATE	
 	</select>

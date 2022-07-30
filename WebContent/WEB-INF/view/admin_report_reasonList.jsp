@@ -205,58 +205,6 @@
 											<td></td>
 											<td>- 위조식품</td>
 										</tr>
-										<tr class="main-category">
-											<td>2</td>
-											<td>필수사항을 기재하지 않았어요</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 필수항목 수정이 필요한 경우</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 잘못된 카테고리 선택</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 상품설명 부족</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 부적절한 내용 기재(음란성, 명예훼손, 저작권침해)</td>
-										</tr>
-										<tr class="main-category">
-											<td>3</td>
-											<td>전문판매업자 같아요</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 여러 계정 또는 하나의 계정으로 같은 물건의 공동구매를 진행</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 해외 구매 대행</td>
-										</tr>
-										<tr class="main-category">
-											<td>4</td>
-											<td>웹 사이트 밖에서 거래를 유도해요</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- SNS 아이디 기재</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 가짜 안전 거래 사이트 기재</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 개인 계좌번호 기재</td>
-										</tr>
-										<tr class="main-category">
-											<td>5</td>
-											<td>대리 구매를 요구해요</td>
-										</tr>
 									</tbody>
 								</table>
 								

@@ -43,7 +43,7 @@ public class MainController
 		
 		// header:카테고리
 		IBuypostDAO buypost = sqlSession.getMapper(IBuypostDAO.class);
-		ArrayList<mainCategoryDTO> mainCateList = buypost.mainCateList();
+		ArrayList<MainCategoryDTO> mainCateList = buypost.mainCateList();
 		model.addAttribute("mainCateList", mainCateList);
 		
 		return "/WEB-INF/view/user_header.jsp";

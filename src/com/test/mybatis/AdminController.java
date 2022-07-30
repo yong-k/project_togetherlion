@@ -117,8 +117,13 @@ public class AdminController
 	}
 	// 카테고리
 	@RequestMapping("/admin_categorylist.lion")
-	public String categoryList()
+	public String categoryList(Model model)
 	{
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		ArrayList<MainCategoryDTO> mainCateList = dao.mainCateList();
+		ArrayList<SubCategoryDTO> subCateList = dao.subCateList();
+		model.addAttribute("mainCateList", mainCateList);
+		model.addAttribute("subCateList", subCateList);
 		return "/WEB-INF/view/admin_homepage_categoryList.jsp";
 	}
 	// 매너지수

@@ -10,7 +10,10 @@ public interface IAdminDAO
 	
 	
 	// 홈페이지관리
-	//--> 매너지수목록
+	//--> 카테고리 목록(대분류/소분류)
+	public ArrayList<MainCategoryDTO> mainCateList();
+	public ArrayList<SubCategoryDTO> subCateList();
+	//--> 매너지수 목록
 	public ArrayList<MannerLevelDTO> mannerList();
 	
 	

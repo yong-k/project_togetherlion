@@ -187,70 +187,22 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="main-category">
-											<td>1</td>
-											<td>쌀/면/빵/떡</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 쌀</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 면</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 빵</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 떡</td>
-										</tr>
-										<tr class="main-category">
-											<td>2</td>
-											<td>과일/채소</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 과일</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 채소</td>
-										</tr>
-										<tr class="main-category">
-											<td>3</td>
-											<td>수산/정육/계란</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 수산</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 정육</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 계란</td>
-										</tr>
-										<tr class="main-category">
-											<td>4</td>
-											<td>밀키트/간편식/냉동</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 밀키트</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 간편식</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 냉동</td>
-										</tr>
+										<c:set var="count" value="0" />
+										<c:forEach var="mainCate" items="${mainCateList }">
+										<c:set var="count" value="${count + 1 }" />
+											<tr class="main-category">
+												<td>${count }</td>
+												<td>${mainCate.name }</td>
+											</tr>
+											<c:forEach var="subCate" items="${subCateList }">
+												<c:if test="${subCate.main_cate_code == mainCate.code }">
+												<tr>
+													<td></td>
+													<td>- ${subCate.name }</td>
+												</tr>
+												</c:if>
+											</c:forEach>
+										</c:forEach>
 									</tbody>
 								</table>
 								
