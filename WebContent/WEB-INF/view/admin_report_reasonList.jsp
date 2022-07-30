@@ -189,22 +189,22 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="main-category">
-											<td>1</td>
-											<td>판매금지 물품이에요</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 무허가식품</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 건강식품</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>- 위조식품</td>
-										</tr>
+										<c:set var="count" value="0" />
+										<c:forEach var="mainCate" items="${reportMainCateList }">
+											<c:set var="count" value="${count + 1 }" />
+											<tr class="main-category">
+												<td>${count }</td>
+												<td>${mainCate.name }</td>
+											</tr>
+											<c:forEach var="subCate" items="${reportSubCateList }">
+												<c:if test="${subCate.main_cate_code == mainCate.code }">
+													<tr>
+														<td></td>
+														<td>- ${subCate.name }</td>
+													</tr>
+												</c:if>
+											</c:forEach>
+										</c:forEach>
 									</tbody>
 								</table>
 								

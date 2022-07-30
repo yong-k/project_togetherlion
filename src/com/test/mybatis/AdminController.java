@@ -165,8 +165,13 @@ public class AdminController
 	}
 	// 사유관리
 	@RequestMapping("/admin_reportreasonlist.lion")
-	public String reportReasonList()
+	public String reportReasonList(Model model)
 	{
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		ArrayList<ReportMainCategoryDTO> reportMainCateList = dao.reportMainCateList();
+		ArrayList<ReportSubCategoryDTO> reportSubCateList = dao.reportSubCateList();
+		model.addAttribute("reportMainCateList", reportMainCateList);
+		model.addAttribute("reportSubCateList", reportSubCateList);
 		return "/WEB-INF/view/admin_report_reasonList.jsp";
 	}
 	

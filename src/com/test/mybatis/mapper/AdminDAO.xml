@@ -34,5 +34,19 @@
 		FROM MANNERLEVEL_ITEM	
 	</select>
 	
+	
+	
+	
+	
+	<!-- 신고관리 - 사유관리 -->
+	<select id="reportMainCateList" resultType="com.test.mybatis.ReportMainCategoryDTO">
+		SELECT CODE, NAME
+		FROM BUYPOST_REPORT_MAIN_CATE	
+	</select>
+	
+	<select id="reportSubCateList" resultType="com.test.mybatis.ReportSubCategoryDTO">
+		SELECT CODE, NAME, MAIN_CATE_CODE
+		FROM BUYPOST_REPORT_SUB_CATE	
+	</select>
 
 </mapper>

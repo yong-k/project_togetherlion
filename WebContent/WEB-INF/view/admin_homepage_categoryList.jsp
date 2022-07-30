@@ -189,17 +189,17 @@
 									<tbody>
 										<c:set var="count" value="0" />
 										<c:forEach var="mainCate" items="${mainCateList }">
-										<c:set var="count" value="${count + 1 }" />
+											<c:set var="count" value="${count + 1 }" />
 											<tr class="main-category">
 												<td>${count }</td>
 												<td>${mainCate.name }</td>
 											</tr>
 											<c:forEach var="subCate" items="${subCateList }">
 												<c:if test="${subCate.main_cate_code == mainCate.code }">
-												<tr>
-													<td></td>
-													<td>- ${subCate.name }</td>
-												</tr>
+													<tr>
+														<td></td>
+														<td>- ${subCate.name }</td>
+													</tr>
 												</c:if>
 											</c:forEach>
 										</c:forEach>
