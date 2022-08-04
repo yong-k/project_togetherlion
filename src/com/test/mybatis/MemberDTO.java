@@ -2,7 +2,7 @@ package com.test.mybatis;
 
 public class MemberDTO
 {
-	private String code, id, pw, nickname, tel, member_code, regist_datetime;
+	private String code, id, pw, name, nickname, tel, member_code, regist_datetime;
 
 	public String getCode()
 	{
@@ -32,6 +32,16 @@ public class MemberDTO
 	public void setPw(String pw)
 	{
 		this.pw = pw;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 
 	public String getNickname()

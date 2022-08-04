@@ -3589,6 +3589,11 @@ span.required {
     border-color: #fca652 !important;
     box-shadow: none !important;
 }
+div.errMsg {
+	display: none;
+    font-size: 14px;
+    color: #e01b1b;
+}
 tr.join-agree {
     border-top: 1px solid #ccc;
 }
@@ -3619,6 +3624,12 @@ button.btn.btn-primary.joinBtn {
     width: 200px;
     height: 60px;
     font-size: 20px;
+}
+div#joinErrMsg {
+    text-align: center;
+    margin-top: 1.2%;
+    margin-left: -7%;
+    font-size: 16px;
 }
 i.bi.bi-chevron-right.join-arrow {
     float: none;

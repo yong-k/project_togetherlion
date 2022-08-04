@@ -126,3 +126,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
+
+user_map.jsp
+Naver_Sens_V2.java

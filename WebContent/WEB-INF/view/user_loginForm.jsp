@@ -108,7 +108,6 @@ table.ban-info tbody tr td {
 			}
 		});
 	})
-
 </script> 
 </head>
 <body>

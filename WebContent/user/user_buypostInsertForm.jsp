@@ -102,11 +102,28 @@ button.swal2-cancel.swal2-styled:focus {
 		// 모집마감일 (현재 ~ +21일)
 		$("#deadline").datepicker({
 			minDate: 0,
+			maxDate: "+21D" ,
+			/*
+			$('#deadlineTime').timepicker({
+				
+			}),
+			*/
+			onclose: function(selectedDate)
+			{	
+				// 거래희망일 (모집마감일 ~ +14일)
+				let year = new Date(selectedDate).getFullYear();
+				let month = new Date(selectedDate).getMonth();
+				let day = new Date(selectedDate).getDate()+14;
+				
+				$("#trade_date").datepicker("option", "minDate", selectedDate);
+				$("#trade_date").datepicker("option", "maxDate", new Date(year, month, day));
+			}
 			maxDate: "+21D"
+			
 		});
 		
 		
-		// TimePicker
+		// TimePicker (https://timepicker.co/#)
 		$('.timepicker').timepicker({
 		    timeFormat: 'h:mm p',
 		    interval: 30,
@@ -259,6 +276,7 @@ button.swal2-cancel.swal2-styled:focus {
 									placeholder="모집상품개수 입력 (진행자 구매 수량 포함)" />
 							</div>
 							<div class="buypostForm-text">
+								<!-- 총금액, 모집상품개수 입력하면, 그걸로 계산해서 보여지는 가격 -->
  								<i class="bi bi-calculator"></i>
 								<span class="buypost-label">1인가격 (총금액/모집상품개수)</span> 
 								<span class="price">???</span>원
@@ -282,6 +300,11 @@ button.swal2-cancel.swal2-styled:focus {
 									<i class="bi bi-geo-alt-fill buypost-icon"></i>
 									<input type="text" id="location" class="buypost-text buypost-location" required
 										placeholder="거래위치를 선택해주세요." readonly/>
+									
+									<br />값 넘겨받는거 테스트중<br />
+									<input type="text" id="location-x" style="width:400px; height:40px"/><br />
+									<input type="text" id="location-y" style="width:400px; height:40px"/><br />
+									<input type="text" id="region" style="width:400px; height:40px"/><br />										
 								</a>
 							</div>
 	
