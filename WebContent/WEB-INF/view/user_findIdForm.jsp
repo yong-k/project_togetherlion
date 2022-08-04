@@ -48,6 +48,14 @@ button.swal2-confirm.swal2-styled:focus {
 	
 	$().ready(function()
 	{
+		if ('<%=request.getParameter("errCode")%>' === 'true')
+		{
+			Swal.fire({
+				  icon: 'error',
+				  text: '일치하는 회원 정보가 존재하지 않습니다.',
+				  confirmButtonText: '확인'
+				});
+		}
 		// 이름 입력한 공백 제거
 		$("#name").focusout(function()
 		{
@@ -86,7 +94,7 @@ button.swal2-confirm.swal2-styled:focus {
 				return false;
 			}
 			
-			
+			$("#idFindForm").submit();						
 		});
 	});
 </script>

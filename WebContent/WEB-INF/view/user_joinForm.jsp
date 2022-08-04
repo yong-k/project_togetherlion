@@ -87,8 +87,8 @@ div#swal2-html-container {
 							<th>아이디<span class="required">*</span></th>
 							<td>
 								<input type="text" name="id" id="id" placeholder="예) togetherlion@lion.com" required="required"/>
-								<button type="button" class="btn btn-outline-primary join-form-btn" id="idOverlapBtn"
-								onclick="">중복확인</button>
+								<button type="button" class="btn btn-outline-primary join-form-btn" 
+								id="idOverlapBtn">중복확인</button>
 								<div class="errMsg" id="idErrMsg">중복된 아이디 입니다.</div>
 							</td>
 						</tr>
@@ -118,11 +118,11 @@ div#swal2-html-container {
 						<tr>
 							<th>휴대폰<span class="required">*</span></th>
 							<td>
-								<input type="tel" name="tel" id="tel" placeholder="숫자만 입력" required="required"
+								<input type="tel" name="tel" id="tel" placeholder="예) 01012345678" required="required"
 								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
 								maxlength="11"/>
 								<button type="button" class="btn btn-outline-primary join-form-btn"
-								id="telAuthBtn">인증번호 받기</button>
+								id="telAuthBtn">인증번호 전송</button>
 								<div class="errMsg" id="telErrMsg">해당 휴대폰 번호로 가입된 아이디가 있습니다.</div>
 							</td>
 						</tr>
@@ -133,15 +133,15 @@ div#swal2-html-container {
 								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
 								maxlength="6"/>
 								<button type="button" class="btn btn-outline-primary join-form-btn"
-								id="telAuthCheckBtn" onclick="">인증번호 확인</button>
+								id="telAuthCheckBtn">인증번호 확인</button>
 							</td>
 						</tr>
 						<tr>
 							<th>닉네임</th>
 							<td>
 								<input type="text" name="nickname" id="nickname" placeholder="닉네임 입력"/>
-								<button type="button" class="btn btn-outline-primary join-form-btn" id="nicknameOverlapBtn"
-								onclick="">중복확인</button>
+								<button type="button" class="btn btn-outline-primary join-form-btn" 
+								id="nicknameOverlapBtn">중복확인</button>
 								<div class="errMsg" id="nicknameErrMsg">중복된 닉네임 입니다.</div>
 							</td>
 						</tr>

@@ -38,8 +38,11 @@ public interface ILoginDAO
 	
 	/* ID,PW 찾기 */
 	// ID 찾기
-	public String findId(MemberDTO dto);
+	public MemberDTO findId(MemberDTO dto);
 	// PW 찾기
-	public String findPw(MemberDTO dto);
+	// ① 입력 정보와 일치하는 회원 존재 여부 확인
+	public int findPw(MemberDTO dto);
+	// ② 비밀번호 변경
+	public int updatePw(MemberDTO dto);
 	
 }

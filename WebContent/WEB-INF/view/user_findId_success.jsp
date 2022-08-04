@@ -52,16 +52,16 @@
 					<tr>
 						<td>
 							<i class="bi bi-person-circle"></i>
-							<span id="findId">am6565</span>
-							<span id="findRegDate">가입일 2022-05-17</span>
+							<span id="findId">${id }</span>
+							<span id="findRegDate">가입일 ${regist_datetime }</span>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<button type="button" class="btn btn-outline-primary lion-outline-btn successBtn"
-							onclick="location.href='<%=cp %>/user/user_findPwForm.jsp'">비밀번호 찾기</button>
+							onclick="location.href='<%=cp %>/findpwform.lion'">비밀번호 찾기</button>
 							<button type="button" class="btn btn-primary lion-primary-btn successBtn"
-							onclick="location.href='<%=cp %>/user/user_loginForm.jsp'">로그인</button>
+							onclick="location.href='<%=cp %>/loginform.lion'">로그인</button>
 						</td>
 					</tr>
 				</tbody>

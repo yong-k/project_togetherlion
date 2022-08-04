@@ -39,34 +39,17 @@ button.swal2-confirm.swal2-styled:focus {
 }
 </style>
 <script type="text/javascript">
-	var telAuth = false;
-</script>
-<script type="text/javascript" src="<%=cp%>/js/findFn.js"></script>
-<script type="text/javascript">
 
 	$(function()
 	{
-		$('.findBtn').click(function()
-		{	
-			if ($("#id").val() == "")
-			{
-				alert("아이디를 입력해주세요.");
-				return;
-			}
-
-			if (telAuth == true)
-			{
-				$("form").submit(); 
-			}
-	    	else 
-	    	{
-	    		Swal.fire({
-	    			icon: 'warning',
-	    			text: '휴대폰 인증이 필요합니다.',
-	    			confirmButtonText: '확인'
-	    		});
-  			 }
-		});	
+		if ('<%=request.getParameter("errCode")%>' === 'true')
+		{
+			Swal.fire({
+				  icon: 'error',
+				  text: '일치하는 회원 정보가 존재하지 않습니다.',
+				  confirmButtonText: '확인'
+				});
+		}
 	});
 
 </script>
@@ -83,7 +66,7 @@ button.swal2-confirm.swal2-styled:focus {
 		</div>
 
 		<div class="join-container">
-			<form action="<%=cp %>/pwmodify.lion" class="join-form" method="post">
+			<form action="<%=cp %>/findpw.lion" id="findPwForm" class="join-form" method="post">
 				<table class="join-table">
 					<thead>
 					</thead>
@@ -92,27 +75,35 @@ button.swal2-confirm.swal2-styled:focus {
 							<th>아이디</th>
 							<td>
 								<input type="text" name="id" id="id" placeholder="예) togetherlion@lion.com" required="required"/>
+								<div class="errMsg" id="idErrMsg">이메일 형식이 아닙니다.</div>
 							</td>
 						</tr>
 						<tr>
 							<th>휴대폰</th>
 							<td>
-								<input type="text" name="tel" id="tel" placeholder="예) 01012345678" required="required" value pattern="[0-9]*"/>
-								<button type="button" class="btn btn-outline-primary join-form-btn" id="telBtn"
-								onclick="telAuth();">인증번호 전송</button>
+								<input type="text" name="tel" id="tel" placeholder="예) 01012345678" required="required"
+								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
+								maxlength="11"/>
+								<button type="button" class="btn btn-outline-primary join-form-btn" 
+								id="telAuthBtn">인증번호 전송</button>
+								<div class="errMsg" id="telErrMsg">올바른 번호 형식이 아닙니다.</div>
 							</td>
 						</tr>
-						<tr>
+						<tr id="telAuth">
 							<th></th>
 							<td>
-								<input type="text" name="telCheckNum" id="telCheckNum" required="required" value pattern="[0-9]*" placeholder="인증번호 입력"/>
-								<button type="button" class="btn btn-outline-primary join-form-btn" id="telCheckBtn" disabled="disabled" 
-								onclick="authCheck();">인증번호 확인</button>
+								<input type="text" name="telCheckNum" id="telCheckNum" required="required"
+								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
+								maxlength="6">
+								<button type="button" class="btn btn-outline-primary join-form-btn" 
+								id="telAuthCheckBtn">인증번호 확인</button>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<button type="button" class="btn btn-primary lion-primary-btn findBtn">확인</button>
+								<div class="errMsg" id="findErrMsg">모든 항목을 입력해주세요.<br/>
+								아이디 입력 및 휴대폰인증을 모두 진행해야 합니다.</div>
 							</td>
 						</tr>
 					</tbody>
@@ -132,5 +123,6 @@ button.swal2-confirm.swal2-styled:focus {
     <script src="<%=cp %>/js/jquery.slicknav.js"></script>
     <script src="<%=cp %>/js/owl.carousel.min.js"></script>
     <script src="<%=cp %>/js/main.js"></script>
+    <script src="<%=cp%>/js/findPwForm.js"></script>
 </body>
 </html>

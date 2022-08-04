@@ -81,6 +81,15 @@ table.ban-info tbody tr td {
 					  confirmButtonText: '확인'
 					})					
 			}
+			// 비밀번호찾기 완료 후,
+			else if ('<%=request.getParameter("code")%>' === 'true')
+			{
+				Swal.fire({
+					  icon: 'success',
+					  title: '비밀번호가 변경되었습니다.',
+					  confirmButtonText: '확인'
+					});
+			}
 		}
 		
 		// <로그인> 버튼 클릭 시,

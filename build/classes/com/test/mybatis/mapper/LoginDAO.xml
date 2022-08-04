@@ -100,11 +100,28 @@
 	
 	<!-- ================================= ID/PW 찾기 ================================= -->
 	<!-- ID 찾기 -->
-	<select id="findId" resultType="java.lang.String">
-		SELECT ID
-		FROM MEMBER_INFO
-		WHERE NAME LIKE '이선재' AND TEL LIKE '01012342341'	
+	<select id="findId" resultType="com.test.mybatis.MemberDTO">
+		SELECT MI.ID, TO_CHAR(M.REGIST_DATETIME, 'YYYY-MM-DD') "REGIST_DATETIME"
+		FROM MEMBER_INFO MI JOIN MEMBER M
+		    ON MI.MEMBER_CODE = M.CODE
+		WHERE NAME LIKE #{name} AND TEL LIKE #{tel}
 	</select>
+	
+	<!-- PW 찾기 -->
+	<!-- ① 입력 정보와 일치하는 회원 존재 여부 확인 -->
+	<select id="findPw" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER_INFO
+		WHERE ID LIKE #{id} AND TEL LIKE #{tel}
+	</select>
+	
+	<!-- ② 비밀번호 변경 -->
+	<update id="updatePw">
+		UPDATE MEMBER_INFO
+		SET PW = #{pw}
+		WHERE ID LIKE #{id}
+	</update>
+	
 	<!-- ================================= ID/PW 찾기 ================================= -->
 </mapper>
 

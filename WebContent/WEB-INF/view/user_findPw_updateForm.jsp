@@ -21,70 +21,7 @@
     <link rel="stylesheet" href="<%=cp %>/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<%=cp %>/css/userStyle.css" type="text/css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-	
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<style type="text/css">
-/* sweetalert */
-button.swal2-confirm.swal2-styled {
-    background-color: #fca652;
-    width: 100px;
-}
-button.swal2-cancel.swal2-styled {
-    width: 100px;
-}
-button.swal2-confirm.swal2-styled:focus {
-    box-shadow: none;
-}
-</style>
-<script type="text/javascript">
-	
-	$(function()
-	{
-		$('.findBtn').click(function()
-		{	
-			if ($("#pw").val() == "")
-			{
-				alert("비밀번호를 입력해주세요.");
-			}
-			else if ($("#pwCheck").val() == "")
-			{
-				alert("비밀번호를 재입력해주세요.");
-			}
-    		else 
-    		{
-    		  if (!isValidPw($("#pw").val()))
-  	          {
-    			 alert("올바른 비밀번호 형식을 입력하세요. \n(6~15자의 영문, 숫자, 특수기호 조합)");
-  	          }
-    		  else if ($("#pw").val() != $("#pwCheck").val())
-    		  {
-    			 alert("비밀번호가 일치하지 않습니다.");  			  
-    		  }
-    		  else if ($("#pw").val() == $("#pwCheck").val())
-    	      {
-    			  alert("비밀번호가 변경되었습니다.");
-    			  
-    			  $("form").submit();  
-    	      }
-    		}
-		});	
-	});
-	
-	
-	function isValidPw(pw)
-	{		
-		var reg_pw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,15}$/;		
-		if(!reg_pw.test(pw))
-		{
-			return false;
-		}
-		
-		return true;	
-	}
-
-</script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 </head>
 <body>
 	<!-- import HEADER -->
@@ -98,7 +35,7 @@ button.swal2-confirm.swal2-styled:focus {
 		</div>
 
 		<div class="join-container">
-			<form action="<%=cp %>/pwmodifyok.lion" class="join-form" method="post">
+			<form action="<%=cp %>/updatepw.lion" id="updatePwForm" class="join-form" method="post">
 				<table class="join-table">
 					<thead>
 					</thead>
@@ -106,19 +43,24 @@ button.swal2-confirm.swal2-styled:focus {
 						<tr>
 							<th>새 비밀번호</th>
 							<td>
-								<input type="password" name="pw" id="pw" placeholder="6~15자의 영문, 숫자, 특수기호 조합" required="required"/>
+								<input type="password" name="pw" id="pw" placeholder="비밀번호 입력" required="required"
+								maxlength="16"/>
+								<div class="errMsg" id="pwErrMsg">일치하지 않습니다.</div>
 							</td>
 						</tr>
 						<tr>
 							<th>새 비밀번호 확인</th>
 							<td>
-								<input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 다시 입력" required="required"/>
+								<input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 입력" required="required"
+								maxlength="16"/>
+								<div class="errMsg" id="pwCheckErrMsg">일치하지 않습니다.</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<button type="button" class="btn btn-primary lion-primary-btn findBtn">확인</button>
-								<input type="hidden" name="id" value="${id }">
+								<div class="errMsg" id="findErrMsg">항목을 모두 입력해주세요.<br/></div>
+								<input type="hidden" name="id" value="${id }"/>
 							</td>
 						</tr>
 					</tbody>
@@ -138,5 +80,6 @@ button.swal2-confirm.swal2-styled:focus {
     <script src="<%=cp %>/js/jquery.slicknav.js"></script>
     <script src="<%=cp %>/js/owl.carousel.min.js"></script>
     <script src="<%=cp %>/js/main.js"></script>
+    <script src="<%=cp%>/js/updatePwForm.js"></script>
 </body>
 </html>

@@ -102,7 +102,7 @@
 			}
 		});
     	
-    	// 휴대폰번호 <인증번호 받기>
+    	// 휴대폰번호 <인증번호 전송>
     	$("#telAuthBtn").click(function()
 		{
     		$("#telErrMsg").css("display", "none");
@@ -248,7 +248,6 @@
 			$("#joinErrMsg").css("display", "none");
 			
     		// 필수항목 비어있는지 체크
-			/*
     		if ($("#id").val().replaceAll(' ', '') == "" 
     			|| $("#pw").val().replaceAll(' ', '') == "" 
     			|| $("#pwCheck").val().replaceAll(' ', '') == "" 
@@ -259,13 +258,11 @@
     			$("#joinErrMsg").css("display", "block");
 				return false;
     		}
-    		*/
 			var checkResult = true;
     		$("input[name=join-check]").each(function()
 			{
 				if ($(this).hasClass("check-require") && !($(this).is(":checked")))
 				{
-					alert("안들어옴?");
 					$("#agreeErrMsg").css("display", "block");
 					checkResult = false;
 					return false;	//-- break 의미
@@ -284,7 +281,6 @@
         		return false;
     		}
     		// 핸드폰 인증했는지 체크
-    		/*
     		if (telCheck == 0)
     		{
     			$("#telErrMsg").html("인증번호 받기를 진행해주세요.");
@@ -292,7 +288,6 @@
         		$("#tel").focus();
         		return false;
     		}
-    		*/
     		// 닉네임 중복검사 했는지 체크
 			if ($("#nickname").val().replaceAll().length != 0)
     		{
@@ -346,6 +341,7 @@
 
     });
 	
+	// 휴대폰 인증 관련 함수들
 	function ajax(url, params, callback, method)
 	{
 		var xhttp = new XMLHttpRequest();
@@ -363,7 +359,7 @@
 	function callback()
 	{
 		if (this.readyState == 4 && this.status == 200)
-			alert("인증번호를 발송했습니다.");
+			alert("인증번호를 전송했습니다.");
 		$("#telAuthBtn").css("display", "none");
 		$("#telAuth").css("display", "table-row");
 	}
@@ -388,23 +384,23 @@
 		}
 	}
 	
-// 아이디가 이메일 형식인지 체크
-function isEmailFormat(id)
-{
-	let format = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	if (format.test(id))
-		return true;
-	return false;
-}
-
-// 비밀번호 체크 (8~16자, 영어/숫자/특수문자 하나 이상 포함)
-// 입력가능 특수문자(!, @, #, $, %, ^, +, -, =)
-function isPwFormat(pw)
-{
-	//let format = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%^*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
-	let format = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^+\-=])(?=\S+$).*$/
-	if (format.test(pw))
-		return true;
-	return false;
-}
+	// 아이디가 이메일 형식인지 체크
+	function isEmailFormat(id)
+	{
+		let format = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if (format.test(id))
+			return true;
+		return false;
+	}
+	
+	// 비밀번호 체크 (8~16자, 영어/숫자/특수문자 하나 이상 포함)
+	// 입력가능 특수문자(!, @, #, $, %, ^, +, -, =)
+	function isPwFormat(pw)
+	{
+		//let format = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%^*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
+		let format = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^+\-=])(?=\S+$).*$/
+		if (format.test(pw))
+			return true;
+		return false;
+	}
 

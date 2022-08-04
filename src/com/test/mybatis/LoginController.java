@@ -244,9 +244,19 @@ public class LoginController
 	}
 	// ID 찾기
 	@RequestMapping("/findid.lion")
-	public String findId()
+	public String findId(MemberDTO dto, Model model)
 	{
-		return "";
+		ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
+		MemberDTO member = dao.findId(dto);
+		if (member == null)
+		{
+			boolean errCode = true;
+			model.addAttribute("errCode", errCode);
+			return "redirect:findidform.lion";
+		}
+		model.addAttribute("id", member.getId());
+		model.addAttribute("regist_datetime", member.getRegist_datetime());
+		return "/WEB-INF/view/user_findId_success.jsp";
 	}
 	
 	// PW 찾기 입력폼
@@ -257,9 +267,27 @@ public class LoginController
 	}
 	// PW 찾기
 	@RequestMapping("/findpw.lion")
-	public String findPw()
+	public String findPw(MemberDTO dto, Model model)
 	{
-		return "";
+		ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
+		int result = dao.findPw(dto);
+		if (result < 1)
+		{
+			boolean errCode = true;
+			model.addAttribute("errCode", errCode);
+			return "redirect:findpwform.lion";
+		}
+		model.addAttribute("id",dto.getId());
+		return "/WEB-INF/view/user_findPw_updateForm.jsp";
+	}
+	// PW 찾기 - 변경폼
+	@RequestMapping("/updatepw.lion")
+	public String updatePw(MemberDTO member, Model model)
+	{
+		ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
+		dao.updatePw(member);
+		model.addAttribute("code", true);
+		return "redirect:loginform.lion";
 	}
 	// --------------------------------------- ID/PW 찾기 ----------------------------------------
 }
