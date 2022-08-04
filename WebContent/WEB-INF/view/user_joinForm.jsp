@@ -112,6 +112,7 @@ div#swal2-html-container {
 							<th>이름<span class="required">*</span></th>
 							<td>
 								<input type="text" name="name" id="name" placeholder="이름 입력" required="required"/>
+								<div class="errMsg" id="nameErrMsg">올바른 이름 형식이 아닙니다.</div>
 							</td>
 						</tr>
 						<tr>
@@ -121,14 +122,16 @@ div#swal2-html-container {
 								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
 								maxlength="11"/>
 								<button type="button" class="btn btn-outline-primary join-form-btn"
-								id="telAuthBtn" onclick="">인증번호 받기</button>
+								id="telAuthBtn">인증번호 받기</button>
 								<div class="errMsg" id="telErrMsg">해당 휴대폰 번호로 가입된 아이디가 있습니다.</div>
 							</td>
 						</tr>
-						<tr>
+						<tr id="telAuth">
 							<th></th>
 							<td>
-								<input type="text" name="telCheckNum" id="telCheckNum" required="required" value pattern="[0-9]*"/>
+								<input type="text" name="telCheckNum" id="telCheckNum" required="required" 
+								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
+								maxlength="6"/>
 								<button type="button" class="btn btn-outline-primary join-form-btn"
 								id="telAuthCheckBtn" onclick="">인증번호 확인</button>
 							</td>
@@ -168,7 +171,8 @@ div#swal2-html-container {
 						<tr class="join-agree">
 							<td colspan="2">
 								<button type="button" class="btn btn-primary inquiryBtn joinBtn">가입하기</button>
-								<div class="errMsg" id="joinErrMsg">*필수 항목을 모두 입력해주세요.</div>
+								<div class="errMsg" id="joinErrMsg">*필수 항목을 모두 입력해주세요.<br/>
+								중복확인 및 휴대폰인증을 모두 진행해야 합니다.</div>
 							</td>
 						</tr>
 					</tbody>

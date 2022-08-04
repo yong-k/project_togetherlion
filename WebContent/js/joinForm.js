@@ -1,5 +1,9 @@
 /* joinForm.js */
-	 
+
+	var idCheck = 0;
+	var telCheck = 0;
+	var nicknameCheck = 0;
+
 	$(document).ready(function()
     { 
 		// 이용약관
@@ -28,12 +32,30 @@
     			})
 		});
     	
+    	// 아이디, 이름, 닉네임 입력한 공백 제거
+    	$("#id").focusout(function()
+		{
+			$("#id").val($("#id").val().replaceAll(" ", ""));
+		});
+    	$("#name").focusout(function()
+		{
+			$("#name").val($("#name").val().replaceAll(" ", ""));
+		});
+    	$("#nickname").focusout(function()
+		{
+			$("#nickname").val($("#nickname").val().replaceAll(" ", ""));
+		});
     	
     	// 아이디 <중복확인>
     	$("#idOverlapBtn").click(function()
 		{
+    		idCheck = 0;
+    		let id = $("#id").val().replaceAll(" ", "");
+    		$("#id").val(id);
+    		
     		$("#idErrMsg").css("color", "red");
     		$("#idErrMsg").css("display", "none");
+    		
 			// 이메일 형식인지 확인
 			if (!isEmailFormat($("#id").val()))
 			{
@@ -67,10 +89,10 @@
 						{
 							$("#idErrMsg").html("사용가능한 아이디입니다.");
 							$("#idErrMsg").css("color", "blue");
+							idCheck++;
 						}
 						$("#idErrMsg").css("display", "block");
 						$("#id").focus();
-						
 					}
 					, error: function(e)
 					{
@@ -85,6 +107,15 @@
 		{
     		$("#telErrMsg").css("display", "none");
     		
+    		// 자릿수 확인
+    		if ($("#tel").val().length < 10)
+			{
+    			$("#telErrMsg").html("올바른 번호 형식이 아닙니다.");
+				$("#telErrMsg").css("display", "block");
+				$("#tel").focus();
+				return false;
+			}
+    		
 			// 중복여부 확인
 			$.ajax({
 				type: "POST"
@@ -96,6 +127,7 @@
 				{
 					if (result.checkTel > 0)
 					{
+						$("#telErrMsg").html("해당 휴대폰 번호로 가입된 아이디가 있습니다.");
 						$("#telErrMsg").css("display", "block");
 						$("#tel").focus();
 						return false;
@@ -103,6 +135,7 @@
 					else
 					{
 						// 인증번호 전송
+						
 						let tel = $("#tel").val();
 						let param = "tel=" + tel;
 						ajax("telauth.lion", param, callback, 'GET');
@@ -128,10 +161,11 @@
     	// 닉네임 <중복확인>
     	$("#nicknameOverlapBtn").click(function()
 		{	
-			
+    		let nickname = $("#nickname").val().replaceAll(" ", "");
+			$("#nickname").val(nickname);
+    		
     		$("#nicknameErrMsg").css("color", "red");
     		$("#nicknameErrMsg").css("display", "none");
-    		let nickname = $("#nickname").val().replaceAll(' ', '');
     		
 			// 공백 아닌지 확인
 			if (nickname == "")
@@ -158,6 +192,7 @@
 						{
 							$("#nicknameErrMsg").html("사용가능한 닉네임입니다.");
 							$("#nicknameErrMsg").css("color", "blue");
+							nicknameCheck++;
 						}
 						$("#nicknameErrMsg").css("display", "block");
 						$("#nickname").focus();
@@ -180,15 +215,40 @@
 				$("input[name=join-check]").prop("checked", false);
 		});
     	
+    	// ID 값 변경 확인
+    	$("#id").change(function()
+		{
+			idCheck = 0;
+		});
+    	// 핸드폰 값 변경 확인
+    	$("#tel").change(function()
+		{
+			telCheck = 0;
+			$("#telAuthBtn").css("display", "inline");
+			$("#telAuth").css("display", "none");
+			$("#telCheckNum").removeAttr("readonly");
+    		$("#telAuthCheckBtn").css("display", "inline");
+		});
+    	// 닉네임 값 변경 확인
+    	$("#nickname").change(function()
+		{
+			nicknameCheck = 0;
+		});
+    	
+    	
     	// <회원가입>
     	$(".joinBtn").click(function()
 		{
+    		$("#idErrMsg").css("display", "none");
 			$("#pwErrMsg").css("display", "none");
 			$("#pwCheckErrMsg").css("display", "none");
+			$("#nameErrMsg").css("display", "none");
+			$("#nicknameErrMsg").css("display", "none");
 			$("#agreeErrMsg").css("display", "none");
 			$("#joinErrMsg").css("display", "none");
 			
     		// 필수항목 비어있는지 체크
+			/*
     		if ($("#id").val().replaceAll(' ', '') == "" 
     			|| $("#pw").val().replaceAll(' ', '') == "" 
     			|| $("#pwCheck").val().replaceAll(' ', '') == "" 
@@ -199,14 +259,52 @@
     			$("#joinErrMsg").css("display", "block");
 				return false;
     		}
+    		*/
+			var checkResult = true;
     		$("input[name=join-check]").each(function()
 			{
 				if ($(this).hasClass("check-require") && !($(this).is(":checked")))
 				{
+					alert("안들어옴?");
 					$("#agreeErrMsg").css("display", "block");
-					return false;
+					checkResult = false;
+					return false;	//-- break 의미
 				}
 			});
+    		if (checkResult === false)	
+    			return false;
+    		
+    		// 아이디 중복검사 했는지 체크
+    		if (idCheck == 0)
+    		{
+    			$("#idErrMsg").html("중복검사를 진행해주세요.");
+    			$("#idErrMsg").css("color", "red");
+        		$("#idErrMsg").css("display", "block");
+        		$("#id").focus();
+        		return false;
+    		}
+    		// 핸드폰 인증했는지 체크
+    		/*
+    		if (telCheck == 0)
+    		{
+    			$("#telErrMsg").html("인증번호 받기를 진행해주세요.");
+        		$("#telErrMsg").css("display", "block");
+        		$("#tel").focus();
+        		return false;
+    		}
+    		*/
+    		// 닉네임 중복검사 했는지 체크
+			if ($("#nickname").val().replaceAll().length != 0)
+    		{
+				if (nicknameCheck == 0)
+				{
+	    			$("#nicknameErrMsg").html("중복검사를 진행해주세요.");
+	    			$("#nicknameErrMsg").css("color", "red");
+	        		$("#nicknameErrMsg").css("display", "block");
+	        		$("#nickname").focus();
+	        		return false;
+				}
+    		}
     		
     		// 비밀번호 형식 맞는지 확인
     		let pw = $("#pw").val();
@@ -227,18 +325,24 @@
     			return false;
     		}
     		
-    		/*
-    		Swal.fire({
-    			  icon: 'success',
-    			  title: '회원가입이 완료되었습니다.',
-    			  confirmButtonText: '확인'
-    			}).then(() => {
-    				// 로그아웃 상태로 로그인창으로 이동
-			    	//location.href='loginform.lion';
-			    });
-    		*/
+    		// 이름 형식 체크
+    		//--특수문자 정규식 변수(공백 미포함)
+    		var replaceChar = /[~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
+    		//--완성형 아닌 한글 정규식
+    		var replaceNotFullKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
+    		let name = $("#name").val();
+    		if (name.length > 0)
+			{
+				if (name.match(replaceChar) || name.match(replaceNotFullKorean) || name.length < 2) 
+				{
+					$("#nameErrMsg").css("display", "block");
+					return false;
+				}
+			}
+    		
     		$("#joinForm").submit();
 		});
+    	
 
     });
 	
@@ -260,6 +364,8 @@
 	{
 		if (this.readyState == 4 && this.status == 200)
 			alert("인증번호를 발송했습니다.");
+		$("#telAuthBtn").css("display", "none");
+		$("#telAuth").css("display", "table-row");
 	}
 	
 	function callbackCheck()
@@ -267,10 +373,13 @@
 		if (this.readyState == 4 && this.status == 200)
 		{
 			let result = this.responseText.trim();
-			alert(result);
 			if (result == 'false')
 			{
 				alert('인증되었습니다.');
+				telCheck++;
+				$("#telAuthBtn").css("display", "none");
+	    		$("#telCheckNum").attr("readonly", true);
+	    		$("#telAuthCheckBtn").css("display", "none");
 			}
 			else
 			{

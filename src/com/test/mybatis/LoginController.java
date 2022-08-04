@@ -116,22 +116,6 @@ public class LoginController
 	}
 	// ------------------------------------- 로그인,로그아웃 -------------------------------------
 	
-	// --------------------------------------- ID/PW 찾기 ----------------------------------------
-	// ID찾기
-	@RequestMapping("/findidform.lion")
-	public String findidform() 
-	{
-		return "/WEB-INF/view/user_findIdForm.jsp";
-	}
-	
-	// PW찾기
-	@RequestMapping("/findpwform.lion")
-	public String findpwform() 
-	{
-		return "/WEB-INF/view/user_findPwForm.jsp";
-	}
-	// --------------------------------------- ID/PW 찾기 ----------------------------------------
-	
 	// ---------------------------------------- 회원가입 -----------------------------------------
 	// 회원가입폼
 	@RequestMapping("/joinform.lion")
@@ -250,5 +234,33 @@ public class LoginController
 		return "redirect:joinform.lion";
 	}
 	// ---------------------------------------- 회원가입 -----------------------------------------
+	
+	// --------------------------------------- ID/PW 찾기 ----------------------------------------
+	// ID 찾기 입력폼
+	@RequestMapping("/findidform.lion")
+	public String findIdForm() 
+	{
+		return "/WEB-INF/view/user_findIdForm.jsp";
+	}
+	// ID 찾기
+	@RequestMapping("/findid.lion")
+	public String findId()
+	{
+		return "";
+	}
+	
+	// PW 찾기 입력폼
+	@RequestMapping("/findpwform.lion")
+	public String findPwForm() 
+	{
+		return "/WEB-INF/view/user_findPwForm.jsp";
+	}
+	// PW 찾기
+	@RequestMapping("/findpw.lion")
+	public String findPw()
+	{
+		return "";
+	}
+	// --------------------------------------- ID/PW 찾기 ----------------------------------------
 }
 

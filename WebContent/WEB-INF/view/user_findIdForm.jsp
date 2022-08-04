@@ -38,45 +38,57 @@ button.swal2-confirm.swal2-styled:focus {
     box-shadow: none;
 }
 </style>
-<script type="text/javascript" src="<%=cp%>/js/loginFn.js"></script>
 <script type="text/javascript">
 
-	$(function()
+	//특수문자 정규식 변수(공백 미포함)
+	var replaceChar = /[~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
+	
+	// 완성형 아닌 한글 정규식
+	var replaceNotFullKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
+	
+	$().ready(function()
 	{
-		$('.findBtn').click(function()
-		{	
-			if ($("#name").val() == "")
-			{
-				alert("이름을 입력해주세요.");
-				return;
-			}
-			
-			if ($("#tel").val() == "")
-			{
-				alert("휴대폰 번호를 입력해주세요.");
-			}
-			else
-			{
-				$("#idFindForm").attr("action", "idsearch.lion");
-				$("#idFindForm").submit();
-			}
-			
-		});	
-		
-		
-		$("#tel").keyup(function()
+		// 이름 입력한 공백 제거
+		$("#name").focusout(function()
 		{
-			var reg_tel = /^[0-9]+$/; 
-			
-			if (!reg_tel.test($("#tel").val()))
-			{
-				alert("휴대폰 번호는 숫자만 입력해주세요.");
-				$("#tel").val('');
-			}
-		});
+			$("#name").val($("#name").val().replaceAll(" ", ""));
+		});		
 		
-	});
+		// ID 찾기
+		$(".findBtn").click(function()
+		{
+			$("#nameErrMsg").css("display", "none");
+			$("#telErrMsg").css("display", "none");
+			$("#findErrMsg").css("display", "none");
+			let name = $("#name").val().replaceAll(" ", "");
+			$("#name").val(name);
+			let tel = $("#tel").val();
 
+			
+			if (name == "" || tel == "")
+			{
+				$("#findErrMsg").css("display", "block");
+				return false;
+			}
+			
+			if (name.length > 0)
+			{
+				if (name.match(replaceChar) || name.match(replaceNotFullKorean) || name.length < 2) 
+				{
+					$("#nameErrMsg").css("display", "block");
+					return false;
+				}
+			}
+			
+			if (tel.length < 10)
+			{
+				$("#telErrMsg").css("display", "block");
+				return false;
+			}
+			
+			
+		});
+	});
 </script>
 </head>
 <body>
@@ -91,7 +103,7 @@ button.swal2-confirm.swal2-styled:focus {
 		</div>
 
 		<div class="join-container">
-			<form action="" class="join-form" id="idFindForm" method="post">
+			<form action="<%=cp %>/findid.lion" class="join-form" id="idFindForm" method="post">
 				<table class="join-table">
 					<thead>
 					</thead>
@@ -100,17 +112,22 @@ button.swal2-confirm.swal2-styled:focus {
 							<th>이름</th>
 							<td>
 								<input type="text" name="name" id="name" placeholder="이름 입력" required="required"/>
+								<div class="errMsg" id="nameErrMsg">올바른 이름 형식이 아닙니다.</div>
 							</td>
 						</tr>
 						<tr>
 							<th>휴대폰</th>
 							<td>
-								<input type="text" name="tel" id="tel" placeholder="예) 01012345678" required="required" value pattern="[0-9]*"/>
+								<input type="text" name="tel" id="tel" placeholder="예) 01012345678" required="required" 
+								oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"
+								maxlength="11"/>
+								<div class="errMsg" id="telErrMsg">올바른 번호 형식이 아닙니다.</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<button type="button" class="btn btn-primary lion-primary-btn findBtn" >확인</button>
+								<div class="errMsg" id="findErrMsg">모든 항목을 입력해주세요.</div>
 							</td>
 						</tr>
 					</tbody>

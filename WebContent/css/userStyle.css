@@ -3518,6 +3518,11 @@ i.bi.bi-chevron-right.buypost-category {
 
 
 /* 회원가입 */
+div#findErrMsg {
+    font-size: 16px;
+    margin-top: 2%;
+    text-align: center;
+}
 .join-title-container {
     text-align: center;
     margin-top: -2.7%;
@@ -3557,6 +3562,9 @@ form.join-form input:focus {
 .join-table td {
     padding: 10px 0;
     text-align: left;
+}
+tr#telAuth {
+    display: none;
 }
 hr.join-hr {
     border-top: 3px solid #fca652;

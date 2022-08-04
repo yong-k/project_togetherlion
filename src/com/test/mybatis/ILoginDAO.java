@@ -34,4 +34,12 @@ public interface ILoginDAO
 	public int checkNickname(String nickname); 
 	// 회원가입INSERT
 	public void insertMember(MemberDTO dto);
+	
+	
+	/* ID,PW 찾기 */
+	// ID 찾기
+	public String findId(MemberDTO dto);
+	// PW 찾기
+	public String findPw(MemberDTO dto);
+	
 }
