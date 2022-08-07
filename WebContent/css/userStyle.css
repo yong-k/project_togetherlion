@@ -3937,6 +3937,7 @@ h2.pointAmount {
 }
 img.mannerLevel-photo {
     width: 85%;
+    padding-top: 5%;
 }
 .progress.mypage-manner-progress {
     width: 94%;

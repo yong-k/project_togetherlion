@@ -63,7 +63,7 @@
                 	<div><span id="nickname">${nickname }</span> 님</div>
                     <span class="arrow_carrot-down"></span>
                     <ul>
-                    	<li><a href="<%=cp %>/user/user_mypageMain.jsp">마이페이지</a></li>
+                    	<li><a href="<%=cp %>/mypagemain.lion">마이페이지</a></li>
                     	<li><a href="<%=cp %>/logout.lion">로그아웃</a></li>
                     </ul>
                  </div>

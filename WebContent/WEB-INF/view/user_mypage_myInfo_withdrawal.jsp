@@ -80,7 +80,7 @@ button.swal2-confirm.swal2-styled:focus {
 </head>
 <body>
 	<!-- import HEADER -->
-	<c:import url="user_header.jsp"></c:import>
+	<c:import url="/header.lion"></c:import>
     
     <section class="featured spad">
 
@@ -124,7 +124,7 @@ button.swal2-confirm.swal2-styled:focus {
 	</section>
 
 	<!-- import FOOTER -->
-	<c:import url="user_footer.jsp"></c:import>
+	<c:import url="/footer.lion"></c:import>
  
     <!-- js plugins -->
     <script src="<%=cp%>/js/jquery-3.3.1.min.js"></script>

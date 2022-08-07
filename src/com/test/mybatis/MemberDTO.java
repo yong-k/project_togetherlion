@@ -2,7 +2,8 @@ package com.test.mybatis;
 
 public class MemberDTO
 {
-	private String code, id, pw, name, nickname, tel, member_code, regist_datetime;
+	private String code, id, pw, name, nickname, tel, member_code, regist_datetime
+				 , score, photo_name;
 
 	public String getCode()
 	{
@@ -83,6 +84,24 @@ public class MemberDTO
 	{
 		this.regist_datetime = regist_datetime;
 	}
-	
-	
+
+	public String getScore()
+	{
+		return score;
+	}
+
+	public void setScore(String score)
+	{
+		this.score = score;
+	}
+
+	public String getPhoto_name()
+	{
+		return photo_name;
+	}
+
+	public void setPhoto_name(String photo_name)
+	{
+		this.photo_name = photo_name;
+	}
 }

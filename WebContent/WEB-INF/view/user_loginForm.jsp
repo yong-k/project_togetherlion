@@ -90,6 +90,17 @@ table.ban-info tbody tr td {
 					  confirmButtonText: '확인'
 					});
 			}
+			// 로그인 후 이용 가능 서비스 클릭 시,
+			else if (errCase === 'login')
+			{
+				Swal.fire({
+					  title: '로그인 후 이용 가능한 서비스입니다.',
+					  icon: 'warning',
+					  iconColor: '#f27474',
+					  confirmButtonText: '확인'
+					})	
+			}
+			
 		}
 		
 		// <로그인> 버튼 클릭 시,

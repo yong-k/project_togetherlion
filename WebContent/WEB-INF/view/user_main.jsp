@@ -32,15 +32,6 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
-
-	$(document).ready(function()	
-	{		
-		$(".buypost_go").click(function()		
-		{
-			location.href = "buypostarticle.lion?code=" + $(this).val();	
-		});
-	});
-	
 	function map()
 	{
 		window.open("user_map.jsp", "_blank", "top=150,left=550,width=1000,height=600");

@@ -99,17 +99,17 @@ button.swal2-cancel.swal2-styled:focus {
 <body>
 
 	<!-- import HEADER -->
-	<c:import url="user_header.jsp"></c:import>
+	<c:import url="/header.lion"></c:import>
     
     <!-- import Mypage Header -->
-	<c:import url="user_mypage_header.jsp"></c:import>
+	<c:import url="/mypageheader.lion"></c:import>
 	
     <section class="featured spad">
         <div class="container">
 			<div class="row featured__filter">
 
 				<!-- import mypage_MENUBAR -->
-				<c:import url="user_mypage_menubar.jsp"></c:import>
+				<c:import url="/mypagemenubar.lion"></c:import>
 
 				<div class="col-lg-9 col-md-7">
 					<div class="product__discount">
@@ -182,7 +182,7 @@ button.swal2-cancel.swal2-styled:focus {
     </section>
 
 	<!-- import FOOTER -->
-	<c:import url="user_footer.jsp"></c:import>
+	<c:import url="/footer.lion"></c:import>
  
     <!-- js plugins -->
     <script src="<%=cp %>/js/jquery-3.3.1.min.js"></script>
