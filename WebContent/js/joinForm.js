@@ -243,6 +243,7 @@
 			$("#pwErrMsg").css("display", "none");
 			$("#pwCheckErrMsg").css("display", "none");
 			$("#nameErrMsg").css("display", "none");
+			$("#telErrMsg").css("display", "none");
 			$("#nicknameErrMsg").css("display", "none");
 			$("#agreeErrMsg").css("display", "none");
 			$("#joinErrMsg").css("display", "none");

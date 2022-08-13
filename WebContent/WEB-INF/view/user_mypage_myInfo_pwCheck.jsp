@@ -49,23 +49,20 @@ button.swal2-confirm.swal2-styled:focus {
 }
 </style>
 <script type="text/javascript">
-			
+
 	$(document).ready(function()
     {
-    	$(".pwCheck-btn").click(function()
-    	{
-   		    // 비밀번호가 맞다면, 회원정보수정폼으로 이동
-   		    if ($("input#pw").val()=='1234') 
-   		    		location.href='user_mypage_myInfo.jsp';
-	    	else {
-	    		Swal.fire({
-	    			icon: 'error',
-	    			text: '비밀번호가 일치하지 않습니다.',
-	    			confirmButtonText: '확인'
-	    		});
-	    	}
-   		});
+		if ('<%=request.getParameter("errCase")%>' === 'true')
+		{
+			Swal.fire({
+				  text: '비밀번호를 다시 확인해주세요.',
+				  icon: 'warning',
+				  iconColor: '#f27474',
+				  confirmButtonText: '확인'
+				})				
+		}
     });
+
 </script>
 </head>
 <body>
@@ -91,14 +88,15 @@ button.swal2-confirm.swal2-styled:focus {
 						</div>
 					</div>
 
-					<form action="" class="join-form">
+					<form action="<%=cp %>/mypage_pwcheck.lion" class="join-form" method="post">
 						<div class="myInfo-pwCheck-box">
 							<h4 class="myInfo-pwCheck-title">비밀번호 확인</h4>
 							<h6>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</h6>
 							<input type="password" name="pw" id="pw" placeholder="비밀번호 입력" 
 							required="required" class="pwCheck-txt"/>
-						
-							<button type="button" class="btn btn-primary lion-primary-btn pwCheck-btn">확인</button>
+							
+							<input type="hidden" name="member_code" value="${member_code }" />							
+							<button type="submit" class="btn btn-primary lion-primary-btn pwCheck-btn">확인</button>
 						</div>
 					</form>
 				</div>

@@ -3904,6 +3904,12 @@ button.calculateBtn:hover {
     border-radius: 4px;
     padding: 30px;
 }
+span#score {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 3%;
+    color: #f58a22;
+}
 h4.header-title-point {
     font-size: 16px;
 }
@@ -4385,6 +4391,11 @@ hr.myInfo-hr {
     border-top: 3px solid #fca652;
     width: 544%;
     margin-top: 31px;
+}
+div#myInfoErrMsg {
+    text-align: center;
+    margin-top: 1.2%;
+    font-size: 16px;
 }
 
 /* 마이페이지>회원탈퇴 */

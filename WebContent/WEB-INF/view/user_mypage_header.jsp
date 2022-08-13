@@ -38,7 +38,7 @@
 				</div>
 				<div class="mypage-info-box">
 					<div class="buypost_profile_nickname participate-profile-nickname">${member.nickname } 님</div>
-					<h4 class="header-title-mannerLevel">매너지수</h4>
+					<h4 class="header-title-mannerLevel">매너지수<span id="score">${member.score } 점</span></h4>
 					<div class="progress mypage-manner-progress">
 						<div class="progress-bar bg-warning" role="progressbar" style="width: ${member.score}%" aria-valuenow="${member.score }" 
 						aria-valuemin="0" aria-valuemax="100"></div>

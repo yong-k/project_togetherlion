@@ -12,12 +12,12 @@
 		        WHERE T.SCORE BETWEEN MIN_MANNERLEVEL AND MAX_MANNERLEVEL) "PHOTO_NAME"
 		FROM 
 		(
-		    SELECT MI.NICKNAME, 30 + SUM(NVL(ML.SCORE, 0)) "SCORE"
-		    FROM MEMBER_INFO MI JOIN MANNERLEVEL_LIST ML
+		    SELECT MI.NICKNAME, 30 + NVL(SUM(NVL(ML.SCORE, 0)), 0) "SCORE"
+		    FROM MEMBER_INFO MI LEFT JOIN MANNERLEVEL_LIST ML
 		        ON MI.MEMBER_CODE = ML.MEMBER_CODE
-		    WHERE MI.MEMBER_CODE = #{member_code}
+		    WHERE MI.MEMBER_CODE=#{member_code}
 		    GROUP BY MI.NICKNAME
-		) T	
+		) T
 	</select>
 	
 	<!-- 포인트 총액 -->
@@ -55,4 +55,34 @@
 		)
 		WHERE MEMBER_CODE = #{member_code}	
 	</select>
+	
+	<!-- =================================== 회원정보수정 =================================== -->
+	<!-- 비밀번호 확인 -->
+	<select id="pwCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER_INFO
+		WHERE MEMBER_CODE = #{member_code} AND PW LIKE #{pw}	
+	</select>
+	
+	<!-- 개인정보수정폼 -->
+	<select id="memberInfo" resultType="com.test.mybatis.MemberDTO">
+		SELECT ID, PW, NAME, TEL, NICKNAME
+		FROM MEMBER_INFO
+		WHERE MEMBER_CODE = #{member_code}	
+	</select>
+	
+	<!-- 현재 비밀번호 확인 -->
+	<select id="nowPwCheck" resultType="java.lang.String">
+		SELECT PW
+		FROM MEMBER_INFO
+		WHERE MEMBER_CODE = #{member_code}
+	</select>
+	
+	<!-- 개인정보수정 -->
+	<update id="updateMemberInfo">
+		UPDATE MEMBER_INFO
+		SET PW=#{pw}, TEL=#{tel}, NICKNAME=NVL(#{nickname}, 'user#'||MEMBER_NICKNAME_SEQ.NEXTVAL)
+		WHERE MEMBER_CODE = #{member_code}	
+	</update>
+	<!-- =================================== 회원정보수정 =================================== -->
 </mapper>
