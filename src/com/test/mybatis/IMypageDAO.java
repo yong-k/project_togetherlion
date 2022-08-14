@@ -18,4 +18,8 @@ public interface IMypageDAO
 	public String nowPwCheck(String member_code);
 	// 개인정보수정
 	public void updateMemberInfo(MemberDTO dto);
+	
+	// 회원탈퇴
+	public void memberWithdraw(String member_code);
+	
 }

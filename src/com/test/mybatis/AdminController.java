@@ -21,8 +21,8 @@ public class AdminController
 	@RequestMapping("/adminheader.lion")
 	public String adminHeader(HttpServletRequest request, Model model)
 	{
-		HttpSession session = request.getSession();
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		HttpSession session = request.getSession();
 		String member_code = (String)session.getAttribute("member_code");
 		String adminName = (dao.searchAdmin(member_code)).getName();
 		model.addAttribute("adminName", adminName);
@@ -45,80 +45,189 @@ public class AdminController
 	
 	// 관리자 메인
 	@RequestMapping("/admin.lion")
-	public String adminMain()
+	public String adminMain(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}
 		return "/WEB-INF/view/admin_main.jsp";
 	}
 	
 	//『회원조회』	
 	// 전체회원
 	@RequestMapping("/admin_memberall.lion")
-	public String memberAll()
+	public String memberAll(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_member_all.jsp";
 	}
 	// 영구정지회원
 	@RequestMapping("/admin_memberban.lion")
-	public String memberBan()
+	public String memberBan(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_member_permanentBan.jsp";
 	}
 	// 휴면회원
 	@RequestMapping("/admin_membersleep.lion")
-	public String memberSleep()
+	public String memberSleep(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_member_sleep.jsp";
 	}
 	// 탈퇴회원
 	@RequestMapping("/admin_memberwithdrawal.lion")
-	public String memberWithdrawal()
+	public String memberWithdrawal(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_member_withdrawal.jsp";
 	}
 	
 	//『포인트조회』
 	// 포인트충전
 	@RequestMapping("/admin_pointcharge.lion")
-	public String pointCharge()
+	public String pointCharge(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_point_charge.jsp";
 	}
 	// 포인트결제
 	@RequestMapping("/admin_pointpay.lion")
-	public String pointPay()
+	public String pointPay(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_point_payment.jsp";
 	}
 	// 포인트환불
 	@RequestMapping("/admin_pointrefund.lion")
-	public String pointRefund()
+	public String pointRefund(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_point_refund.jsp";
 	}
 	// 포인트인출
 	@RequestMapping("/admin_pointwithdraw.lion")
-	public String pointWithdraw()
+	public String pointWithdraw(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_point_withdrawal.jsp";
 	}
 	// 완료포인트지급
 	@RequestMapping("/admin_pointcomplete.lion")
-	public String pointComplete()
+	public String pointComplete(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_point_complete.jsp";
 	}
 	
 	//『홈페이지관리』
 	// 공지사항목록
 	@RequestMapping("/admin_noticelist.lion")
-	public String noticeList()
+	public String noticeList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_homepage_noticeList.jsp";
 	}
 	// 카테고리
 	@RequestMapping("/admin_categorylist.lion")
-	public String categoryList(Model model)
+	public String categoryList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}
+		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		ArrayList<MainCategoryDTO> mainCateList = dao.mainCateList();
 		ArrayList<SubCategoryDTO> subCateList = dao.subCateList();
@@ -128,8 +237,18 @@ public class AdminController
 	}
 	// 매너지수
 	@RequestMapping("/admin_mannerlist.lion")
-	public String mannerList(Model model)
+	public String mannerList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}
+		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		ArrayList<MannerLevelDTO> mannerList = dao.mannerList();
 		model.addAttribute("mannerList", mannerList);
@@ -139,34 +258,80 @@ public class AdminController
 	//『미진행취소』
 	// 접수내역
 	@RequestMapping("/admin_cancelreceptionlist.lion")
-	public String cancelReceptionList()
+	public String cancelReceptionList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_cancel_receptionList.jsp";
 	}
 	// 처리내역
 	@RequestMapping("/admin_cancelhandlinglist.lion")
-	public String cancelHandlingList()
+	public String cancelHandlingList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_cancel_handlingList.jsp";
 	}
 	
 	//『신고관리』
 	// 접수내역
 	@RequestMapping("/admin_reportreceptionlist.lion")
-	public String reportReceptionList()
+	public String reportReceptionList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_report_receptionList.jsp";
 	}
 	// 처리내역
 	@RequestMapping("/admin_reporthandlinglist.lion")
-	public String reportHandlingList()
+	public String reportHandlingList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_report_handlingList.jsp";
 	}
 	// 사유관리
 	@RequestMapping("/admin_reportreasonlist.lion")
-	public String reportReasonList(Model model)
+	public String reportReasonList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}
+		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		ArrayList<ReportMainCategoryDTO> reportMainCateList = dao.reportMainCateList();
 		ArrayList<ReportSubCategoryDTO> reportSubCateList = dao.reportSubCateList();
@@ -178,22 +343,53 @@ public class AdminController
 	//『문의관리』
 	// 1:1문의목록
 	@RequestMapping("/admin_inquirylist.lion")
-	public String inquiryList()
+	public String inquiryList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_inquiry_inquiryList.jsp";
 	}
 	// FAQ목록
 	@RequestMapping("/admin_faqlist.lion")
-	public String faqList()
+	public String faqList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}		
 		return "/WEB-INF/view/admin_inquiry_faqList.jsp";
 	}
 	
 	//『관리자계정관리』
 	// 목록
 	@RequestMapping("/admin_accountlist.lion")
-	public String accountList()
+	public String accountList(HttpServletRequest request, Model model)
 	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
+		{
+			session.invalidate();
+			model.addAttribute("errCase", "login_admin");
+			return "redirect:loginform.lion";
+		}
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		ArrayList<AdminDTO> adminList = dao.adminList();
+		model.addAttribute("adminList", adminList);
 		return "/WEB-INF/view/admin_accountList.jsp";
 	}
 }

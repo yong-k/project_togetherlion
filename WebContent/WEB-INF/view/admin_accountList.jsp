@@ -58,6 +58,7 @@ button.swal2-cancel.swal2-styled:focus {
 			
 	$(document).ready(function()
     {
+		
     	$(".updateAccountBtn").click(function()
     	{
     		(async () => {
@@ -119,6 +120,7 @@ button.swal2-cancel.swal2-styled:focus {
     		    }
     		})()
         });
+    	
     });
 </script>
 </head>
@@ -270,11 +272,13 @@ button.swal2-cancel.swal2-styled:focus {
 							</ol>
 						</nav>
 						
-						<!-- 코드작성 때, 대표관리자 여부로 버튼 disabled 또는 display:none; 처리해야함 -->
-`						<div>
-							<button type="button" class="btn btn-secondary writeBtn" 
-							onclick="location.href='<%=cp%>/admin/admin_accountInsertForm.jsp'">계정생성</button>
-						</div>
+						<c:set var="member_code" value='<%=session.getAttribute("member_code") %>'/>
+						<c:if test="${member_code == 'M1' }">
+	`						<div>
+								<button type="button" class="btn btn-secondary writeBtn" 
+								onclick="location.href='<%=cp%>/admin/admin_accountInsertForm.jsp'">계정생성</button>
+							</div>
+						</c:if>
 						
 						<div class="card-body">
 							<table class="table table-bordered table-hover admin-table">
@@ -289,71 +293,36 @@ button.swal2-cancel.swal2-styled:focus {
 									</tr>
 								</thead>
 								<tbody>
+									<c:forEach var="admin" items="${adminList }">
+									<c:set var="count" value="${count+1 }" />
 									<tr>
-										<td>1</td>
-										<td>yong_qo_oa</td>
-										<td>김정용</td>
-										<td>010-2731-3153</td>
-										<td>1996-06-08</td>
+										<td>${count }</td>
+										<td>${admin.id }</td>
+										<td>${admin.name }</td>
+										<td>${admin.tel }</td>
+										<td>${admin.regist_datetime }</td>
 										<td>
-											<span class="badge rounded-pill bg-primary">대표관리자</span>
+											<c:choose>
+												<c:when test="${admin.admin_grade_code == 'AG1'}" >
+													<span class="badge rounded-pill bg-primary">대표관리자</span>
+												</c:when>
+												<c:otherwise>
+													<c:choose>
+														<c:when test="${member_code == 'M1'}" >
+															<button type="button" class="adminBtn updateAccountBtn">수정</button>
+															<button type="button" class="adminBtn deleteAccountBtn">삭제</button>
+														</c:when>
+														<c:otherwise>
+															<c:if test="${admin.member_code == member_code }">
+																<button type="button" class="adminBtn updateAccountBtn">수정</button>
+															</c:if>
+														</c:otherwise>
+													</c:choose>
+												</c:otherwise>
+											</c:choose>
 										</td>
 									</tr>
-									<tr>
-										<td>2</td>
-										<td>1031cory</td>
-										<td>신시은</td>
-										<td>010-5698-1578</td>
-										<td>2002-08-12</td>
-										<td>
-											<button type="button" class="adminBtn updateAccountBtn">수정</button>
-											<button type="button" class="adminBtn deleteAccountBtn">삭제</button>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>wsj0329</td>
-										<td>우수정</td>
-										<td>010-7856-0329</td>
-										<td>2005-11-14</td>
-										<td>
-											<button type="button" class="adminBtn updateAccountBtn">수정</button>
-											<button type="button" class="adminBtn deleteAccountBtn">삭제</button>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>girlishu0515</td>
-										<td>이시우</td>
-										<td>010-0515-4896</td>
-										<td>2010-12-24</td>
-										<td>
-											<button type="button" class="adminBtn updateAccountBtn">수정</button>
-											<button type="button" class="adminBtn deleteAccountBtn">삭제</button>
-										</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>linavely99</td>
-										<td>이아린</td>
-										<td>010-9856-1124</td>
-										<td>2020-01-01</td>
-										<td>
-											<button type="button" class="adminBtn updateAccountBtn">수정</button>
-											<button type="button" class="adminBtn deleteAccountBtn">삭제</button>
-										</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>kreunjung</td>
-										<td>정은정</td>
-										<td>010-4535-1248</td>
-										<td>2022-06-20</td>
-										<td>
-											<button type="button" class="adminBtn updateAccountBtn">수정</button>
-											<button type="button" class="adminBtn deleteAccountBtn">삭제</button>
-										</td>
-									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

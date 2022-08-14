@@ -110,6 +110,7 @@ public class MypageController
 			model.addAttribute("errCase", "login");
 			return "redirect:loginform.lion";
 		}
+		
 		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
 		MemberDTO member = dao.memberInfo(member_code);
 		model.addAttribute("member", member);
@@ -145,5 +146,50 @@ public class MypageController
 		}
 		return "redirect:mypage_myinfoupdateform.lion";
 	}
+	
+	// 회원탈퇴안내 페이지
+	@RequestMapping("/mypage_withdrawnotice.lion")
+	public String myInfoWithdrawNotice(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		if (session.getAttribute("member_code") == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}	
+		return "/WEB-INF/view/user_mypage_myInfo_withdrawal.jsp";
+	}
+	
+	// 회원탈퇴처리
+	@RequestMapping("/mypage_memberwithdraw.lion")
+	public String myInfoWithdraw(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		String pw = request.getParameter("pw");
+		String pwCheck = dao.nowPwCheck(member_code);
+		if (pw.equals(pwCheck))
+		{
+			dao.memberWithdraw(member_code);
+			model.addAttribute("code", "withdraw");
+			session.invalidate();
+			return "redirect:main.lion";
+		}
+		else
+		{
+			model.addAttribute("errCase", true);
+			return "redirect:mypage_withdrawnotice.lion";
+		}
+	}
+	
 	// ------------------------------------- 회원정보수정 -------------------------------------	
 }

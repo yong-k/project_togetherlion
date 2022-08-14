@@ -51,29 +51,17 @@ button.swal2-confirm.swal2-styled:focus {
 </style>
 <script type="text/javascript">
 
-	$(document).ready(function()
+	$(function()
     {
-    	$(".myInfo-withdrawBtn").click(function()
+		if ('<%=request.getParameter("errCase")%>' === 'true')
 		{
-    		// 비밀번호가 맞다면, 회원탈퇴 진행
-		    if ($("input#pwCheck").val()=='1234') {
-		    	Swal.fire({
-	    			  icon: 'success',
-	    			  html: '회원탈퇴가 정상적으로 처리되었습니다.<br><br>그동안 이용해주셔서 감사합니다.',
-	    			  confirmButtonText: '확인',
-	    			}).then((result) => {
-	    				// 로그아웃 상태로 메인으로 이동
-	    				location.href='user_main.jsp';
-	    			});
-		    }
-	    	else {
-	    		Swal.fire({
-	    			icon: 'error',
-	    			text: '비밀번호가 일치하지 않습니다.',
-	    			confirmButtonText: '확인'
-	    		});
-	    	}
-		});
+			Swal.fire({
+				  text: '비밀번호가 일치하지 않습니다.',
+				  icon: 'warning',
+				  iconColor: '#f27474',
+				  confirmButtonText: '확인'
+				})	
+		}
     });	
 	
 </script>
@@ -90,7 +78,7 @@ button.swal2-confirm.swal2-styled:focus {
 		</div>
 
 		<div class="join-container">
-			<form action="" class="join-form">
+			<form action="<%=cp %>/mypage_memberwithdraw.lion" class="join-form">
 				<table class="join-table">
 					<thead>
 					</thead>
@@ -107,14 +95,14 @@ button.swal2-confirm.swal2-styled:focus {
 						<tr>
 							<th>비밀번호확인</th>
 							<td>
-								<input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 입력" required="required"/>
+								<input type="password" name="pw" id="pw" placeholder="비밀번호 입력" required="required"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<button type="button" class="btn btn-outline-primary login-form-btn myInfo-cancelBtn"
-										onclick="location.href='user_mypage_myInfo_pwCheck.jsp'">취소</button>
-								<button type="button" class="btn btn-primary lion-primary-btn myInfo-withdrawBtn">탈퇴</button>
+										onclick="location.href='<%=cp%>/mypage_myinfoupdateform.lion'">취소</button>
+								<button type="submit" class="btn btn-primary lion-primary-btn myInfo-withdrawBtn">탈퇴</button>
 							</td>
 						</tr>
 					</tbody>

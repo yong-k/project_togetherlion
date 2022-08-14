@@ -25,7 +25,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-	
 <style type="text/css">
 .sidebar__item ul li:last-child {
 	background-color: #f5f3ed;
@@ -128,7 +127,7 @@ button.swal2-cancel.swal2-styled:focus {
 								<tr>
 									<th>현재 비밀번호</th>
 									<td>
-										<input type="password" name="nowPw" id="nowPw" placeholder="비밀번호 입력"/>
+										<input type="password" name="nowPw" id="nowPw" placeholder="비밀번호 입력" maxlength="16"/>
 									</td>
 								</tr>
 								<tr>
@@ -184,7 +183,7 @@ button.swal2-cancel.swal2-styled:focus {
 								<tr class="join-agree">
 									<td colspan="2" class="myInfo-btn-box">
 										<button type="button" class="btn btn-outline-primary login-form-btn myInfo-withdrawBtn"
-											onclick="location.href='user_mypage_myInfo_withdrawal.jsp'">탈퇴하기</button>
+											onclick="location.href='<%=cp%>/mypage_withdrawnotice.lion'">탈퇴하기</button>
 										<button type="button" class="btn btn-primary lion-primary-btn"
 										id="myInfoUpdateBtn">회원정보수정</button>
 										<div class="errMsg" id="myInfoErrMsg">현재비밀번호와 휴대폰번호는 필수 입력값입니다.</div>

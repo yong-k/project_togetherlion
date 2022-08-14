@@ -2,7 +2,7 @@ package com.test.mybatis;
 
 public class AdminDTO
 {
-	private String code, id, pw, name, tel, admin_grade_code, member_code;
+	private String code, id, pw, name, tel, admin_grade_code, member_code, regist_datetime;
 
 	public String getCode()
 	{
@@ -73,6 +73,16 @@ public class AdminDTO
 	{
 		this.member_code = member_code;
 	}
-	 
+
+	public String getRegist_datetime()
+	{
+		return regist_datetime;
+	}
+
+	public void setRegist_datetime(String regist_datetime)
+	{
+		this.regist_datetime = regist_datetime;
+	}
+	
 	 
 }

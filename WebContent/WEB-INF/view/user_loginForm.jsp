@@ -25,7 +25,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-	 
 <style type="text/css">
 /* sweetalert */
 h2#swal2-title {
@@ -58,6 +57,17 @@ table.ban-info tbody tr td {
 		else if (banType === 'reply')
 			banType = '공동구매 댓글 신고';
 
+		// 관리자 페이지 잘못 접근 시,
+		if (errCase === 'login_admin')
+		{
+			Swal.fire({
+				  title: '잘못된 접근입니다.',
+				  icon: 'warning',
+				  iconColor: '#f27474',
+				  confirmButtonText: '확인'
+				})	
+		}
+		
 		if (member_code === 'null')
 		{
 			// 영구정지 회원일 때,
@@ -100,8 +110,7 @@ table.ban-info tbody tr td {
 					  confirmButtonText: '확인'
 					})	
 			}
-			
-		}
+		} 
 		
 		// <로그인> 버튼 클릭 시,
 		$("#loginBtn").click(function()

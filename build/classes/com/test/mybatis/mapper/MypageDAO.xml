@@ -22,33 +22,33 @@
 	
 	<!-- 포인트 총액 -->
 	<select id="pointAmount" resultType="java.lang.Integer">
-		SELECT SUM(AMOUNT)
+		SELECT NVL(SUM(AMOUNT), 0)
 		FROM
 		(
 		    <!-- 충전 -->
-		    SELECT C.AMOUNT, A.MEMBER_CODE
+		    SELECT NVL(C.AMOUNT, 0) "AMOUNT", A.MEMBER_CODE
 		    FROM CHARGE C
 		        JOIN ACCOUNT A
 		            ON C.ACCOUNT_CODE = A.CODE
 		    UNION        
 		    <!-- 결제 -->
-		    SELECT AMOUNT*-1, MEMBER_CODE
+		    SELECT NVL(AMOUNT, 0)*-1 "AMOUNT", MEMBER_CODE
 		    FROM PAYMENT
 		    UNION
 		    <!-- 인출 -->
-		    SELECT W.AMOUNT*-1, A.MEMBER_CODE
+		    SELECT NVL(W.AMOUNT, 0)*-1 "AMOUNT", A.MEMBER_CODE
 		    FROM WITHDRAWAL W
 		        JOIN ACCOUNT A
 		            ON W.ACCOUNT_CODE = A.CODE
 		    UNION
 		    <!-- 환불 -->
-		    SELECT R.AMOUNT, P.MEMBER_CODE
+		    SELECT NVL(R.AMOUNT, 0) "AMOUNT", P.MEMBER_CODE
 		    FROM REFUND R 
 		        JOIN PAYMENT P 
 		            ON R.PAYMENT_CODE = P.CODE
 		    UNION
 		    <!-- 지급 -->
-		    SELECT CO.AMOUNT, B.MEMBER_CODE
+		    SELECT NVL(CO.AMOUNT, 0) "AMOUNT", B.MEMBER_CODE
 		    FROM COMPLETE CO
 		        JOIN BUYPOST B
 		        ON CO.BUYPOST_CODE = B.CODE
@@ -84,5 +84,10 @@
 		SET PW=#{pw}, TEL=#{tel}, NICKNAME=NVL(#{nickname}, 'user#'||MEMBER_NICKNAME_SEQ.NEXTVAL)
 		WHERE MEMBER_CODE = #{member_code}	
 	</update>
+	
+	<!-- 회원탈퇴 -->
+	<select id="memberWithdraw" statementType="CALLABLE">
+		{CALL PRC_MEMBER_WITHDRAW (#{member_code})}
+	</select>
 	<!-- =================================== 회원정보수정 =================================== -->
 </mapper>
