@@ -128,8 +128,8 @@ public class LoginController
 	public String idCheck(HttpServletRequest request, Model model)
 	{
 		String ajaxCode = "idCheck";
-		ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
 		String id = request.getParameter("id");
+		ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
 		int checkId = dao.checkId(id);
 		int checkWithdrawId = dao.checkWithdrawId(id);
 		model.addAttribute("ajaxCode", ajaxCode);
@@ -142,9 +142,24 @@ public class LoginController
 	public String telCheck(HttpServletRequest request, Model model)
 	{
 		String ajaxCode = "telCheck";
-		ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
 		String tel = request.getParameter("tel");
-		int checkTel = dao.checkTel(tel);
+		int checkTel = 0;
+		
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		
+		// 관리자페이지 > 휴대폰번호 중복체크
+		if (member_code != null && Integer.parseInt(member_code.substring(1)) <= 10)
+		{
+			IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+			checkTel = dao.checkTel(tel);
+		}
+		// 회원페이지 > 휴대폰번호 중복체크
+		else
+		{
+			ILoginDAO dao = sqlSession.getMapper(ILoginDAO.class);
+			checkTel = dao.checkTel(tel);
+		}
 		model.addAttribute("ajaxCode", ajaxCode);
 		model.addAttribute("checkTel", checkTel);
 		return "/WEB-INF/view/ajax.jsp";

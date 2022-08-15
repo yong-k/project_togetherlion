@@ -78,9 +78,61 @@
 		     , TO_CHAR(M.REGIST_DATETIME, 'YYYY-MM-DD') "REGIST_DATETIME"
 		FROM ADMIN_INFO AI JOIN MEMBER M
 		    ON AI.MEMBER_CODE = M.CODE
-		ORDER BY AI.CODE	
+		ORDER BY REGIST_DATETIME ASC	
 	</select>
 	
+	<!-- 계정 개수 확인 -->
+	<select id="adminCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ADMIN_INFO	
+	</select>
+	
+	<!-- 아이디 중복확인 -->
+	<select id="checkId" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ADMIN_INFO
+		WHERE ID LIKE #{id}	
+	</select>
+	
+	<!-- 휴대폰번호 중복확인 -->
+	<select id="checkTel" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ADMIN_INFO
+		WHERE TEL LIKE #{tel}	
+	</select>
+	
+	<!-- 계정생성 -->
+	<select id="insertAdmin" statementType="CALLABLE">
+		{CALL PRC_ADMIN_INSERT
+		(#{id}, #{pw}, #{name}, #{tel})}
+	</select>
+	
+	<!-- 계정수정폼 -->
+	<select id="adminInfo" resultType="com.test.mybatis.AdminDTO">
+		SELECT ID, NAME, TEL
+		FROM ADMIN_INFO
+		WHERE ID = #{id}	
+	</select>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="pwCheck" resultType="java.lang.String">
+		SELECT PW
+		FROM ADMIN_INFO
+		WHERE ID = #{id}	
+	</select>
+	
+	<!-- 계정수정 -->
+	<update id="updateAdmin">
+		UPDATE ADMIN_INFO
+		SET PW=#{pw}, NAME=#{name}, TEL=#{tel}
+		WHERE ID = #{id}	
+	</update>
+	
+	<!-- 계정삭제 -->
+	<delete id="deleteAdmin">
+		DELETE ADMIN_INFO
+		WHERE ID = #{id}	
+	</delete>
 	<!-- ================================== 관리자계정관리 ================================== -->
 	
 </mapper>

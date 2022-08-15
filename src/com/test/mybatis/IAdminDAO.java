@@ -33,4 +33,20 @@ public interface IAdminDAO
 	// 관리자계정관리
 	//--▷ 목록
 	public ArrayList<AdminDTO> adminList();
+	//--▷ 계정 개수 확인
+	public int adminCount();
+	//--▷ 아이디 중복확인
+	public int checkId(String id);
+	//--▷ 휴대폰번호 중복확인
+	public int checkTel(String tel);
+	//--▷ 계정생성
+	public void insertAdmin(AdminDTO dto);
+	//--▷ 계정수정폼
+	public AdminDTO adminInfo(String id);
+	//--▷ 비밀번호 확인
+	public String pwCheck(String id);
+	//--▷ 계정수정
+	public void updateAdmin(AdminDTO dto);
+	//--▷ 계정삭제
+	public void deleteAdmin(String id); 
 }

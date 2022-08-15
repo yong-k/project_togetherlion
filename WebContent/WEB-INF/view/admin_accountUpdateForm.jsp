@@ -17,7 +17,10 @@
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+ -->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 <script src="<%=cp %>/js/scripts.js"></script>
@@ -62,28 +65,24 @@ button.swal2-cancel.swal2-styled:focus {
 	
 	$(document).ready(function()
     {
-		$(".saveBtn").click(function()
-    	{
-    		
-    		Swal.fire({
-    			  title: '계정 정보를 수정하시겠습니까?',
-    			  showCancelButton: true,
-    			  confirmButtonText: '수정',
-    			  cancelButtonText: '취소',
-    			  reverseButtons: true
-    			}).then((result) => {
-    			  if (result.isConfirmed) {
-    				  Swal.fire({
-      			    	title: '수정 완료!',
-      			    	icon: 'success',
-      			    	confirmButtonText: '확인'
-      			    }).then(() => {
-      			    	location.href='admin_accountList.jsp';
-      			    });
-		    	  }
-    			})
-        });
-		
+		if ('<%=request.getParameter("errCase")%>' === 'true')
+		{
+			Swal.fire({
+				  text: '현재 비밀번호가 일치하지 않습니다.',
+				  icon: 'warning',
+				  iconColor: '#f27474',
+				  confirmButtonText: '확인'
+				})	
+		}
+		else if ('<%=request.getParameter("updateCheck")%>' === 'ok')
+		{
+			Swal.fire({
+			    	title: '수정 완료!',
+			    	icon: 'success',
+			    	confirmButtonText: '확인'
+			    });
+		}
+
     	$(".cancelBtn").click(function()
 		{
     		Swal.fire({
@@ -95,8 +94,9 @@ button.swal2-cancel.swal2-styled:focus {
     			  cancelButtonText: '취소',
     			  reverseButtons: true
     			}).then((result) => {
-			    	location.href = 'admin_accountList.jsp';
-			    });
+    					if (result.isConfirmed)
+  			    		location.href = 'admin_accountlist.lion';
+  			    });
 		});
 
     });
@@ -106,7 +106,7 @@ button.swal2-cancel.swal2-styled:focus {
 <body class="sb-nav-fixed">
 
 	<!-- import HEADER -->
-	<c:import url="admin_header.jsp"></c:import>
+	<c:import url="/adminheader.lion"></c:import>
 
 	<div id="layoutSidenav">
 
@@ -130,11 +130,10 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="member" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_member_all.jsp">전체회원</a> 
-								<a class="nav-link" href="admin_member_ban.jsp">일시정지회원</a> 
-								<a class="nav-link" href="admin_member_permanentBan.jsp">영구정지회원</a> 
-								<a class="nav-link" href="admin_member_sleep.jsp">휴면회원</a> 
-								<a class="nav-link" href="admin_member_withdrawal.jsp">탈퇴회원</a>
+								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
+								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -150,11 +149,11 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="point" aria-labelledby="headingTwo"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_point_charge.jsp">포인트충전</a> 
-								<a class="nav-link" href="admin_point_payment.jsp">포인트결제</a> 
-								<a class="nav-link" href="admin_point_refund.jsp">포인트환불</a> 
-								<a class="nav-link" href="admin_point_withdrawal.jsp">포인트인출</a> 
-								<a class="nav-link" href="admin_point_complete.jsp">완료포인트지급</a>
+								<a class="nav-link" href="<%=cp %>/admin_pointcharge.lion">포인트충전</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointpay.lion">포인트결제</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointrefund.lion">포인트환불</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointwithdraw.lion">포인트인출</a> 
+								<a class="nav-link" href="<%=cp %>/admin_pointcomplete.lion">완료포인트지급</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -170,9 +169,9 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="homepage" aria-labelledby="headingThree"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_homepage_noticeList.jsp">공지사항</a> 
-								<a class="nav-link" href="admin_homepage_categoryList.jsp">카테고리</a> 
-								<a class="nav-link" href="admin_homepage_mannerLevelList.jsp">매너지수</a>
+								<a class="nav-link" href="<%=cp %>/admin_noticelist.lion">공지사항</a> 
+								<a class="nav-link" href="<%=cp %>/admin_categorylist.lion">카테고리</a> 
+								<a class="nav-link" href="<%=cp %>/admin_mannerlist.lion">매너지수</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -188,8 +187,8 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="cancel"
 							aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_cancel_receptionList.jsp">접수내역</a>
-								<a class="nav-link" href="admin_cancel_handlingList.jsp">처리내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelreceptionlist.lion">접수내역</a>
+								<a class="nav-link" href="<%=cp %>/admin_cancelhandlinglist.lion">처리내역</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -205,9 +204,9 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="report" aria-labelledby="headingFive"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_report_receptionList.jsp">접수내역</a> 
-								<a class="nav-link" href="admin_report_handlingList.jsp">처리내역</a> 
-								<a class="nav-link" href="admin_report_reasonList.jsp">사유관리</a>
+								<a class="nav-link" href="<%=cp %>/admin_reportreceptionlist.lion">접수내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reporthandlinglist.lion">처리내역</a> 
+								<a class="nav-link" href="<%=cp %>/admin_reportreasonlist.lion">사유관리</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -223,12 +222,12 @@ button.swal2-cancel.swal2-styled:focus {
 						<div class="collapse" id="inquiry" aria-labelledby="headingSix"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="admin_inquiry_inquiryList.jsp">1:1문의</a> 
-								<a class="nav-link current-menu" href="admin_inquiry_faqList.jsp">FAQ</a>
+								<a class="nav-link" href="<%=cp %>/admin_inquirylist.lion">1:1문의</a> 
+								<a class="nav-link" href="<%=cp %>/admin_faqlist.lion">FAQ</a>
 							</nav>
 						</div>
 						<div class="sb-sidenav-menu-heading">ADMIN ACCOUNT</div>
-						<a class="nav-link current-menu" href="admin_accountList.jsp">
+						<a class="nav-link current-menu" href="<%=cp %>/admin_accountlist.lion">
 							<div class="sb-nav-link-icon">
 								<i class="fa-solid fa-gears icon"></i>
 							</div> 관리자계정관리
@@ -257,32 +256,48 @@ button.swal2-cancel.swal2-styled:focus {
 								<h2 class="head">관리자계정 수정</h2>
 								
 								<div class="accountForm-box">
-									<form action="" method="post">
+									<form action="<%=cp %>/admin_accountupdate.lion" method="post" id="accountUpdateForm">
 										<div class="form-floating mb-3">
-											<input type="text" class="form-control adminAccount-form adminUpdate-readonly" placeholder="ID" value="yong-z_z" readonly>
+											<input type="text" name="id" id="id" class="form-control adminAccount-form adminUpdate-readonly" 
+											placeholder="ID" value="${admin.id }" readonly>
 											<label for="floatingId">아이디</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input type="password" class="form-control adminAccount-form" placeholder="Password"> 
-											<label for="floatingPassword">비밀번호</label>
+											<input type="password" name="nowPw" id="nowPw" class="form-control adminAccount-form" 
+											placeholder="Password" maxlength="16">
+											<label for="floatingPassword">현재 비밀번호</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input type="password" class="form-control adminAccount-form" placeholder="Password"> 
-											<label for="floatingPassword">비밀번호 확인</label>
+											<input type="password" name="pw" id="pw" class="form-control adminAccount-form" 
+											placeholder="Password" maxlength="16">
+											<label for="floatingPassword">새 비밀번호</label>
+											<div class="errMsg" id="pwErrMsg">8~16자(소문자,숫자,특수문자 포함)</div>
 										</div>
 										<div class="form-floating mb-3">
-											<input type="text" class="form-control adminAccount-form adminUpdate-readonly" placeholder="Name" value="김정용" readonly>
+											<input type="password" name="pwCheck" id="pwCheck" class="form-control adminAccount-form" 
+											placeholder="Password" maxlength="16"> 
+											<label for="floatingPassword">새 비밀번호 확인</label>
+											<div class="errMsg" id="pwCheckErrMsg">일치하지 않습니다.</div>
+										</div>
+										<div class="form-floating mb-3">
+											<input type="text"  name="name" id="name" class="form-control adminAccount-form adminUpdate-readonly" 
+											placeholder="Name" value="${admin.name }" readonly>
 											<label for="floatingName">이름</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input type="tel" class="form-control adminAccount-form" placeholder="Tel" value="01027313153">
+											<input type="tel" name="tel" id="tel" class="form-control adminAccount-form" 
+											placeholder="Tel" maxlength="11" value="${admin.tel }" 
+											oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');">>
 											<label for="floatingTel">휴대전화</label>
-											<button type="button" class="adminBtn accountBtn">인증번호 받기</button>
+											<button type="button" class="adminBtn accountBtn" id="telAuthBtn">인증번호 전송</button>
+											<div class="errMsg" id="telErrMsg">해당 휴대폰 번호로 가입된 아이디가 있습니다.</div>
 										</div>
-										<div class="form-floating mb-3">
-											<input type="text" class="form-control adminAccount-form" placeholder="TelNum">
+										<div class="form-floating mb-3" id="telAuth">
+											<input type="text" name="telCheckNum" id="telCheckNum" class="form-control adminAccount-form" 
+											placeholder="TelNum" maxlength="6"
+											oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');">
 											<label for="floatingTelNum">인증번호 입력</label>
-											<button type="button" class="adminBtn accountBtn">확인</button>
+											<button type="button" class="adminBtn accountBtn" id="telAuthCheckBtn">확인</button>
 										</div>
 									</form>
 								</div>
@@ -290,6 +305,7 @@ button.swal2-cancel.swal2-styled:focus {
 							<div class="btn-container notice-btn">
 								<button type="button" class="adminBtn cancelBtn answerCancelBtn">취소</button>
 								<button type="button" class="adminBtn saveBtn answerInsertBtn">계정 수정</button>
+								<div class="errMsg" id="myInfoErrMsg">현재비밀번호와 휴대폰번호는 필수 입력값입니다.</div>
 							</div>
 						</div>
 
@@ -298,9 +314,12 @@ button.swal2-cancel.swal2-styled:focus {
 			</main>
 
 			<!-- import FOOTER -->
-			<c:import url="admin_footer.jsp"></c:import>
+			<c:import url="/adminfooter.lion"></c:import>
 
 		</div>
 	</div>
+
+	<!-- js plugins -->
+	<script src="<%=cp %>/js/admin_accountUpdateForm.js"></script>	
 </body>
 </html>

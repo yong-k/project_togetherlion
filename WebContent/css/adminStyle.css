@@ -2257,8 +2257,10 @@ progress {
 .form-control:disabled, .dataTable-input:disabled, .form-control[readonly], [readonly].dataTable-input {
   background-color: #e9ecef;
   opacity: 1;
+  /*
   width: 950px;
   margin-left: 84px;
+  */
 }
 .form-control::-webkit-file-upload-button, .dataTable-input::-webkit-file-upload-button {
   padding: 0.375rem 0.75rem;
@@ -12157,6 +12159,21 @@ span.inquiryAnswer-label {
     margin-right: auto;
     border-radius: 15px;
 }
+div.errMsg {
+	display: none;
+    font-size: 14px;
+    color: #e01b1b;
+}
+div#joinErrMsg, div#myInfoErrMsg  {
+    text-align: center;
+    margin-top: 1.2%;
+    font-size: 16px;
+}
+div#telAuth {
+    display: none;
+    font-size: 16px;
+}    
+
 input.adminAccount-form {
     width: 280px;
     border-radius: 8px;

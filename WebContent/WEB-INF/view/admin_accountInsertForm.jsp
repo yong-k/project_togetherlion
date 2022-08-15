@@ -14,13 +14,16 @@
 
 <link href="<%=cp %>/css/adminStyle.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script type="<%=cp %>/text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<!-- 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+ -->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="<%=cp %>/js/scripts.js"></script>
-	
+
 <style type="text/css">
 .sb-sidenav-menu a.current-menu {
     background-color: #f5f4f2;
@@ -43,9 +46,11 @@ input.swal2-input:focus {
 button.swal2-confirm.swal2-styled {
     background-color: #fca652;
     width: 100px;
+    margin-right: 20px;
 }
 button.swal2-cancel.swal2-styled {
     width: 100px;
+    margin-right: 20px;
 }
 button.swal2-confirm.swal2-styled:focus {
     box-shadow: none;
@@ -54,57 +59,64 @@ button.swal2-cancel.swal2-styled:focus {
     box-shadow: none;
 }
 </style>	
-<script type="text/javascript">
-			
+<script>
+	
+	var joinCheck = Number('<%=request.getParameter("joinCheck")%>');
+	
 	$(document).ready(function()
     {
-		if ('<%=request.getParameter("deleteCheck")%>' === 'ok')
-		{
-			Swal.fire({
-    			icon: 'success',
-    			text: '계정이 삭제되었습니다.',
-    			confirmButtonText: '확인'
-    		})
-		}
-		
-		$('.writeBtn').click(function()
-		{
-			if (${adminCount } === 10)
-			{
-				Swal.fire({
-					  title: '관리자는 10명까지만 등록가능합니다.',
-					  icon: 'warning',
-					  iconColor: '#f27474',
-					  confirmButtonText: '확인'
-					})	
-			}
-			else
-				location.href='admin_accountinsertform.lion';
-		});
-		
-    	$(".updateAccountBtn").click(function()
-    	{
-    		location.href = '<%=cp%>/admin_accountupdateform.lion?id=' + this.value;
-        });
-    	
-    	$(".deleteAccountBtn").click(function()
+		/*
+		$(".saveBtn").click(function()
     	{
     		Swal.fire({
-    			  title: '선택 관리자 ID: ' + this.value,
-    			  text: '해당 관리자 계정을 삭제하시겠습니까?',
-    			  icon: 'warning',
-				  iconColor: '#f27474',
+    			  title: '관리자 계정을 생성하시겠습니까?',
     			  showCancelButton: true,
-    			  confirmButtonText: '삭제',
+    			  confirmButtonText: '생성',
     			  cancelButtonText: '취소',
     			  reverseButtons: true
     			}).then((result) => {
-    			  if (result.isConfirmed) 
-    				  location.href = '<%=cp%>/admin_accountdelete.lion?id=' + this.value;
+    			  if (result.isConfirmed) {
+    				  Swal.fire({
+      			    	title: '계정 생성 완료!',
+      			    	icon: 'success',
+      			    	confirmButtonText: '확인'
+      			    }).then(() => {
+      			    	location.href='admin_accountList.jsp';
+      			    });
+		    	  }
     			})
         });
+		*/
+		
+		if (joinCheck > 0)
+		{
+			Swal.fire({
+			    	title: '계정 생성 완료!',
+			    	icon: 'success',
+			    	confirmButtonText: '확인'
+			    }).then(() => {
+			    	location.href='admin_accountlist.lion';
+			    });
+		}
+		
+    	$(".cancelBtn").click(function()
+		{
+    		Swal.fire({
+  			  title: '그만하고 목록으로 돌아가시겠습니까?',
+  			  icon: 'warning',
+  			  iconColor: '#f27474',
+  			  showCancelButton: true,
+  			  confirmButtonText: '목록으로',
+  			  cancelButtonText: '취소',
+  			  reverseButtons: true
+  			}).then((result) => {
+  					if (result.isConfirmed)
+			    		location.href = 'admin_accountlist.lion';
+			    });
+		});
     	
     });
+	
 </script>
 </head>
 <body class="sb-nav-fixed">
@@ -244,7 +256,7 @@ button.swal2-cancel.swal2-styled:focus {
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<div class="card mb-4 admin-table-body">
+					<div class="card mb-4">
 
 						<!--  Breadcrumb -->
 						<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -254,59 +266,60 @@ button.swal2-cancel.swal2-styled:focus {
 									href="#">계정목록</a></li>
 							</ol>
 						</nav>
-						
-						<c:set var="member_code" value='<%=session.getAttribute("member_code") %>'/>
-						<c:if test="${member_code == 'M1' }">
-	`						<div>
-								<button type="button" class="btn btn-secondary writeBtn">계정생성</button>
-							</div>
-						</c:if>
-						
+
 						<div class="card-body">
-							<table class="table table-bordered table-hover admin-table">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>아이디</th>
-										<th>이름</th>
-										<th>전화번호</th>
-										<th>계정생성일</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="admin" items="${adminList }">
-									<c:set var="count" value="${count+1 }" />
-									<tr>
-										<td>${count }</td>
-										<td>${admin.id }</td>
-										<td>${admin.name }</td>
-										<td>${admin.tel }</td>
-										<td>${admin.regist_datetime }</td>
-										<td>
-											<c:choose>
-												<c:when test="${admin.admin_grade_code == 'AG1'}" >
-													<span class="badge rounded-pill bg-primary">대표관리자</span>
-												</c:when>
-												<c:otherwise>
-													<c:choose>
-														<c:when test="${member_code == 'M1'}" >
-															<button type="button" class="adminBtn updateAccountBtn" value="${admin.id }">수정</button>
-															<button type="button" class="adminBtn deleteAccountBtn" value="${admin.id }">삭제</button>
-														</c:when>
-														<c:otherwise>
-															<c:if test="${admin.member_code == member_code }">
-																<button type="button" class="adminBtn updateAccountBtn" value="${admin.id }">수정</button>
-															</c:if>
-														</c:otherwise>
-													</c:choose>
-												</c:otherwise>
-											</c:choose>
-										</td>
-									</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+							<div class="account-container">
+								<h2 class="head">관리자계정 생성</h2>
+								
+								<div class="accountForm-box">
+									<form action="<%=cp %>/admin_accountinsert.lion" method="post" id="accountInsertForm">
+										<div class="form-floating mb-3">
+											<input type="text" name="id" id="id" class="form-control adminAccount-form" placeholder="ID">
+											<label for="floatingId">아이디</label>
+											<button type="button" class="adminBtn accountBtn" id="idOverlapBtn">중복확인</button>
+											<div class="errMsg" id="idErrMsg">중복된 아이디 입니다.</div>
+										</div>
+										<div class="form-floating mb-3">
+											<input type="password" name="pw" id="pw" class="form-control adminAccount-form" 
+											placeholder="Password" maxlength="16"> 
+											<label for="floatingPassword">비밀번호</label>
+											<div class="errMsg" id="pwErrMsg">일치하지 않습니다.</div>
+										</div>
+										<div class="form-floating mb-3">
+											<input type="password" name="pwCheck" id="pwCheck" class="form-control adminAccount-form" 
+											placeholder="Password" maxlength="16">  
+											<label for="floatingPassword">비밀번호 확인</label>
+											<div class="errMsg" id="pwCheckErrMsg">일치하지 않습니다.</div>
+										</div>
+										<div class="form-floating mb-3">
+											<input type="text" name="name" id="name" class="form-control adminAccount-form" placeholder="Name">
+											<label for="floatingName">이름</label>
+											<div class="errMsg" id="nameErrMsg">올바른 이름 형식이 아닙니다.</div>
+										</div>
+										<div class="form-floating mb-3">
+											<input type="tel" name="tel" id="tel" class="form-control adminAccount-form" 
+											placeholder="Tel" maxlength="11"
+											oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');">
+											<label for="floatingTel">휴대전화</label>
+											<button type="button" class="adminBtn accountBtn" id="telAuthBtn">인증번호 전송</button>
+											<div class="errMsg" id="telErrMsg">해당 휴대폰 번호로 가입된 아이디가 있습니다.</div>
+										</div>
+										<div class="form-floating mb-3" id="telAuth">
+											<input type="text" name="telCheckNum" id="telCheckNum" class="form-control adminAccount-form" 
+											placeholder="TelNum" maxlength="6"
+											oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');">
+											<label for="floatingTelNum">인증번호 입력</label>
+											<button type="button" class="adminBtn accountBtn TelCheckBtn" id="telAuthCheckBtn">확인</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="btn-container notice-btn">
+								<button type="button" class="adminBtn cancelBtn answerCancelBtn">취소</button>
+								<button type="button" class="adminBtn saveBtn answerInsertBtn">계정 생성</button>
+								<div class="errMsg" id="joinErrMsg">*모든 항목을 입력해주세요.<br/>
+								중복확인 및 휴대폰인증을 모두 진행해야 합니다.</div>
+							</div>
 						</div>
 
 					</div>
@@ -315,8 +328,10 @@ button.swal2-cancel.swal2-styled:focus {
 
 			<!-- import FOOTER -->
 			<c:import url="/adminfooter.lion"></c:import>
-
 		</div>
-	</div>	
+	</div>
+	
+	<!-- js plugins -->
+	<script src="<%=cp %>/js/admin_accountInsertForm.js"></script>
 </body>
 </html>

@@ -17,6 +17,14 @@
 		sb.append("{\"checkId\":\"" + checkId + "\", \"checkWithdrawId\":\"" + checkWithdrawId + "\"}");
 		result = sb.toString();
 	}
+	else if (ajaxCode.equals("admin_idCheck"))
+	{
+		StringBuffer sb = new StringBuffer();
+		int checkId = (Integer)request.getAttribute("checkId");
+		
+		sb.append("{\"checkId\":\"" + checkId + "\"}");
+		result = sb.toString();
+	}
 	else if (ajaxCode.equals("telCheck"))
 	{
 		StringBuffer sb = new StringBuffer();

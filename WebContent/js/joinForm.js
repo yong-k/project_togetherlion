@@ -135,7 +135,6 @@
 					else
 					{
 						// 인증번호 전송
-						
 						let tel = $("#tel").val();
 						let param = "tel=" + tel;
 						ajax("telauth.lion", param, callback, 'GET');
