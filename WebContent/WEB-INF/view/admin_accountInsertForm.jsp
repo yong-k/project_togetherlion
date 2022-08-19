@@ -65,29 +65,6 @@ button.swal2-cancel.swal2-styled:focus {
 	
 	$(document).ready(function()
     {
-		/*
-		$(".saveBtn").click(function()
-    	{
-    		Swal.fire({
-    			  title: '관리자 계정을 생성하시겠습니까?',
-    			  showCancelButton: true,
-    			  confirmButtonText: '생성',
-    			  cancelButtonText: '취소',
-    			  reverseButtons: true
-    			}).then((result) => {
-    			  if (result.isConfirmed) {
-    				  Swal.fire({
-      			    	title: '계정 생성 완료!',
-      			    	icon: 'success',
-      			    	confirmButtonText: '확인'
-      			    }).then(() => {
-      			    	location.href='admin_accountList.jsp';
-      			    });
-		    	  }
-    			})
-        });
-		*/
-		
 		if (joinCheck > 0)
 		{
 			Swal.fire({

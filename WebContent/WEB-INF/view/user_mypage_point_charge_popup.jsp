@@ -110,7 +110,7 @@ button.swal2-cancel.swal2-styled:focus {
 	// <계좌등록> 버튼 클릭 시, 
 	function accountInsertForm() 
 	{
-		location.href="user_mypage_point_accountInsertForm_popup.jsp";
+		location.href="point_accountinsertform.lion";
 	}	
 
 </script>

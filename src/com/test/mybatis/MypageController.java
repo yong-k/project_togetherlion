@@ -1,5 +1,8 @@
 package com.test.mybatis;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -57,9 +60,95 @@ public class MypageController
 	
 	// 찜
 	
+	// ---------------------------------------- 포인트 ----------------------------------------
 	// 포인트
+	@RequestMapping("/mypage_point.lion")
+	public String mypagePointMain(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		MemberDTO member = dao.mypageHeaderInfo(member_code);
+		int point = dao.pointAmount(member_code);
+		HashMap<String, String> params = new HashMap<String, String>();
+		String type = request.getParameter("type");
+		if (type == null || type.equals("%")) type = "%";
+		params.put("member_code", member_code);
+		params.put("type", type);
+		ArrayList<PointDTO> pointList = dao.pointList(params);
+		model.addAttribute("member", member);
+		model.addAttribute("point", point);
+		model.addAttribute("pointList", pointList);
+		
+		return "/WEB-INF/view/user_mypage_point.jsp";
+	}
 	
-	// ------------------------------------- 회원정보수정 -------------------------------------
+	// 계좌등록팝업
+	@RequestMapping("/point_accountinsertform.lion")
+	public String pointAccountInsertForm(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		if (session.getAttribute("member_code") == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}		
+		return "/WEB-INF/view/user_mypage_point_accountInsertForm_popup.jsp";
+	}
+	
+	// 계좌관리팝업
+	@RequestMapping("/point_accountmanageform.lion")
+	public String pointAccountManageForm(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		if (session.getAttribute("member_code") == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}		
+		return "/WEB-INF/view/user_mypage_point_accountManage_popup.jsp";
+	}
+	
+	// 충전팝업
+	@RequestMapping("/point_chargeform.lion")
+	public String pointChargeForm(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		if (session.getAttribute("member_code") == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}		
+		return "/WEB-INF/view/user_mypage_point_charge_popup.jsp";
+	}
+	
+	// 인출팝업
+	@RequestMapping("/point_withdrawform.lion")
+	public String pointWithdrawForm(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		if (session.getAttribute("member_code") == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}		
+		return "/WEB-INF/view/user_mypage_point_withdrawal_popup.jsp";
+	}
+	// 
+	// ---------------------------------------- 포인트 ----------------------------------------
+	
+	// ------------------------------------- 개인정보수정 -------------------------------------
 	// (메뉴바에서 개인정보수정 클릭 시) 비밀번호 입력폼
 	@RequestMapping("/mypage_pwcheckform.lion")
 	public String mypagePwCheckForm(HttpServletRequest request, Model model) 
@@ -190,6 +279,5 @@ public class MypageController
 			return "redirect:mypage_withdrawnotice.lion";
 		}
 	}
-	
-	// ------------------------------------- 회원정보수정 -------------------------------------	
+	// ------------------------------------- 개인정보수정 -------------------------------------	
 }

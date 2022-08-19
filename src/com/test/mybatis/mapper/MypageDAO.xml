@@ -56,7 +56,66 @@
 		WHERE MEMBER_CODE = #{member_code}	
 	</select>
 	
-	<!-- =================================== 회원정보수정 =================================== -->
+	
+	<!-- ===================================== MY 공구 ====================================== -->
+	<!-- ===================================== MY 공구 ====================================== -->
+	
+	<!-- ==================================== 게시물 관리 =================================== -->
+	<!-- ==================================== 게시물 관리 =================================== -->
+	
+	<!-- ======================================== 찜 ======================================== -->
+	<!-- ======================================== 찜 ======================================== -->
+	
+	<!-- ====================================== 포인트 ====================================== -->
+	<!-- 사용내역 -->
+	<select id="pointList" resultType="com.test.mybatis.PointDTO">
+		SELECT TYPE, NAME, DATETIME, BUYPOST_CODE, BUYPOST_TITLE, AMOUNT, MEMBER_CODE
+		FROM
+		(
+		    <!-- 충전(타입 | 포인트 충전 | 처리일 | +금액) -->
+		    SELECT 'charge' "TYPE", '포인트 충전' "NAME", TO_CHAR(C.DATETIME, 'YYYY-MM-DD') "DATETIME"
+		         , '' "BUYPOST_CODE", '' "BUYPOST_TITLE"
+		         , '+ '||TO_CHAR(C.AMOUNT, 'FM999,999,999,999') "AMOUNT", A.MEMBER_CODE
+		    FROM CHARGE C JOIN ACCOUNT A
+		        ON C.ACCOUNT_CODE = A.CODE
+		    UNION
+		    <!-- 결제(타입 | 공동구매 참여 | 처리일 | 공동구매코드 | 공동구매이름 | -금액) -->
+		    SELECT 'pay' "TYPE", '공동구매 참여' "NAME", TO_CHAR(DATETIME, 'YYYY-MM-DD') "DATETIME"
+		         , BUYPOST_CODE
+		         , (SELECT TITLE FROM BUYPOST WHERE CODE = P.BUYPOST_CODE) "BUYPOST_TITLE"
+		         , '- '||TO_CHAR(AMOUNT, 'FM999,999,999,999') "AMOUNT", MEMBER_CODE 
+		    FROM PAYMENT P
+		    UNION
+		    <!-- 인출(타입 | 포인트 인출 | 처리일 | -금액) -->
+		    SELECT 'withdraw' "TYPE", '포인트 인출' "NAME", TO_CHAR(W.DATETIME, 'YYYY-MM-DD') "DATETIME"
+		         , '' "BUYPOST_CODE", '' "BUYPOST_TITLE"
+		         , '- '||TO_CHAR(W.AMOUNT, 'FM999,999,999,999') "AMOUNT", A.MEMBER_CODE
+		    FROM WITHDRAWAL W JOIN ACCOUNT A
+		        ON W.ACCOUNT_CODE = A.CODE
+		    UNION
+		    <!-- 환불(타입 | 취소된 공동구매(사유) | 처리일 | 공동구매코드 | 공동구매이름 | +금액) -->
+		    SELECT 'refund' "TYPE", '취소된 공동구매(' || (SELECT REASON FROM REFUND_REASON WHERE CODE = R.REFUND_REASON_CODE) || ')' "NAME"
+		         , TO_CHAR(R.DATETIME, 'YYYY-MM-DD') "DATETIME"
+		         , P.BUYPOST_CODE
+		         , (SELECT TITLE FROM BUYPOST WHERE CODE = P.BUYPOST_CODE) "BUYPOST_TITLE"
+		         , '+ '||TO_CHAR(R.AMOUNT, 'FM999,999,999,999') "AMOUNT", P.MEMBER_CODE
+		    FROM REFUND R JOIN PAYMENT P 
+		        ON R.PAYMENT_CODE = P.CODE
+		    UNION
+		    <!-- 지급(타입 | 공동구매 진행 완료 | 처리일 | 공동구매코드 | 공동구매이름 | +금액) -->
+		    SELECT 'complete' "TYPE", '공동구매 진행 완료' "NAME", TO_CHAR(CO.DATETIME, 'YYYY-MM-DD') "DATETIME"
+		         , B.CODE "BUYPOST_CODE", B.TITLE "BUYPOST_TITLE"
+		         , '+ '||TO_CHAR(CO.AMOUNT, 'FM999,999,999,999') "AMOUNT", B.MEMBER_CODE
+		    FROM COMPLETE CO JOIN BUYPOST B
+		        ON CO.BUYPOST_CODE = B.CODE
+		) T
+		WHERE MEMBER_CODE = #{member_code} AND TYPE LIKE #{type}
+		ORDER BY DATETIME
+	</select>
+	
+	<!-- ====================================== 포인트 ====================================== -->
+	
+	<!-- =================================== 개인정보수정 =================================== -->
 	<!-- 비밀번호 확인 -->
 	<select id="pwCheck" resultType="java.lang.Integer">
 		SELECT COUNT(*)
@@ -89,5 +148,5 @@
 	<select id="memberWithdraw" statementType="CALLABLE">
 		{CALL PRC_MEMBER_WITHDRAW (#{member_code})}
 	</select>
-	<!-- =================================== 회원정보수정 =================================== -->
+	<!-- =================================== 개인정보수정 =================================== -->
 </mapper>

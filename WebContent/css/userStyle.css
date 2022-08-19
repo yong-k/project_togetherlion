@@ -4167,7 +4167,7 @@ span.buypost-title {
 }
 span.point {
     font-size: 24px;
-    padding-right: 40%;
+    /* padding-right: 40%; */
 }
 span.point.minusPoint {
 	color: #fa4646;
