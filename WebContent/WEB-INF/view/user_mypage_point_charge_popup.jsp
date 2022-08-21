@@ -10,7 +10,7 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>같이사자 계좌관리</title>
+<title>같이사자 포인트 충전</title>
     <link rel="stylesheet" href="<%=cp %>/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="<%=cp %>/css/font-awesome.min.css" type="text/css">
@@ -129,7 +129,8 @@ button.swal2-cancel.swal2-styled:focus {
 					<tr>
 						<th>충전 금액</th>
 						<td>
-							<input type="text" class="accountNum" placeholder="금액을 입력해주세요."/>
+							<input type="text" class="accountNum" placeholder="금액을 입력해주세요."
+							oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');">
 							<div class="accountInsert-notice">충전가능금액: 200만원</div>
 						</td>
 					</tr>

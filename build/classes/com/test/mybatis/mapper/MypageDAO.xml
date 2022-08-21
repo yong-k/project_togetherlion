@@ -113,6 +113,67 @@
 		ORDER BY DATETIME
 	</select>
 	
+	<!-- =============== 계좌등록팝업 =============== -->
+	<!-- 은행목록 -->
+	<select id="bankList" resultType="com.test.mybatis.BankDTO">
+		SELECT CODE, NAME, DIGIT
+		FROM BANK
+	</select>
+	
+	<!-- 대표계좌 소유 확인 -->
+	<select id="hasMainAccount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MAIN_ACCOUNT
+		WHERE ACCOUNT_CODE IN (SELECT CODE FROM ACCOUNT WHERE MEMBER_CODE = #{member_code})	
+	</select>
+	
+	<!-- 계좌등록 _ ① 대표계좌 있는 경우 → 계좌테이블 INSERT -->
+	<insert id="accountInsert">
+		INSERT INTO ACCOUNT(CODE, ACCOUNT_NUMBER, MEMBER_CODE, BANK_CODE)
+		VALUES('A'||ACCOUNT_SEQ.NEXTVAL, #{account_number}, #{member_code}, #{bank_code})	
+	</insert>	
+	
+	<!-- 계좌등록 _ ② 대표계좌 없는 경우 → 계좌테이블 + 대표계좌테이블 INSERT -->
+	<select id="mainAccountInsert" statementType="CALLABLE">
+		{CALL PRC_ACCOUNT_INSERT (#{account_number}, #{member_code}, #{bank_code})}
+	</select>
+	
+	<!-- =============== 계좌관리팝업 =============== -->
+	<!-- 계좌목록 -->
+	<select id="accountList" resultType="com.test.mybatis.AccountDTO">
+		SELECT CODE, (SELECT NAME FROM BANK WHERE CODE = BANK_CODE) "BANK_NAME"
+		     , SUBSTR(ACCOUNT_NUMBER, 0, 3)||'****'||SUBSTR(ACCOUNT_NUMBER, -4) "ACCOUNT_NUMBER"
+		     , (SELECT COUNT(*) FROM MAIN_ACCOUNT WHERE ACCOUNT_CODE = A.CODE) "IS_MAIN_ACCOUNT"
+		FROM ACCOUNT A
+		WHERE MEMBER_CODE = #{member_code}
+		  AND CODE NOT IN (SELECT ACCOUNT_CODE FROM DELETE_ACCOUNT 
+		                   WHERE ACCOUNT_CODE IN (SELECT CODE FROM ACCOUNT WHERE MEMBER_CODE = #{member_code}))		
+		ORDER BY IS_MAIN_ACCOUNT DESC	
+	</select>
+	
+	<!-- 대표계좌설정 -->
+	<update id="updateMainAccount">
+		UPDATE MAIN_ACCOUNT
+		SET ACCOUNT_CODE = #{code}
+		WHERE CODE = (SELECT MA.CODE
+		              FROM MAIN_ACCOUNT MA JOIN ACCOUNT A 
+		                ON MA.ACCOUNT_CODE = A.CODE
+		              WHERE MEMBER_CODE = #{member_code})	
+	</update>
+	
+	<!-- 대표계좌 여부 확인 -->
+	<select id="isMainAccount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MAIN_ACCOUNT
+		WHERE ACCOUNT_CODE = #{code}	
+	</select>
+	
+	<!-- 계좌삭제 -->
+	<delete id="deleteAccount">
+		INSERT INTO DELETE_ACCOUNT(CODE, DATETIME, ACCOUNT_CODE)
+		VALUES('DA'||DELETE_ACCOUNT_SEQ.NEXTVAL, SYSDATE, #{code})	
+	</delete>
+	
 	<!-- ====================================== 포인트 ====================================== -->
 	
 	<!-- =================================== 개인정보수정 =================================== -->

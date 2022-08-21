@@ -10,7 +10,7 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>같이사자 계좌관리</title>
+<title>같이사자 계좌등록</title>
     <link rel="stylesheet" href="<%=cp %>/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="<%=cp %>/css/font-awesome.min.css" type="text/css">
@@ -61,50 +61,46 @@ button.swal2-cancel.swal2-styled:focus {
 </style>
 <script type="text/javascript">
 
-
+	
 	$(document).ready(function()
     {
+		var bank_code;
+		var accountLength;
 		
-		// <등록> 버튼 클릭 시, 
-		$(".accountInsertBtn").click(function()
-	   	{
-			(async () => {
-			    const { value: password } = await Swal.fire({
-			        title: '비밀번호를 입력해주세요.',
-			        input: 'password',
-			        inputPlaceholder: '비밀번호 입력',
-			        showCancelButton: true,
-			        reverseButtons: true,
-			        confirmButtonText: '확인',
-			        cancelButtonText: '취소'
-			    })
-			    // 비밀번호가 맞다면, 등록진행
-			    if (password) {
-			    	if (password=='1234') {
-			    		
-			    		// 계좌등록 작업 처리 코드 작성!
-			    		
-			    		
-			    		// 계좌등록 완료 후, 띄울 알림창
-			    		Swal.fire({
-			    			icon: 'success',
-			    			text: '계좌가 등록되었습니다.',
-			    			confirmButtonText: '확인'
-			    		}).then(() => {
-	      			    	window.close();
-	      			    });
-			    	}else {
-			    		Swal.fire({
-			    			icon: 'error',
-			    			text: '비밀번호가 일치하지 않습니다.',
-			    			showConfirmButton: false,
-			    			showCancelButton: true,
-			    			cancelButtonText: '확인'
-			    		})
-			    	}
-			    }
-			})()
-	    });
+		if ('<%=request.getParameter("code")%>' === 'true') 
+		{
+			Swal.fire({
+    			icon: 'success',
+    			title: '계좌가 등록되었습니다.',
+    			confirmButtonText: '확인'
+    		}).then(() => {
+			    	window.close();
+			    });	
+		}
+		
+		$('.bank-select').on("change", function()
+		{
+			$('#accountErrMsg').css('display', 'none');
+			arr = $(this).val().split(',');
+			bank_code = arr[0];
+			accountLength = Number(arr[1]);
+			$('#account_number').val('');
+			$('#account_number').attr('maxlength', accountLength);
+		});
+		
+		$('.accountInsertBtn').click(function()
+		{
+			$('#accountErrMsg').css('display', 'none');
+			
+			if ($('#account_number').val().length != accountLength) {
+				$('#accountErrMsg').css('display', 'block');
+				$('#account_number').focus();
+				return false;
+			}
+			
+			$('#bank_code').val(bank_code);
+			$('#accountInsertForm').submit();
+		});
     });
 
 </script>
@@ -117,7 +113,7 @@ button.swal2-cancel.swal2-styled:focus {
 			<hr class="report-line"/>
 		</div>
 		
-		<form action="">
+		<form action="<%=cp%>/point_accountinsert.lion" id="accountInsertForm">
 			<table class="table accountTable accountInsertTable">
 				<thead></thead>
 				<tbody>
@@ -126,30 +122,26 @@ button.swal2-cancel.swal2-styled:focus {
 						<td>   
 							<select class="form-select bank-select" aria-label="Default select example">
 								<option value="0" selected>--선택--</option>
-								<option value="1">KB국민</option>
-								<option value="2">NH농협</option>
-								<option value="3">한국씨티</option>
-								<option value="4">IBK기업</option>
-								<option value="5">신한</option>
-								<option value="6">하나</option>
-								<option value="7">우리</option>
-								<option value="8">카카오뱅크</option>
-								<option value="9">SC제일</option>
-								<option value="10">토스</option>
+								<c:forEach var="bank" items="${bankList }">
+									<option value="${bank.code },${bank.digit}">${bank.name }</option>
+								</c:forEach>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>계좌번호</th>
 						<td>
-							<input type="text" class="accountNum" placeholder="'-' 없이 입력하세요."/>
+							<input type="text" id="account_number" name="account_number" 
+							class="accountNum" placeholder="'-' 없이 입력하세요."
+							oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"/>
+							<div class="errMsg" id="accountErrMsg">유효하지 않은 계좌번호입니다.</div>
 							<div class="accountInsert-notice">본인 명의 계좌만 등록 가능합니다.</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			
 			<button type="button" class="btn btn-primary lion-primary-btn accountInsertBtn">계좌 등록</button>
+			<input type="hidden" id="bank_code" name="bank_code"/>
 		</form>
 		<hr class="report-line"/>
 	</div>

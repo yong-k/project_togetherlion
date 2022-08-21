@@ -64,88 +64,46 @@ button.swal2-cancel.swal2-styled:focus {
 
 	$(document).ready(function()
     {
+		if ('<%=request.getParameter("updateCode")%>' === 'true')
+		{
+			Swal.fire({
+    			icon: 'success',
+    			title: '대표계좌 설정이 완료되었습니다.',
+    			confirmButtonText: '확인'
+    		});
+		}
+		else if ('<%=request.getParameter("deleteCode")%>' === 'true')
+		{
+			Swal.fire({
+    			icon: 'success',
+    			title: '계좌가 삭제되었습니다.',
+    			confirmButtonText: '확인'
+    		});
+		}
 		
-		// <대표계좌로 설정> 버튼 클릭 시, 
-		$(".mainAccount-insertBtn").click(function()
-	   	{
-			(async () => {
-			    const { value: password } = await Swal.fire({
-			        title: '비밀번호를 입력해주세요.',
-			        input: 'password',
-			        inputPlaceholder: '비밀번호 입력',
-			        showCancelButton: true,
-			        reverseButtons: true,
-			        confirmButtonText: '확인',
-			        cancelButtonText: '취소'
-			    })
-			    // 비밀번호가 맞다면, 삭제진행
-			    if (password) {
-			    	if (password=='1234') {
-			    		
-			    		// 대표계좌 설정 작업 처리 코드 작성!
-			    		
-			    		
-			    		// 대표계좌 설정 완료 후, 띄울 알림창
-			    		Swal.fire({
-			    			icon: 'success',
-			    			text: '대표계좌 설정이 완료되었습니다.',
-			    			confirmButtonText: '확인'
-			    		}).then(() => {
-	      			    	location.href='#!';
-	      			    });
-			    	}else {
-			    		Swal.fire({
-			    			icon: 'error',
-			    			text: '비밀번호가 일치하지 않습니다.',
-			    			showConfirmButton: false,
-			    			showCancelButton: true,
-			    			cancelButtonText: '확인'
-			    		})
-			    	}
-			    }
-			})()
-	    });
+		// <대표계좌로 설정> 버튼 클릭 시,
+		$('.mainAccount-setBtn').click(function()
+		{
+			location.href = 'point_updatemainaccount.lion?code=' + $(this).val();
+		});
 		
 		// <삭제> 버튼 클릭 시, 
-    	$(".account-deleteBtn").click(function()
-    	{
-    		(async () => {
-    		    const { value: password } = await Swal.fire({
-    		        title: '삭제를 진행하려면 비밀번호를 입력하세요.',
-    		        input: 'password',
-    		        inputPlaceholder: '비밀번호 입력',
-    		        showCancelButton: true,
-    		        reverseButtons: true,
-    		        confirmButtonText: '삭제',
-    		        cancelButtonText: '취소'
-    		    })
-    		    // 비밀번호가 맞다면, 삭제진행
-    		    if (password) {
-    		    	if (password=='1234') {
-    		    		
-    		    		// Delete 작업 처리 코드 작성!
-    		    		
-    		    		
-    		    		// Delete 완료 후, 띄울 알림창
-    		    		Swal.fire({
-    		    			icon: 'success',
-    		    			text: '계좌가 삭제되었습니다.',
-    		    			confirmButtonText: '확인'
-    		    		}).then(() => {
-	      			    	location.href='#!';
-	      			    });
-    		    	}else {
-    		    		Swal.fire({
-    		    			icon: 'error',
-    		    			text: '비밀번호가 일치하지 않습니다.',
-    		    			showConfirmButton: false,
-    		    			showCancelButton: true,
-    		    			cancelButtonText: '확인'
-    		    		})
-    		    	}
-    		    }
-    		})()
-        });
+		$('.account-deleteBtn').click(function()
+		{
+			Swal.fire({
+				title: '계좌를 삭제하시겠습니까?',
+    			icon: 'warning',
+    			iconColor: '#f27474',
+    			showConfirmButton: true,
+    			showCancelButton: true,
+    			confirmButtonText: '삭제',
+    			cancelButtonText: '취소',
+    			reverseButtons: true
+    		}).then((result) => {
+  					if (result.isConfirmed)
+  						location.href = 'point_deleteaccount.lion?code=' + $(this).val();
+			    });
+		});
     });
 	
 	// <계좌등록> 버튼 클릭 시, 
@@ -164,48 +122,30 @@ button.swal2-cancel.swal2-styled:focus {
 			<hr class="report-line"/>
 		</div>
 		
-		<!-- 회원 계좌테이블에 있는 것 중에, 삭제계좌테이블에는 없는 것들만 가져오기 -->
 		<table class="table accountTable">
 			<thead></thead>
 			<tbody>
-				<tr>
-					<td>
-						<div class="bankName">KB국민</div>
-						<!-- 계좌번호는 앞에 3글자 + *4개 + 뒤에 4글자만 보여줌 -->
-						<div class="accountNum">043****1234</div>
-					</td>
-					<td>
-						<!-- if, 대표계좌 -->
-						<button type="button" class="btn accountManage-btn" disabled>대표계좌</button>
-						<!-- else 대표계좌아닌것들 -->
-						<!-- 
-						<button type="button" class="btn accountManage-btn">대표계좌로 설정</button>
-						<button type="button" class="btn accountManage-btn">삭제</button>
-						 -->
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="bankName">하나</div>
-						<!-- 계좌번호는 앞에 3글자 + *4개 + 뒤에 4글자만 보여줌 -->
-						<div class="accountNum">043****1234</div>
-					</td>
-					<td>
-						<button type="button" class="btn accountManage-btn mainAccount-insertBtn">대표계좌로 설정</button>
-						<button type="button" class="btn accountManage-btn account-deleteBtn">삭제</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="bankName">신한</div>
-						<!-- 계좌번호는 앞에 3글자 + *4개 + 뒤에 4글자만 보여줌 -->
-						<div class="accountNum">043****1234</div>
-					</td>
-					<td>
-						<button type="button" class="btn accountManage-btn">대표계좌로 설정</button>
-						<button type="button" class="btn accountManage-btn account-deleteBtn">삭제</button>
-					</td>
-				</tr>
+				<c:forEach var="account" items="${accountList }">
+					<tr>
+						<td>
+							<div class="bankName">${account.bank_name }</div>
+							<div class="accountNum">${account.account_number }</div>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${account.is_main_account == 1 }">
+									<button type="button" class="btn accountManage-btn" disabled>대표계좌</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn accountManage-btn mainAccount-setBtn"
+									value="${account.code }">대표계좌로 설정</button>
+									<button type="button" class="btn accountManage-btn account-deleteBtn" 
+									value="${account.code }">삭제</button>
+							 	</c:otherwise>
+							 </c:choose>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 			

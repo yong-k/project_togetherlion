@@ -18,8 +18,29 @@ public interface IMypageDAO
 	
 	
 	/* 포인트 */
-	// 사용내역
+	// 사용내역 <회원코드, 검색값>
 	public ArrayList<PointDTO> pointList(HashMap<String, String> params);
+	
+	//---------------------------계좌등록팝업---------------------------
+	// 은행목록
+	public ArrayList<BankDTO> bankList();
+	// 대표계좌 소유 확인
+	public int hasMainAccount(String member_code);
+	// 계좌등록 _ ① 대표계좌 있는 경우 → 계좌테이블 INSERT
+	public void accountInsert(AccountDTO dto);
+	// 계좌등록 _ ② 대표계좌 없는 경우 → 계좌테이블 + 대표계좌테이블 INSERT
+	public void mainAccountInsert(AccountDTO dto);
+	
+	//---------------------------계좌관리팝업---------------------------
+	// 계좌목록
+	public ArrayList<AccountDTO> accountList(String member_code);
+	// 대표계좌설정 <계좌코드, 회원코드>
+	public void updateMainAccount(HashMap<String, String> params);
+	// 대표계좌 여부 확인
+	public int isMainAccount(String account_code);
+	// 계좌삭제
+	public void deleteAccount(String account_code);
+	
 	
 	
 	/* 개인정보수정 */

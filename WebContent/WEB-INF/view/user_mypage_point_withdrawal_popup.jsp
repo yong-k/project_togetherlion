@@ -10,7 +10,7 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>같이사자 계좌관리</title>
+<title>같이사자 포인트 인출</title>
     <link rel="stylesheet" href="<%=cp %>/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="<%=cp %>/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="<%=cp %>/css/font-awesome.min.css" type="text/css">
@@ -135,7 +135,8 @@ button.swal2-cancel.swal2-styled:focus {
 						<th>인출할 포인트</th>
 						<td>
 							<!-- 본인 보유 포인트보다 큰 금액 입력하면, 자동으로 본인 보유 포인트로 입력되게 -->
-							<input type="text" class="withdrawPoint" placeholder="본인 명의 계좌만 인출가능"/>
+							<input type="text" class="withdrawPoint" placeholder="본인 명의 계좌만 인출가능"
+							oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"/>
 						</td>
 					</tr>
 					<tr>

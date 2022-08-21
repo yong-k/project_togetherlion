@@ -4256,6 +4256,10 @@ input.accountNum {
     font-size: 13px;
     color: #757474;
 }
+div#accountErrMsg {
+    text-align: left;
+    margin-left: 3%;
+}
 /* 포인트>충전팝업 */
 .nice-select.chargeAccount-select {
     width: 300px;

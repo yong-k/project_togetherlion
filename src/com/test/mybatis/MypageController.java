@@ -101,7 +101,36 @@ public class MypageController
 			model.addAttribute("errCase", "login");
 			return "redirect:loginform.lion";
 		}		
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		ArrayList<BankDTO> bankList = dao.bankList();
+		model.addAttribute("bankList", bankList);
+		
 		return "/WEB-INF/view/user_mypage_point_accountInsertForm_popup.jsp";
+	}
+	// 계좌등록
+	@RequestMapping("/point_accountinsert.lion")
+	public String pointAccountInsert(HttpServletRequest request, Model model, AccountDTO account)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}		
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		int hasMainAccount = dao.hasMainAccount(member_code);
+		account.setMember_code(member_code);
+		if (hasMainAccount > 0)
+			dao.accountInsert(account);
+		else
+			dao.mainAccountInsert(account);
+		
+		model.addAttribute("code", true);
+		return "redirect:point_accountinsertform.lion";
 	}
 	
 	// 계좌관리팝업
@@ -110,12 +139,63 @@ public class MypageController
 	{
 		// member_code(세션값) 확인
 		HttpSession session = request.getSession();
-		if (session.getAttribute("member_code") == null)
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
 		{
 			model.addAttribute("errCase", "login");
 			return "redirect:loginform.lion";
-		}		
+		}	
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		ArrayList<AccountDTO> accountList = dao.accountList(member_code);
+		model.addAttribute("accountList", accountList);
+
 		return "/WEB-INF/view/user_mypage_point_accountManage_popup.jsp";
+	}
+	// 대표계좌설정
+	@RequestMapping("/point_updatemainaccount.lion")
+	public String pointUpdateMainAccount(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		HashMap<String, String> params = new HashMap<String, String>();
+		String account_code = request.getParameter("code");
+		params.put("code", account_code);
+		params.put("member_code", member_code);
+		dao.updateMainAccount(params);
+		
+		model.addAttribute("updateCode", true);
+		return "redirect:point_accountmanageform.lion";
+	}
+	// 계좌삭제
+	@RequestMapping("/point_deleteaccount.lion")
+	public String pointDeleteAccount(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}	
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		String account_code = request.getParameter("code");
+		if (dao.isMainAccount(account_code) < 1)
+		{
+			dao.deleteAccount(account_code);
+			model.addAttribute("deleteCode", true);
+		}
+		return "redirect:point_accountmanageform.lion";
 	}
 	
 	// 충전팝업
