@@ -64,47 +64,37 @@ button.swal2-cancel.swal2-styled:focus {
 
 	$(document).ready(function()
     {
+		if ('<%=request.getParameter("code")%>' === 'true')
+		{
+			Swal.fire({
+    			icon: 'success',
+    			title: '충전이 완료되었습니다.',
+    			confirmButtonText: '확인'
+    		}).then(() => {
+    				opener.parent.location.reload();
+    				window.close();
+			    });
+		}
 		
-		// <충전> 버튼 클릭 시, 
 		$(".chargeBtn").click(function()
-	   	{
-			(async () => {
-			    const { value: password } = await Swal.fire({
-			        title: '비밀번호를 입력해주세요.',
-			        input: 'password',
-			        inputPlaceholder: '비밀번호 입력',
-			        showCancelButton: true,
-			        reverseButtons: true,
-			        confirmButtonText: '확인',
-			        cancelButtonText: '취소'
-			    })
-			    // 비밀번호가 맞다면, 등록진행
-			    if (password) {
-			    	if (password=='1234') {
-			    		
-			    		// 충전 처리 코드 작성! (지금은 그냥 충전되게)
-			    		
-			    		
-			    		// 충전 완료 후, 띄울 알림창
-			    		Swal.fire({
-			    			icon: 'success',
-			    			text: '충전이 완료되었습니다.',
-			    			confirmButtonText: '확인'
-			    		}).then(() => {
-	      			    	window.close();
-	      			    });
-			    	}else {
-			    		Swal.fire({
-			    			icon: 'error',
-			    			text: '비밀번호가 일치하지 않습니다.',
-			    			showConfirmButton: false,
-			    			showCancelButton: true,
-			    			cancelButtonText: '확인'
-			    		})
-			    	}
-			    }
-			})()
-	    });
+		{
+			$('#chargePointErrMsg').css('display', 'none');
+			$('#chargeAccountErrMsg').css('display', 'none');
+			
+			if ($('#amount').val() === null || $('#amount').val() === '' || Number($('#amount').val()) > 2000000)
+			{
+				$('#chargePointErrMsg').css('display', 'block');
+				$('#amount').focus();
+				return false;
+			}
+			if ($('#account-select').val() === '0')
+			{
+				$('#chargeAccountErrMsg').css('display', 'block');
+				return false;
+			}
+			
+			$('#pointChargeForm').submit();
+		});
     });
 	
 	// <계좌등록> 버튼 클릭 시, 
@@ -122,27 +112,37 @@ button.swal2-cancel.swal2-styled:focus {
 			<hr class="report-line"/>
 		</div>
 		
-		<form action="">
+		<form id="pointChargeForm" action="<%=cp%>/point_charge.lion">
 			<table class="table accountTable accountInsertTable">
 				<thead></thead>
 				<tbody>
 					<tr>
 						<th>충전 금액</th>
 						<td>
-							<input type="text" class="accountNum" placeholder="금액을 입력해주세요."
+							<input type="text" id="amount" name="amount" class="accountNum" 
+							placeholder="금액을 입력해주세요." maxlength="7"
 							oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');">
+							<div class="errMsg" id="chargePointErrMsg">충전 금액을 확인해주세요.</div>
 							<div class="accountInsert-notice">충전가능금액: 200만원</div>
 						</td>
 					</tr>
 					<tr>
 						<th>출금 계좌</th>
 						<td>   
-							<select class="form-select bank-select chargeAccount-select" aria-label="Default select example">
+							<select id="account-select" name="account_code" class="form-select bank-select chargeAccount-select" aria-label="Default select example">
 								<option value="0" selected>------- 계좌를 선택해주세요 -------</option>
-								<option value="1">KB국민 593***0396</option>
-								<option value="2">신한 392***5410</option>
-								<option value="3">하나 394***6665</option>
+								<c:forEach var="account" items="${accountList }">
+									<c:choose>
+										<c:when test="${account.is_main_account == 1 }">
+											<option value="${account.code }" selected>${account.bank_name } ${account.account_number }</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${account.code }">${account.bank_name } ${account.account_number }</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</select>
+							<div class="errMsg" id="chargeAccountErrMsg">출금 계좌를 선택해주세요.</div>
 						</td>
 					</tr>
 				</tbody>

@@ -155,7 +155,7 @@
 									<td><h4 id="proposal">${point.name }</h4></td>
 									<td>
 										<div class="point-detail">
-											<span class="point-date">${point.datetime }</span><br /> 
+											<span class="point-date">${(point.datetime).substring(0,11) }</span><br /> 
 											<a href="<%=cp%>/buypostarticle.lion?code=${point.buypost_code}"><span class="buypost-title">${point.buypost_title }</span></a>
 										</div>
 									</td>

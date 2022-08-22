@@ -64,7 +64,52 @@ button.swal2-cancel.swal2-styled:focus {
 
 	$(document).ready(function()
     {
+		if ('<%=request.getParameter("code")%>' === 'true')
+		{
+			Swal.fire({
+    			icon: 'success',
+    			title: '인출이 완료되었습니다.',
+    			confirmButtonText: '확인'
+    		}).then(() => {
+    				opener.parent.location.reload();
+    				window.close();
+			    });
+		}
 		
+		let point = '${point }';
+		point = point.replaceAll(',', '');
+		
+		$('#amount').focusout(function()
+		{
+			if (Number($('#amount').val()) > Number(point))
+			{
+				$('#withdrawPointErrMsg').css('display', 'none');
+				$('#amount').val(point);
+			}
+		});
+		
+		$(".point-withdrawBtn").click(function()
+		{
+			$('#withdrawPointErrMsg').css('display', 'none');
+			$('#withdrawAccountErrMsg').css('display', 'none');
+			
+			
+			if ($('#amount').val() === null || $('#amount').val() === '' || Number($('#amount').val()) > Number(point))
+			{
+				$('#withdrawPointErrMsg').css('display', 'block');
+				$('#amount').focus();
+				return false;
+			}
+			if ($('#account-select').val() === '0')
+			{
+				$('#withdrawAccountErrMsg').css('display', 'block');
+				return false;
+			}
+			
+			$('#pointWithdrawForm').submit();
+		});
+		
+		/*
 		// <인출> 버튼 클릭 시, 
 		$(".point-withdrawBtn").click(function()
 	   	{
@@ -106,6 +151,7 @@ button.swal2-cancel.swal2-styled:focus {
 			    }
 			})()
 	    });
+		*/
     });
 	
 	// <계좌등록> 버튼 클릭 시, 
@@ -123,35 +169,45 @@ button.swal2-cancel.swal2-styled:focus {
 			<hr class="report-line"/>
 		</div>
 		
-		<form action="">
+		<form id="pointWithdrawForm" action="<%=cp%>/point_withdraw.lion">
 			<table class="table accountTable accountInsertTable pointWithdrawTable">
 				<thead></thead>
 				<tbody>
 					<tr>
 						<th>인출 가능 포인트</th>
-						<td><span class="userPoint">80,540</span>원</td>
+						<td><span class="userPoint">${point }</span> 원</td>
 					</tr>
 					<tr>
 						<th>인출할 포인트</th>
 						<td>
 							<!-- 본인 보유 포인트보다 큰 금액 입력하면, 자동으로 본인 보유 포인트로 입력되게 -->
-							<input type="text" class="withdrawPoint" placeholder="본인 명의 계좌만 인출가능"
+							<input type="text" id="amount" name="amount" class="withdrawPoint" 
+							placeholder="본인 명의 계좌만 인출가능"
 							oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"/>
+							<div class="errMsg" id="withdrawPointErrMsg">인출 금액을 확인해주세요.</div>
 						</td>
 					</tr>
 					<tr>
 						<th>인출 계좌</th>
 						<td>   
-							<select class="form-select bank-select withdrawAccount-select" aria-label="Default select example">
+							<select id="account-select" name="account_code" class="form-select bank-select withdrawAccount-select" aria-label="Default select example">
 								<option value="0" selected>------- 계좌를 선택해주세요 -------</option>
-								<option value="1">KB국민 593***0396</option>
-								<option value="2">신한 392***5410</option>
-								<option value="3">하나 394***6665</option>
+								<c:forEach var="account" items="${accountList }">
+									<c:choose>
+										<c:when test="${account.is_main_account == 1 }">
+											<option value="${account.code }" selected>${account.bank_name } ${account.account_number }</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${account.code }">${account.bank_name } ${account.account_number }</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</select>
 						</td>
 					</tr>
 				</tbody>
 			</table>
+		    <div class="errMsg" id="withdrawAccountErrMsg">출금 계좌를 선택해주세요.</div>
 			
 			<button type="button" class="btn accountManage-btn charge-accountInsertBtn"
 			onclick="javascript:accountInsertForm()">

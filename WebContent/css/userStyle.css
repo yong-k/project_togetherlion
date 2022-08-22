@@ -4267,6 +4267,14 @@ div#accountErrMsg {
 .nice-select.chargeAccount-select ul {
     width: 295px;
 }
+div#chargePointErrMsg {
+    margin-top: -1%;
+    margin-left: -49%;
+}
+div#chargeAccountErrMsg {
+    padding-top: 14%;
+    margin-left: -49%;
+}
 button.charge-accountInsertBtn {
     margin-bottom: 20px;
     margin-top: 10px;
@@ -4328,6 +4336,14 @@ input.withdrawPoint {
 input.withdrawPoint::placeholder {
     font-weight: normal;
     font-size: 16px;
+}
+div#withdrawPointErrMsg {
+    margin-top: -1%;
+    margin-left: -58%;
+}
+div#withdrawAccountErrMsg {
+    margin-top: -5%;
+    margin-left: -7%;
 }
 
 /* 마이페이지>개인정보수정 */

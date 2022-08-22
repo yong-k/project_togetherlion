@@ -2,7 +2,7 @@ package com.test.mybatis;
 
 public class PointDTO
 {
-	private String type, name, datetime, buypost_code, buypost_title, amount;
+	private String type, name, datetime, buypost_code, buypost_title, amount, account_code;
 
 	public String getType()
 	{
@@ -63,6 +63,15 @@ public class PointDTO
 	{
 		this.amount = amount;
 	}
-	
+
+	public String getAccount_code()
+	{
+		return account_code;
+	}
+
+	public void setAccount_code(String account_code)
+	{
+		this.account_code = account_code;
+	}
 	
 }

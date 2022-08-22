@@ -9,7 +9,7 @@ public interface IMypageDAO
 	public MemberDTO mypageHeaderInfo(String member_code);
 	
 	// 포인트 총액
-	public int pointAmount(String member_code); 
+	public String pointAmount(String member_code); 
 	
 	
 	/* MY 공구 */
@@ -40,6 +40,14 @@ public interface IMypageDAO
 	public int isMainAccount(String account_code);
 	// 계좌삭제
 	public void deleteAccount(String account_code);
+	
+	//--------------------------포인트충전팝업--------------------------
+	// 포인트 충전
+	public void chargePoint(PointDTO dto);
+	
+	//--------------------------포인트인출팝업--------------------------
+	// 포인트 인출
+	public void withdrawPoint(PointDTO dto);
 	
 	
 	
