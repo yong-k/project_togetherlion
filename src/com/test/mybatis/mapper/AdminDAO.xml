@@ -13,6 +13,51 @@
 	
 	
 	<!-- ===================================== 회원조회 ===================================== -->
+	<!-- 전체회원 수 -->
+	<select id="memberCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_ALLMEMBERLIST
+		<choose>
+			<when test="searchType neq ''">
+				WHERE LOWER(${searchType}) LIKE '%'||LOWER(#{keyword})||'%'
+			</when>
+		</choose>	
+	</select>
+	
+	<!-- 전체회원 목록 -->
+	<select id="allMemberList" resultType="com.test.mybatis.MemberDTO">
+		SELECT NUM, ID, NAME, NICKNAME, TEL, REPORT_COUNT, REGIST_DATETIME
+		FROM
+		(
+		    SELECT ROWNUM RNUM, T.*
+		    FROM 
+		    (
+		        SELECT ROWNUM AS NUM, VA.*
+		        FROM VIEW_ALLMEMBERLIST VA
+		        <choose>
+		        	<when test="searchType neq ''">
+		        		WHERE LOWER(${searchType}) LIKE '%'||LOWER(#{keyword})||'%'
+		        	</when>
+		        </choose>
+		        ORDER BY NUM DESC
+		    ) T
+		    <!-- startList = 각 페이지의 목록 시작번호 -->
+		    <!-- listSize  = 한 페이지당 보여질 리스트의 개수 -->
+		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
+		) 
+		WHERE RNUM <![CDATA[>=]]> #{startList}	
+	</select>
+	
+	<!-- 영구정지회원 -->
+	<select id="banMemberList" resultType="com.test.mybatis.MemberDTO">
+	
+	</select>
+	
+	<!-- 탈퇴회원 -->
+	<select id="withdrawMemberList" resultType="com.test.mybatis.MemberDTO">
+	
+	</select> 
+	
 	<!-- ===================================== 회원조회 ===================================== -->
 	
 	

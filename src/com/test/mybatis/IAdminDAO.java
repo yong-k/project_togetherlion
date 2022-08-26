@@ -2,11 +2,30 @@ package com.test.mybatis;
 
 import java.util.ArrayList;
 
+import com.test.util.Search;
+
 public interface IAdminDAO
 {
 	// 관리자 찾기 (세션에 있는 멤버코드로)
 	public AdminDTO searchAdmin(String member_code);
 	
+	// 회원조회
+	//--▷전체회원 수
+	public int memberCount(Search search) throws Exception;
+ 	//--▷전체회원 목록 
+	public ArrayList<MemberDTO> allMemberList(Search search) throws Exception;
+	//--▷영구정지회원
+	public ArrayList<MemberDTO> banMemberList();
+	//--▷탈퇴회원
+	public ArrayList<MemberDTO> withdrawMemerList();
+	
+	
+	// 포인트조회
+	//--▷
+	//--▷
+	//--▷
+	//--▷
+	//--▷
 	
 	
 	// 홈페이지관리

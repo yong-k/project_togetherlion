@@ -27,7 +27,6 @@
 	<!-- import HEADER -->
 	<c:import url="user_header.jsp"></c:import>
 
-	<!-- 일단 지금은 .jsp 3개 분리해놨음; -->
 	<!-- 메인말고는 상품 한 페이지에 24개 --> 
 
 	<!-- 최근공구/마감임박/검색 → banner 사진 변경위해 분기 -->

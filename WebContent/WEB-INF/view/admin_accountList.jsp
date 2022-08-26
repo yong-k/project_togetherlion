@@ -136,7 +136,6 @@ button.swal2-cancel.swal2-styled:focus {
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="<%=cp %>/admin_memberall.lion">전체회원</a> 
 								<a class="nav-link" href="<%=cp %>/admin_memberban.lion">영구정지회원</a> 
-								<a class="nav-link" href="<%=cp %>/admin_membersleep.lion">휴면회원</a> 
 								<a class="nav-link" href="<%=cp %>/admin_memberwithdrawal.lion">탈퇴회원</a>
 							</nav>
 						</div>

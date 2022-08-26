@@ -185,7 +185,6 @@
 		INSERT INTO WITHDRAWAL(CODE, AMOUNT, DATETIME, ACCOUNT_CODE)
 		VALUES('W'||WITHDRAWAL_SEQ.NEXTVAL, #{amount}, SYSDATE, #{account_code})	
 	</insert>
-	
 	<!-- ====================================== 포인트 ====================================== -->
 	
 	<!-- =================================== 개인정보수정 =================================== -->

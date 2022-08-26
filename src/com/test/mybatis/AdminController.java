@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.test.util.Search;
 
 @Controller
 public class AdminController
@@ -63,7 +66,11 @@ public class AdminController
 	// ------------------------------------------- 회원조회 -------------------------------------------
 	// 전체회원
 	@RequestMapping("/admin_memberall.lion")
-	public String memberAll(HttpServletRequest request, Model model)
+	public String memberAll(HttpServletRequest request, Model model
+						  , @RequestParam(required = false, defaultValue = "1") int page
+						  , @RequestParam(required = false, defaultValue = "1") int range
+						  , @RequestParam(required = false, defaultValue = "") String searchType
+						  , @RequestParam(required = false, defaultValue = "") String keyword) throws Exception
 	{
 		// member_code(세션값) 확인
 		HttpSession session = request.getSession();
@@ -74,6 +81,18 @@ public class AdminController
 			model.addAttribute("errCase", "login_admin");
 			return "redirect:loginform.lion";
 		}		
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		Search search = new Search();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
+		
+		// 전체 게시글 개수
+		int listCnt = dao.memberCount(search);
+		search.pageInfo(page, range, listCnt);
+		ArrayList<MemberDTO> allMemberList = dao.allMemberList(search);
+		model.addAttribute("pagination", search);
+		model.addAttribute("allMemberList", allMemberList);
 		return "/WEB-INF/view/admin_member_all.jsp";
 	}
 	// 영구정지회원
@@ -90,21 +109,6 @@ public class AdminController
 			return "redirect:loginform.lion";
 		}		
 		return "/WEB-INF/view/admin_member_permanentBan.jsp";
-	}
-	// 휴면회원
-	@RequestMapping("/admin_membersleep.lion")
-	public String memberSleep(HttpServletRequest request, Model model)
-	{
-		// member_code(세션값) 확인
-		HttpSession session = request.getSession();
-		String member_code = (String)session.getAttribute("member_code");
-		if (member_code == null || Integer.parseInt(member_code.substring(1)) > 10)
-		{
-			session.invalidate();
-			model.addAttribute("errCase", "login_admin");
-			return "redirect:loginform.lion";
-		}		
-		return "/WEB-INF/view/admin_member_sleep.jsp";
 	}
 	// 탈퇴회원
 	@RequestMapping("/admin_memberwithdrawal.lion")

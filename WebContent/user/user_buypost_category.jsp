@@ -27,23 +27,7 @@
 	<!-- import HEADER -->
 	<c:import url="user_header.jsp"></c:import>
 
-	<!-- 일단 지금은 .jsp 3개 분리해놨음; -->
 	<!-- 메인말고는 상품 한 페이지에 24개 --> 
-
-	<!-- 최근공구/마감임박/검색 → banner 사진 변경위해 분기 -->
-	<!-- buyPost_new/buyPost_final/buyPost_search -->
-	<!-- ① 최근공구 -->
-	 <%-- 
-	<section class="breadcrumb-section set-bg newBuyPost-banner"
-		data-setbg="<%=cp %>/img/hero/banner6.jpg">
-	--%>	
-	<!-- ② 마감임박 -->	
-	<%--  	
-	<section class="breadcrumb-section set-bg finalBuyPost-banner"
-		data-setbg="<%=cp %>/img/hero/banner4.jpg">
-	--%>	
-	<!-- ③ 검색 -->
-	 		
 	<section class="breadcrumb-section set-bg searchBuyPost-banner"
 		data-setbg="<%=cp %>/img/hero/banner3.jpg">
 			

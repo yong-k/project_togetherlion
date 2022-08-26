@@ -108,50 +108,6 @@ button.swal2-cancel.swal2-styled:focus {
 			
 			$('#pointWithdrawForm').submit();
 		});
-		
-		/*
-		// <인출> 버튼 클릭 시, 
-		$(".point-withdrawBtn").click(function()
-	   	{
-			(async () => {
-			    const { value: password } = await Swal.fire({
-			        title: '비밀번호를 입력해주세요.',
-			        input: 'password',
-			        inputPlaceholder: '비밀번호 입력',
-			        showCancelButton: true,
-			        reverseButtons: true,
-			        confirmButtonText: '확인',
-			        cancelButtonText: '취소'
-			    })
-			    // 비밀번호가 맞다면, 인출 진행
-			    if (password) {
-			    	if (password=='1234') {
-			    		
-			    		// 인출 처리 코드 작성! (지금은 그냥 인출되게)
-			    		
-			    		
-			    		// 인출 완료 후, 띄울 알림창
-			    		Swal.fire({
-			    			icon: 'success',
-			    			text: '인출이 완료되었습니다.',
-			    			confirmButtonText: '확인'
-			    		}).then(() => {
-			    			opener.parent.location.reload();
-	      			    	window.close();
-	      			    });
-			    	}else {
-			    		Swal.fire({
-			    			icon: 'error',
-			    			text: '비밀번호가 일치하지 않습니다.',
-			    			showConfirmButton: false,
-			    			showCancelButton: true,
-			    			cancelButtonText: '확인'
-			    		})
-			    	}
-			    }
-			})()
-	    });
-		*/
     });
 	
 	// <계좌등록> 버튼 클릭 시, 
@@ -180,7 +136,6 @@ button.swal2-cancel.swal2-styled:focus {
 					<tr>
 						<th>인출할 포인트</th>
 						<td>
-							<!-- 본인 보유 포인트보다 큰 금액 입력하면, 자동으로 본인 보유 포인트로 입력되게 -->
 							<input type="text" id="amount" name="amount" class="withdrawPoint" 
 							placeholder="본인 명의 계좌만 인출가능"
 							oninput="this.value=this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '&1');"/>
