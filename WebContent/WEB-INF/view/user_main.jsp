@@ -116,38 +116,33 @@ div#swal2-html-container {
         <div class="container">
             <div class="row featured__filter">
             
-            	<c:forEach var="buypost" items="${list }" varStatus="li">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">                	
-                    <div class="featured__item">
-                    <!-- 
-                    <button type="button" class="btn btn-default btn-xs btnDelete"
-								value="${member.mid }">삭제</button>
-                     -->
-                    	<%-- <input type="hidden" class="featured__item__pic set-bg" value="${buypost.code }" name="buypost"> --%>
-                        <div class="featured__item__pic set-bg" data-setbg="<%=cp %>/img/featured/feature-8.jpg">
-                        	<button class="buypost_go" style="width:209.99px; height:270px; cursor:pointer; opacity:0;" value="${buypost.code }"></button>
-                        	
-                        	<span class="timeLeft">
-                        	<c:choose>
-                        		<c:when test="${buypost.day != '0' }">	
-                        			${buypost.day }일 남음
-                        		</c:when>
-                        		<c:otherwise>
-                        			${buypost.hour }시간 ${buypost.minute }분 남음
-                        		</c:otherwise>
-                        	</c:choose>
-							</span>
-                        	<span class="featured__item__pic__hover">
-                        		<i class="bi bi-cart4"></i>
-                        		<span class="item_number">${buypost.count }</span>
-                        	</span>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="user_buyPostArticle.jsp">${buypost.title }</a></h6>
-                            <h5>￦${buypost.person_price }</h5>
-                        </div>
-                    </div>
-                </div>
+            	<c:forEach var="buypost" items="${buypostList }" >
+	                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">    
+	                	<a href="buypostarticle.lion?code=${buypost.code }">            	
+		                    <div class="featured__item">
+		                        <div class="featured__item__pic set-bg" data-setbg="img/buypost/${buypost.goods_photo_name }">
+		                        	<span class="timeLeft">
+		                        	<c:choose>
+		                        		<c:when test="${buypost.left_day != '0'}">	
+		                        			${buypost.left_day }일 남음
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        			${buypost.left_hour }시간 ${buypost.left_minute }분 남음
+		                        		</c:otherwise>
+		                        	</c:choose>
+									</span>
+		                        	<span class="featured__item__pic__hover">
+		                        		<i class="bi bi-cart4"></i>
+		                        		<span class="item_number">${buypost.count }</span>
+		                        	</span>
+		                        </div>
+	                        </a>
+	                        <div class="featured__item__text">
+	                            <h6><a href="buypostarticle.lion?code=${buypost.code }">${buypost.title }</a></h6>
+	                            <h5>￦${buypost.amount }</h5>
+	                        </div>
+	                    </div>
+	                </div>
                 </c:forEach>
                 
             </div>

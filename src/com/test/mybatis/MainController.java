@@ -57,9 +57,52 @@ public class MainController
 	
 	// 메인
 	@RequestMapping("/main.lion")
-	public String main() {
+	public String main(HttpServletRequest request, Model model) 
+	{
+		HttpSession session = request.getSession();
+		String user_region = (String)session.getAttribute("user_region");
+		if (user_region == null) 
+			user_region = "";
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<BuypostDTO> buypostList_main = dao.buypostList_main(user_region);	
+		model.addAttribute("buypostList", buypostList_main);
 		return "/WEB-INF/view/user_main.jsp";
 	}
 	
+	// 공동구매 목록 - 메인카테고리
+	@RequestMapping("/buypostmaincate.lion")
+	public String buypostList_mainCate(HttpServletRequest request, Model model)
+	{
+		return "/WEB-INF/view/user_buypost_category.jsp";
+	}
+	
+	// 공동구매 목록 - 서브카테고리
+	@RequestMapping("/buypostsubcate.lion")
+	public String buypostList_subCate(HttpServletRequest request, Model model)
+	{
+		return "/WEB-INF/view/user_buypost_category.jsp";
+	}
+	
+	// 공동구매 목록 - 최근공구
+	@RequestMapping("/buypostnew.lion")
+	public String buypostList_new(HttpServletRequest request, Model model)
+	{
+		return "/WEB-INF/view/user_buypost_new.jsp";
+	}
+	
+	// 공동구매 목록 - 마감임박
+	@RequestMapping("/buypostfinal.lion")
+	public String buypostList_final(HttpServletRequest request, Model model)
+	{
+		return "/WEB-INF/view/user_buypost_final.jsp";
+	}
+	
+	// 공동구매 목록 - 검색
+	@RequestMapping("/buypostsearch.lion")
+	public String buypostList_search(HttpServletRequest request, Model model)
+	{
+		return "/WEB-INF/view/user_buypost_search.jsp";
+	}
 	
 }

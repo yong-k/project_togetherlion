@@ -9,5 +9,67 @@
 		SELECT CODE, NAME
 		FROM MAIN_CATE	
 	</select>
+	
+	<!--==================== 공동구매 목록 ====================-->
+	<!-- 메인(32개) -->
+	<select id="buypostList_main" resultType="com.test.mybatis.BuypostDTO">
+		SELECT ROWNUM, CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND ROWNUM <![CDATA[<=]]> 32	
+	</select>
+	
+	<!-- 메인카테고리 -->
+	<select id="buypostList_mainCate" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND MAIN_CATE_CODE = #{main_cate_code}
+	</select>
+	
+	<!-- 서브카테고리 -->
+	<select id="buypostList_subCate" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND SUB_CATE_CODE = #{sub_cate_code}	
+	</select>
+	
+	<!-- 최근공구 -->
+	<select id="buypostList_new" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND WRITE_DATETIME <![CDATA[<]]> SYSDATE - 7	
+	</select>
+	
+	<!-- 마감임박 -->
+	<select id="buypostList_final" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND DEADLINE - SYSDATE <![CDATA[<=]]> -1	
+	</select>
+	
+	<!-- 검색 -->
+	<select id="buypostList_search" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		AND TITLE LIKE '%'||#{searchType}||'%'
+		    OR CONTENT LIKE '%'||#{searchType}||'%'
+		    OR REGION LIKE '%'||#{searchType}||'%'
+		    OR SUB_CATE_CODE = (SELECT CODE
+		                        FROM SUB_CATE
+		                        WHERE NAME LIKE '%'||#{searchType}||'%')	
+	</select>
+	
+	<!--==================== 공동구매 목록 ====================-->
 
 </mapper>
