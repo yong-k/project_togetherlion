@@ -104,8 +104,7 @@
                         </div>
                         <ul style="display: none;">
                         	<c:forEach var="mainCate" items="${mainCateList }">
-                        	<!-- 주소에 mainCate.code 넘겨줘야 됨 -->
-                        	<li><a href="<%=cp %>/user/user_buypost_category.jsp">${mainCate.name }</a></li>
+                        	<li><a href="buypostcategory.lion?main=${mainCate.code }">${mainCate.name }</a></li>
                         	</c:forEach>
                         </ul>
                     </div>

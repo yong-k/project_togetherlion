@@ -20,22 +20,49 @@
 		  AND ROWNUM <![CDATA[<=]]> 32	
 	</select>
 	
-	<!-- 메인카테고리 -->
-	<select id="buypostList_mainCate" resultType="com.test.mybatis.BuypostDTO">
-		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
-		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+	<!-- 서브카테고리로 메인카테고리 찾기 -->
+	<select id="searchMainCate" resultType="java.lang.String">
+		SELECT MAIN_CATE_CODE
+		FROM SUB_CATE
+		WHERE CODE = #{sub_cate_code}	
+	</select>
+	
+	<!-- 메인카테고리 & 서브카테고리 이름 -->
+	<select id="categoryList" resultType="com.test.mybatis.SubCategoryDTO">
+		SELECT M.CODE "MAIN_CATE_CODE", M.NAME "MAIN_CATE_NAME", S.CODE, S.NAME
+		FROM MAIN_CATE M JOIN SUB_CATE S
+		    ON M.CODE = S.MAIN_CATE_CODE
+		WHERE MAIN_CATE_CODE = #{main_cate_code}    
+		ORDER BY M.CODE, S.CODE	
+	</select>
+	
+	<!-- 카테고리 목록 개수 -->
+	<select id="count_category" resultType="java.lang.Integer">
+		SELECT COUNT(*) COUNT
 		FROM VIEW_BUYPOSTLIST
 		WHERE REGION LIKE '%'||#{user_region}||'%'
 		  AND MAIN_CATE_CODE = #{main_cate_code}
+		  AND SUB_CATE_CODE LIKE '%'||#{sub_cate_code}||'%'	
 	</select>
 	
-	<!-- 서브카테고리 -->
-	<select id="buypostList_subCate" resultType="com.test.mybatis.BuypostDTO">
-		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
-		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
-		FROM VIEW_BUYPOSTLIST
-		WHERE REGION LIKE '%'||#{user_region}||'%'
-		  AND SUB_CATE_CODE = #{sub_cate_code}	
+	<!-- 카테고리 -->
+	<select id="buypostList_category" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, COUNT, GOODS_PHOTO_NAME, LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM 
+		(
+		    SELECT ROWNUM RNUM, T.*
+		    FROM
+		    (
+		        SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		             , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		        FROM VIEW_BUYPOSTLIST
+		        WHERE REGION LIKE '%'||#{user_region}||'%'
+				  AND MAIN_CATE_CODE = #{main_cate_code}
+				  AND SUB_CATE_CODE LIKE '%'||#{sub_cate_code}||'%'	
+		    ) T
+		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
+		)
+		WHERE RNUM <![CDATA[>=]]> #{startList}		  	  
 	</select>
 	
 	<!-- 최근공구 -->

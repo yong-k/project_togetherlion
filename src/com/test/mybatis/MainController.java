@@ -1,6 +1,7 @@
 package com.test.mybatis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.test.util.Pagination;
+import com.test.util.Search_buypost;
 
 @Controller
 public class MainController
@@ -70,17 +75,40 @@ public class MainController
 		return "/WEB-INF/view/user_main.jsp";
 	}
 	
-	// 공동구매 목록 - 메인카테고리
-	@RequestMapping("/buypostmaincate.lion")
-	public String buypostList_mainCate(HttpServletRequest request, Model model)
+	// 공동구매 목록 - 카테고리
+	@RequestMapping("/buypostcategory.lion")
+	public String buypostList_category(HttpServletRequest request, Model model
+			  , @RequestParam(required = false, defaultValue = "1") int page
+			  , @RequestParam(required = false, defaultValue = "1") int range) throws Exception
 	{
-		return "/WEB-INF/view/user_buypost_category.jsp";
-	}
-	
-	// 공동구매 목록 - 서브카테고리
-	@RequestMapping("/buypostsubcate.lion")
-	public String buypostList_subCate(HttpServletRequest request, Model model)
-	{
+		HttpSession session = request.getSession();
+		String user_region = (String)session.getAttribute("user_region");
+		if (user_region == null) 
+			user_region = "";
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		String main_cate_code = request.getParameter("main");
+		String sub_cate_code = request.getParameter("sub");
+		if (main_cate_code == null)
+			main_cate_code = dao.searchMainCate(sub_cate_code);
+		if (sub_cate_code == null)
+			sub_cate_code = "";
+		
+		ArrayList<SubCategoryDTO> categoryList = dao.categoryList(main_cate_code);
+
+		Search_buypost search = new Search_buypost();
+		search.setListSize(24);
+		search.setUser_region(user_region);
+		search.setMain_cate_code(main_cate_code);
+		search.setSub_cate_code(sub_cate_code);
+		
+		int listCnt = dao.count_category(search);
+		search.pageInfo(page, range, listCnt);
+		ArrayList<BuypostDTO> buypostList_category = dao.buypostList_category(search);
+		
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("pagination", search);
+		model.addAttribute("buypostList", buypostList_category);
 		return "/WEB-INF/view/user_buypost_category.jsp";
 	}
 	

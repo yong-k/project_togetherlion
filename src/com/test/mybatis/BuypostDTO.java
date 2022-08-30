@@ -4,7 +4,7 @@ public class BuypostDTO
 {
 	private String code, title, amount, buy_number, goods_num, count, goods_photo_name
 		, left_day, left_hour, left_minute, left_second
-		, region, sub_cate_code, write_datetime, deadline, content;
+		, region, sub_cate_code, main_cate_code, write_datetime, deadline, content;
 
 	public String getCode()
 	{
@@ -134,6 +134,16 @@ public class BuypostDTO
 	public void setSub_cate_code(String sub_cate_code)
 	{
 		this.sub_cate_code = sub_cate_code;
+	}
+	
+	public String getMain_cate_code()
+	{
+		return main_cate_code;
+	}
+
+	public void setMain_cate_code(String main_cate_code)
+	{
+		this.main_cate_code = main_cate_code;
 	}
 
 	public String getWrite_datetime()
