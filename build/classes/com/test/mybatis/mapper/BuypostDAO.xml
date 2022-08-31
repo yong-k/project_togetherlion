@@ -100,7 +100,7 @@
 		FROM VIEW_BUYPOSTLIST
 		WHERE REGION LIKE '%'||#{user_region}||'%'
 		  AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
-		  AND DEADLINE - SYSDATE <![CDATA[<=]]> -1	
+		  AND DEADLINE - SYSDATE <![CDATA[<]]> 1	
 	</select>
 	
 	<!-- 마감임박 -->
@@ -114,9 +114,10 @@
 		        SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
 		             , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
 		        FROM VIEW_BUYPOSTLIST
-		        WHERE REGION LIKE '%'||''||'%'
+		        WHERE REGION LIKE '%'||#{user_region}||'%'
 		          AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
-		          AND DEADLINE - SYSDATE <![CDATA[<=]]> -1
+		          AND DEADLINE - SYSDATE <![CDATA[<]]> 1
+		        ORDER BY DEADLINE, WRITE_DATETIME DESC
 		    ) T
 		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
 		)

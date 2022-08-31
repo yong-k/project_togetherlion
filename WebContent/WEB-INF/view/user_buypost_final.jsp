@@ -20,7 +20,26 @@
     <link rel="stylesheet" href="<%=cp %>/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="<%=cp %>/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<%=cp %>/css/userStyle.css" type="text/css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+	<script src="<%=cp %>/js/paging_noSearching.js"></script>
+	
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(function()
+	{
+		let maincate = '<%=request.getParameter("maincate")%>';
+		if (maincate === 'null')
+			maincate = '%';
+		$('span.current').html($("select[name='category-select'] option[value='" + maincate + "']").text());
+		
+		$('#category-select').on("change", function()
+		{
+			location.href='buypostfinal.lion?maincate=' + $(this).val();
+		});
+	});
+
+</script>		 
 </head>
 <body>
 
@@ -51,23 +70,28 @@
 						<div class="row">
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
-									<span>카테고리 선택</span> <select>
-										<option value="0">전체</option>
-										<option value="1">쌀/면/빵/떡</option>
-										<option value="2">과일/채소</option>
-										<option value="3">수산/정육/계란</option>
-										<option value="4">밀키트/간편식/냉동</option>
-										<option value="5">국/반찬</option>
-										<option value="6">간식/과자</option>
-										<option value="7">우유/유제품</option>
-										<option value="8">물/음료/커피/차</option>
-										<option value="9">양념/소스</option>
+									<span>카테고리 선택</span> 
+									<select name="category-select" id="category-select" style="display:none;">
+										<option value="%">전체</option>
+										<c:forEach var="mainCate" items="${mainCateList }">
+											<option value="${mainCate.code }">${mainCate.name }</option>
+										</c:forEach>
 									</select>
+									<div class="nice-select" tabindex="0">
+										<span class="current">전체</span>
+										<ul class="list">
+											<li data-value="%" class="option selected">전체</li>
+											<c:forEach var="mainCate" items="${mainCateList }">
+												<li data-value="${mainCate.code }" class="option">${mainCate.name }</li>
+											</c:forEach>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				
 				<c:forEach var="buypost" items="${buypostList }" >
 	                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">    
 	                	<a href="buypostarticle.lion?code=${buypost.code }">            	
