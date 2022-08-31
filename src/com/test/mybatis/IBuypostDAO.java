@@ -20,11 +20,17 @@ public interface IBuypostDAO
 	public int count_category(Search_buypost search) throws Exception;
 	//--▷ 카테고리
 	public ArrayList<BuypostDTO> buypostList_category(Search_buypost search) throws Exception;
+	//--▷ 최근공구 목록 개수
+	public int count_new(Search_buypost search) throws Exception;
 	//--▷ 최근공구
-	public ArrayList<BuypostDTO> buypostList_new();
+	public ArrayList<BuypostDTO> buypostList_new(Search_buypost search) throws Exception;
+	//--▷ 마감임박 목록 개수
+	public int count_final(Search_buypost search) throws Exception;
 	//--▷ 마감임박
-	public ArrayList<BuypostDTO> buypostList_final();
+	public ArrayList<BuypostDTO> buypostList_final(Search_buypost search) throws Exception;
+	//--▷ 검색 목록 개수
+	
 	//--▷ 검색
-	public ArrayList<BuypostDTO> buypostList_search();
+	
 	
 }

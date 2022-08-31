@@ -25,7 +25,7 @@
 <body>
 
 	<!-- import HEADER -->
-	<c:import url="user_header.jsp"></c:import>
+	<c:import url="/header.lion"></c:import>
 
 	<!-- 메인말고는 상품 한 페이지에 24개 --> 
 	<section class="breadcrumb-section set-bg finalBuyPost-banner"
@@ -65,472 +65,62 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-lg-8 col-md-7">
-								<div class="filter__found">
-									<h6>
-										<span>16</span> Products found
-									</h6>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-1.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">3시간 2분 42초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">2/3</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[강남구] 고기 같이 사요~~~</a>
-							</h6>
-							<h5>￦20,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-2.jpg"
-							onClick="location.href='<%=cp %>/user/user_buyPostArticle.jsp'">
-							<span class="timeLeft">5일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">3/10</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[마포구] 바나나바나나바나나바나나</a>
-							</h6>
-							<h5>￦6,500</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-3.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">23시간 11분 44초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">6/7</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[서대문구] 이건무슨과일임하하</a>
-							</h6>
-							<h5>￦14,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-4.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">9일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">1/5</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[은평구] 수박수박수박수박수박</a>
-							</h6>
-							<h5>￦59,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-5.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">2일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">4/6</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[서초구] 유기농포도한박스포도</a>
-							</h6>
-							<h5>￦35,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-6.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">1시간 1분 1초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">6/6</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[관악구] 베토디세트같이먹어용</a>
-							</h6>
-							<h5>￦99,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-7.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">11시간 2분 59초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">1/5</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[양천구] AleMangoAMagooooo</a>
-							</h6>
-							<h5>￦120,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-8.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">11일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">5/20</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[성북구] 사과사과솨과apple</a>
-							</h6>
-							<h5>￦32,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-1.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">3시간 2분 42초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">2/3</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[강남구] 고기 같이 사요~~~</a>
-							</h6>
-							<h5>￦20,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-2.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">5일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">3/10</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[마포구] 바나나바나나바나나바나나</a>
-							</h6>
-							<h5>￦6,500</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-3.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">23시간 11분 44초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">6/7</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[서대문구] 이건무슨과일임하하</a>
-							</h6>
-							<h5>￦14,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-4.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">9일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">1/5</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[은평구] 수박수박수박수박수박</a>
-							</h6>
-							<h5>￦59,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-5.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">2일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">4/6</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[서초구] 유기농포도한박스포도</a>
-							</h6>
-							<h5>￦35,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-6.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">1시간 1분 1초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">6/6</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[관악구] 베토디세트같이먹어용</a>
-							</h6>
-							<h5>￦99,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-7.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">11시간 2분 59초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">1/5</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[양천구] AleMangoAMagooooo</a>
-							</h6>
-							<h5>￦120,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-8.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">11일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">5/20</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[성북구] 사과사과솨과apple</a>
-							</h6>
-							<h5>￦32,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-1.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">3시간 2분 42초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">2/3</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[강남구] 고기 같이 사요~~~</a>
-							</h6>
-							<h5>￦20,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-2.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">5일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">3/10</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[마포구] 바나나바나나바나나바나나</a>
-							</h6>
-							<h5>￦6,500</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-3.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">23시간 11분 44초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">6/7</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[서대문구] 이건무슨과일임하하</a>
-							</h6>
-							<h5>￦14,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-4.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">9일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">1/5</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[은평구] 수박수박수박수박수박</a>
-							</h6>
-							<h5>￦59,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-5.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">2일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">4/6</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[서초구] 유기농포도한박스포도</a>
-							</h6>
-							<h5>￦35,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-6.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">1시간 1분 1초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">6/6</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[관악구] 베토디세트같이먹어용</a>
-							</h6>
-							<h5>￦99,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-7.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">11시간 2분 59초</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">1/5</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[양천구] AleMangoAMagooooo</a>
-							</h6>
-							<h5>￦120,000</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="<%=cp%>/img/featured/feature-8.jpg"
-							onClick="location.href='#'">
-							<span class="timeLeft">11일</span> <span
-								class="featured__item__pic__hover"> <i
-								class="bi bi-cart4"></i> <span class="item_number">5/20</span>
-							</span>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								<a href="#">[성북구] 사과사과솨과apple</a>
-							</h6>
-							<h5>￦32,000</h5>
-						</div>
-					</div>
-				</div>
+				<c:forEach var="buypost" items="${buypostList }" >
+	                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">    
+	                	<a href="buypostarticle.lion?code=${buypost.code }">            	
+		                    <div class="featured__item">
+		                        <div class="featured__item__pic set-bg" data-setbg="img/buypost/${buypost.goods_photo_name }">
+		                        	<span class="timeLeft">
+		                        	<c:choose>
+		                        		<c:when test="${buypost.left_day != '0'}">	
+		                        			${buypost.left_day }일 남음
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        			${buypost.left_hour }시간 ${buypost.left_minute }분 남음
+		                        		</c:otherwise>
+		                        	</c:choose>
+									</span>
+		                        	<span class="featured__item__pic__hover">
+		                        		<i class="bi bi-cart4"></i>
+		                        		<span class="item_number">${buypost.count }</span>
+		                        	</span>
+		                        </div>
+	                        </a>
+	                        <div class="featured__item__text">
+	                            <h6><a href="buypostarticle.lion?code=${buypost.code }">${buypost.title }</a></h6>
+	                            <h5>￦${buypost.amount }</h5>
+	                        </div>
+	                    </div>
+	                </div>
+                </c:forEach>
 			</div>
 
 			<!-- page navigation -->
-			<nav class="pageNav buyPost-pageNav" aria-label="Page navigation example">
+			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);" aria-label="Previous"> <span
-							aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);">1</a></li>
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);">2</a></li>
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);">3</a></li>
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);">4</a></li>
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);">5</a></li>
-					<li class="page-item"><a class="page-link"
-						href="javascript:void(0);" aria-label="Next"> <span
-							aria-hidden="true">&raquo;</span>
-					</a></li>
+					<c:if test="${pagination.prev }">
+						<li class="page-item">
+							<a class="page-link" href="#" aria-label="Previous"
+							onclick="fn_prev('${pagination.page }', '${pagination.range }', '${pagination.rangeSize }')"> 
+							<span aria-hidden="true">&laquo;</span></a>
+						</li>
+					</c:if>
+					<c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="idx">
+						<li class="page-item <c:out value="${pagination.page == idx ? 'active' : '' }"/>">
+							<a class="page-link" href="#" 
+							onclick="fn_pagination('${idx}', '${pagination.range }', '${pagination.rangeSize }')"> ${idx } </a>
+						</li>
+					</c:forEach>
+					<c:if test="${pagination.next }">
+						<li class="page-item">
+							<a class="page-link" href="#" aria-label="Next"
+							onclick="fn_next('${pagination.page}', '${pagination.range }', '${pagination.rangeSize }')"> 
+							<span aria-hidden="true">&raquo;</span></a>
+						</li>
+					</c:if>
 				</ul>
 			</nav>
 		</div>
@@ -538,7 +128,7 @@
 	<!-- Product Section End -->
 
 	<!-- import FOOTER -->
-	<c:import url="user_footer.jsp"></c:import>
+	<c:import url="/footer.lion"></c:import>
 
 	<!-- js plugins -->
     <script src="<%=cp %>/js/jquery-3.3.1.min.js"></script>

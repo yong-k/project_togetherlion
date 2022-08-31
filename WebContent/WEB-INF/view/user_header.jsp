@@ -112,8 +112,8 @@
 				<div class="col-lg-4">
 					<nav class="header__menu">
 						<ul>
-							<li class="final"><a href="<%=cp %>/user/user_buypost_final.jsp">마감임박</a></li>
-							<li class="active recent"><a href="<%=cp %>/user/user_buypost_new.jsp">최근공구</a></li>
+							<li class="final"><a href="buypostfinal.lion">마감임박</a></li>
+							<li class="active recent"><a href="buypostnew.lion">최근공구</a></li>
 						</ul>
 					</nav>
 				</div>

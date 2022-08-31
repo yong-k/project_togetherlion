@@ -114,8 +114,33 @@ public class MainController
 	
 	// 공동구매 목록 - 최근공구
 	@RequestMapping("/buypostnew.lion")
-	public String buypostList_new(HttpServletRequest request, Model model)
+	public String buypostList_new(HttpServletRequest request, Model model
+			  , @RequestParam(required = false, defaultValue = "1") int page
+			  , @RequestParam(required = false, defaultValue = "1") int range) throws Exception
 	{
+		HttpSession session = request.getSession();
+		String user_region = (String)session.getAttribute("user_region");
+		if (user_region == null) 
+			user_region = "";
+		String main_cate_code = request.getParameter("maincate");
+		if (main_cate_code == null || main_cate_code == "")
+			main_cate_code = "%";
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<MainCategoryDTO> mainCateList = dao.mainCateList();
+		
+		Search_buypost search = new Search_buypost();
+		search.setListSize(24);
+		search.setUser_region(user_region);
+		search.setMain_cate_code(main_cate_code);
+		
+		int listCnt = dao.count_new(search);
+		search.pageInfo(page, range, listCnt);
+		ArrayList<BuypostDTO> buypostList_new = dao.buypostList_new(search);
+		
+		model.addAttribute("mainCateList", mainCateList);
+		model.addAttribute("pagination", search);
+		model.addAttribute("buypostList", buypostList_new);
 		return "/WEB-INF/view/user_buypost_new.jsp";
 	}
 	
@@ -123,6 +148,10 @@ public class MainController
 	@RequestMapping("/buypostfinal.lion")
 	public String buypostList_final(HttpServletRequest request, Model model)
 	{
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<MainCategoryDTO> mainCateList = dao.mainCateList();
+		
+		model.addAttribute("mainCateList", mainCateList);
 		return "/WEB-INF/view/user_buypost_final.jsp";
 	}
 	

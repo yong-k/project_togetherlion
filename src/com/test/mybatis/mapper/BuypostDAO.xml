@@ -65,22 +65,67 @@
 		WHERE RNUM <![CDATA[>=]]> #{startList}		  	  
 	</select>
 	
-	<!-- 최근공구 -->
-	<select id="buypostList_new" resultType="com.test.mybatis.BuypostDTO">
-		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
-		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+	<!-- 최근공구 목록 개수 -->
+	<select id="count_new" resultType="java.lang.Integer">
+		SELECT COUNT(*) COUNT
 		FROM VIEW_BUYPOSTLIST
 		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
 		  AND WRITE_DATETIME <![CDATA[<]]> SYSDATE - 7	
+	</select>
+	
+	<!-- 최근공구 -->
+	<select id="buypostList_new" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, COUNT, GOODS_PHOTO_NAME, LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM
+		(
+		    SELECT ROWNUM RNUM, T.*
+		    FROM
+		    (
+		        SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		             , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		        FROM VIEW_BUYPOSTLIST
+		        WHERE REGION LIKE '%'||#{user_region}||'%'
+		          AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
+		          AND WRITE_DATETIME <![CDATA[<]]> SYSDATE - 7
+		    ) T
+		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
+		)
+		WHERE RNUM <![CDATA[>=]]> #{startList}
+	</select>
+	
+	<!-- 마감임박 목록 개수 -->
+	<select id="count_final" resultType="java.lang.Integer">
+		SELECT COUNT(*) COUNT
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
+		  AND DEADLINE - SYSDATE <![CDATA[<=]]> -1	
 	</select>
 	
 	<!-- 마감임박 -->
 	<select id="buypostList_final" resultType="com.test.mybatis.BuypostDTO">
-		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
-		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
-		FROM VIEW_BUYPOSTLIST
-		WHERE REGION LIKE '%'||#{user_region}||'%'
-		  AND DEADLINE - SYSDATE <![CDATA[<=]]> -1	
+		SELECT CODE, TITLE, AMOUNT, COUNT, GOODS_PHOTO_NAME, LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM
+		(
+		    SELECT ROWNUM RNUM, T.*
+		    FROM
+		    (
+		        SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		             , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		        FROM VIEW_BUYPOSTLIST
+		        WHERE REGION LIKE '%'||''||'%'
+		          AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
+		          AND DEADLINE - SYSDATE <![CDATA[<=]]> -1
+		    ) T
+		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
+		)
+		WHERE RNUM <![CDATA[>=]]> #{startList}
+	</select>
+	
+	<!-- 검색 목록 개수 -->
+	<select id="count_search" resultType="java.lang.Integer">
+	
 	</select>
 	
 	<!-- 검색 -->
