@@ -20,7 +20,7 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 	
-	map.setCenter(new kakao.maps.LatLng(37.5436063473129, 126.95119605287933));
+	//map.setCenter(new kakao.maps.LatLng(37.5436063473129, 126.95119605287933));
 	//추가 -------------------------------------------------------
     var latlng = mouseEvent.latLng;
     document.getElementById("lat").value = latlng.getLat();
@@ -41,20 +41,19 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + 
                         '</div>';
-            
-            
+           
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
             
-
             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
+            //infowindow.setContent(content);
+            //infowindow.open(map, marker);
             
             //추가 -----------------------------------------------------------------------
             //document.getElementById("addr").value = result[0].road_address.address_name;
-            document.getElementById("detailAddr").value = result[0].address.address_name;
+            //document.getElementById("detailAddr").value = result[0].address.address_name;
+            document.getElementById("detailAddr").value = result[0].address.region_2depth_name;
             document.getElementById("coords").value = map.getCenter();
             //----------------------------------------------------------------------------
             

@@ -66,8 +66,15 @@ public class MainController
 	{
 		HttpSession session = request.getSession();
 		String user_region = (String)session.getAttribute("user_region");
-		if (user_region == null) 
-			user_region = "";
+		String region = request.getParameter("region");
+		
+		if (user_region == null || (region != null && !user_region.equals(region)))
+		{
+			user_region = region;
+			if (user_region == null || user_region == "") 
+				user_region = "";
+			session.setAttribute("user_region", user_region);
+		}
 		
 		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
 		ArrayList<BuypostDTO> buypostList_main = dao.buypostList_main(user_region);	
@@ -90,7 +97,7 @@ public class MainController
 	{
 		HttpSession session = request.getSession();
 		String user_region = (String)session.getAttribute("user_region");
-		if (user_region == null) 
+		if (user_region == null || user_region == "") 
 			user_region = "";
 		
 		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
@@ -127,7 +134,7 @@ public class MainController
 	{
 		HttpSession session = request.getSession();
 		String user_region = (String)session.getAttribute("user_region");
-		if (user_region == null) 
+		if (user_region == null || user_region == "") 
 			user_region = "";
 		String main_cate_code = request.getParameter("maincate");
 		if (main_cate_code == null || main_cate_code == "")
@@ -159,7 +166,7 @@ public class MainController
 	{
 		HttpSession session = request.getSession();
 		String user_region = (String)session.getAttribute("user_region");
-		if (user_region == null) 
+		if (user_region == null || user_region == "") 
 			user_region = "";
 		String main_cate_code = request.getParameter("maincate");
 		if (main_cate_code == null || main_cate_code == "")
@@ -191,7 +198,7 @@ public class MainController
 	{
 		HttpSession session = request.getSession();
 		String user_region = (String)session.getAttribute("user_region");
-		if (user_region == null) 
+		if (user_region == null || user_region == "") 
 			user_region = "";
 		String main_cate_code = request.getParameter("maincate");
 		if (main_cate_code == null || main_cate_code == "")

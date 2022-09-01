@@ -56,7 +56,7 @@ div#swal2-html-container {
 	
 	function map()
 	{
-		window.open("user_map.jsp", "_blank", "top=150,left=550,width=1000,height=600");
+		window.open("map_main.lion", "_blank", "top=150,left=550,width=1000,height=700");
 	}
 	
 </script>
@@ -95,6 +95,7 @@ div#swal2-html-container {
 					<form action="#">
 						<i class="bi bi-geo-alt-fill" title="지도에서 선택하기"></i>
 						<input type="text" class="map__search__text" placeholder="장소를 선택해주세요." readonly>
+						<input type="hidden" id="region" readonly>
 					</form>
 				</a>
 			</div>
