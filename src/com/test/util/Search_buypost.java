@@ -3,6 +3,7 @@ package com.test.util;
 public class Search_buypost extends Pagination
 {
 	private String user_region, main_cate_code, sub_cate_code;
+	private String searchType;
 
 	public String getUser_region()
 	{
@@ -33,6 +34,15 @@ public class Search_buypost extends Pagination
 	{
 		this.sub_cate_code = sub_cate_code;
 	}
-	
+
+	public String getSearchType()
+	{
+		return searchType;
+	}
+
+	public void setSearchType(String searchType)
+	{
+		this.searchType = searchType;
+	}
 	
 }

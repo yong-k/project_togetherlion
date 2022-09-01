@@ -22,7 +22,21 @@
     <link rel="stylesheet" href="<%=cp %>/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="<%=cp %>/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<%=cp %>/css/userStyle.css" type="text/css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(function()
+	{
+		$('#header-searchBtn').click(function()
+		{
+			let searchType = $.trim($('#searchType').val());
+			location.href='buypostsearch.lion?search=' + searchType;
+		});
+	});
+
+</script>		 	 
 </head>
 <body>	
   
@@ -120,9 +134,9 @@
 				<div class="col-lg-5">
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="<%=cp %>/user/user_buypost_search.jsp">
-								<input type="text" placeholder="검색어를 입력해주세요.">
-								<button type="submit" class="site-btn">
+							<form action="">
+								<input id="searchType" type="text" placeholder="검색어를 입력해주세요.">
+								<button type="button" class="site-btn" id="header-searchBtn">
 									<i class="bi bi-search"></i>
 								</button>
 							</form>

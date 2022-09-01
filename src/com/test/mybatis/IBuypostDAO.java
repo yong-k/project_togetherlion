@@ -29,8 +29,8 @@ public interface IBuypostDAO
 	//--▷ 마감임박
 	public ArrayList<BuypostDTO> buypostList_final(Search_buypost search) throws Exception;
 	//--▷ 검색 목록 개수
-	
+	public int count_search(Search_buypost search) throws Exception;
 	//--▷ 검색
-	
+	public ArrayList<BuypostDTO> buypostList_search(Search_buypost search) throws Exception;
 	
 }

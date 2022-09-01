@@ -126,21 +126,42 @@
 	
 	<!-- 검색 목록 개수 -->
 	<select id="count_search" resultType="java.lang.Integer">
-	
+		SELECT COUNT(*) COUNT
+		FROM VIEW_BUYPOSTLIST
+		WHERE REGION LIKE '%'||#{user_region}||'%'
+		  AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
+		  AND (TITLE LIKE '%'||#{searchType}||'%' 
+		       OR CONTENT LIKE '%'||#{searchType}||'%'
+		       OR REGION LIKE '%'||#{searchType}||'%'
+		       OR SUB_CATE_CODE = (SELECT CODE
+		                           FROM SUB_CATE
+		                           WHERE NAME LIKE '%'||#{searchType}||'%'))	
 	</select>
 	
 	<!-- 검색 -->
 	<select id="buypostList_search" resultType="com.test.mybatis.BuypostDTO">
-		SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
-		     , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
-		FROM VIEW_BUYPOSTLIST
-		WHERE REGION LIKE '%'||#{user_region}||'%'
-		AND TITLE LIKE '%'||#{searchType}||'%'
-		    OR CONTENT LIKE '%'||#{searchType}||'%'
-		    OR REGION LIKE '%'||#{searchType}||'%'
-		    OR SUB_CATE_CODE = (SELECT CODE
-		                        FROM SUB_CATE
-		                        WHERE NAME LIKE '%'||#{searchType}||'%')	
+		SELECT CODE, TITLE, AMOUNT, COUNT, GOODS_PHOTO_NAME, LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		FROM 
+		(
+		    SELECT ROWNUM RNUM, T.*
+		    FROM
+		    (
+		        SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		             , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE
+		        FROM VIEW_BUYPOSTLIST
+				WHERE REGION LIKE '%'||#{user_region}||'%'
+				  AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
+				  AND (TITLE LIKE '%'||#{searchType}||'%' 
+				       OR CONTENT LIKE '%'||#{searchType}||'%'
+				       OR REGION LIKE '%'||#{searchType}||'%'
+				       OR SUB_CATE_CODE = (SELECT CODE
+				                           FROM SUB_CATE
+				                           WHERE NAME LIKE '%'||#{searchType}||'%'))
+				ORDER BY DEADLINE, WRITE_DATETIME DESC	
+		    ) T
+		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
+		)
+		WHERE RNUM <![CDATA[>=]]> #{startList}
 	</select>
 	
 	<!--==================== 공동구매 목록 ====================-->

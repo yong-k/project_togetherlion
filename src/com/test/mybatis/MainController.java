@@ -75,6 +75,13 @@ public class MainController
 		return "/WEB-INF/view/user_main.jsp";
 	}
 	
+	// 지도
+	@RequestMapping("/map_main.lion")
+	public String map(HttpServletRequest request, Model model) 
+	{
+		return "/WEB-INF/view/user_map_main.jsp";
+	}
+	
 	// 공동구매 목록 - 카테고리
 	@RequestMapping("/buypostcategory.lion")
 	public String buypostList_category(HttpServletRequest request, Model model
@@ -178,8 +185,38 @@ public class MainController
 	
 	// 공동구매 목록 - 검색
 	@RequestMapping("/buypostsearch.lion")
-	public String buypostList_search(HttpServletRequest request, Model model)
+	public String buypostList_search(HttpServletRequest request, Model model
+			  , @RequestParam(required = false, defaultValue = "1") int page
+			  , @RequestParam(required = false, defaultValue = "1") int range) throws Exception
 	{
+		HttpSession session = request.getSession();
+		String user_region = (String)session.getAttribute("user_region");
+		if (user_region == null) 
+			user_region = "";
+		String main_cate_code = request.getParameter("maincate");
+		if (main_cate_code == null || main_cate_code == "")
+			main_cate_code = "%";
+		String searchType = request.getParameter("search");
+		if (searchType == null || searchType == "")
+			searchType = "%";
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<MainCategoryDTO> mainCateList = dao.mainCateList();
+		
+		Search_buypost search = new Search_buypost();
+		search.setListSize(24);
+		search.setUser_region(user_region);
+		search.setMain_cate_code(main_cate_code);
+		search.setSearchType(searchType);
+		
+		int listCnt = dao.count_search(search);
+		search.pageInfo(page, range, listCnt);
+		ArrayList<BuypostDTO> buypostList_search = dao.buypostList_search(search);
+		
+		model.addAttribute("mainCateList", mainCateList);
+		model.addAttribute("pagination", search);
+		model.addAttribute("buypostList", buypostList_search);
+		
 		return "/WEB-INF/view/user_buypost_search.jsp";
 	}
 	

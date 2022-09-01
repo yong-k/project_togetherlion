@@ -8,12 +8,26 @@
 		
 		var url = window.location.href;
 		
-		if (url.indexOf('&page') != -1)
-			url = url.substring(0, url.indexOf('&page'));
-			
-		url += "&page=" + page;
-		url += "&range=" + range;
+		// lion이나 lion#로 끝남
+		if ((url.slice(-5)).indexOf('lion') != -1)
+		{
+			url += "?page=" + page;
+		}
+		// 뒤에 ? 이런식으로 이어짐
+		else
+		{
+			if (url.indexOf('page') != -1)
+			{
+				url = url.substring(0, url.indexOf('page'));
+				url += "page=" + page;
+			}
+			else
+			{
+				url += "&page=" + page;
+			}
+		}
 		
+		url += "&range=" + range;
 		location.href = url;
 	}
 	
@@ -22,10 +36,25 @@
 	{
 		var url = window.location.href;
 		
-		if (url.indexOf('&page') != -1)
-			url = url.substring(0, url.indexOf('&page'));
-			
-		url += "&page=" + page;
+		// lion이나 lion#로 끝남
+		if ((url.slice(-5)).indexOf('lion') != -1)
+		{
+			url += "?page=" + page;
+		}
+		// 뒤에 ? 이런식으로 이어짐
+		else
+		{
+			if (url.indexOf('page') != -1)
+			{
+				url = url.substring(0, url.indexOf('page'));
+				url += "page=" + page;
+			}
+			else
+			{
+				url += "&page=" + page;
+			}
+		}
+		
 		url += "&range=" + range;
 		location.href = url;
 	}
@@ -36,13 +65,25 @@
 		var page = parseInt(range * rangeSize) + 1;
 		var range = parseInt(range) + 1;
 		
-		var url = window.location.href;
+		// lion이나 lion#로 끝남
+		if ((url.slice(-5)).indexOf('lion') != -1)
+		{
+			url += "?page=" + page;
+		}
+		// 뒤에 ? 이런식으로 이어짐
+		else
+		{
+			if (url.indexOf('page') != -1)
+			{
+				url = url.substring(0, url.indexOf('page'));
+				url += "page=" + page;
+			}
+			else
+			{
+				url += "&page=" + page;
+			}
+		}
 		
-		if (url.indexOf('&page') != -1)
-			url = url.substring(0, url.indexOf('&page'));
-			
-		url += "&page=" + page;
 		url += "&range=" + range;
-		
 		location.href = url;
 	}
