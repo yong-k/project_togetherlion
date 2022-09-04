@@ -10,7 +10,8 @@
 		FROM MAIN_CATE	
 	</select>
 	
-	<!--==================== 공동구매 목록 ====================-->
+	<!--==================================== 공동구매 목록 ===================================-->
+	
 	<!-- 메인(32개) -->
 	<select id="buypostList_main" resultType="com.test.mybatis.BuypostDTO">
 		SELECT ROWNUM, CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
@@ -164,6 +165,71 @@
 		WHERE RNUM <![CDATA[>=]]> #{startList}
 	</select>
 	
-	<!--==================== 공동구매 목록 ====================-->
+	<!--==================================== 공동구매 목록 ===================================-->
+	
+	<!--============================== 공동구매 게시물 상세보기 ==============================-->
+	
+	<!-- 상세보기 -->
+	<select id="buypostArticle" resultType="com.test.mybatis.BuypostDTO">
+		SELECT MEMBER_CODE 
+		     , (SELECT NICKNAME FROM MEMBER_INFO WHERE MEMBER_CODE = BP.MEMBER_CODE) "NICKNAME"
+		     , (SELECT PHOTO_NAME FROM VIEW_PROFILE WHERE MEMBER_CODE = BP.MEMBER_CODE) "PHOTO_NAME"
+		     , CODE, TITLE, URL, EXPIRATION_DATETIME, GOODS_PHOTO_NAME
+		     , TO_CHAR(CEIL(TOTAL_PRICE/GOODS_NUM), 'FM999,999,999,999') "PRICE"
+		     , (SELECT SUM(NVL(BUY_NUMBER, 0)) FROM BUYPOST_PARTICIPANT WHERE BUYPOST_CODE = BP.CODE) "BUY_NUMBER"
+		     , GOODS_NUM
+		     , TRADE_DATETIME
+		     , TRUNC((DEADLINE - SYSDATE) * (24*60*60)/60/60/24) "LEFT_DAY"
+		     , TRUNC(MOD((DEADLINE - SYSDATE) * (24*60*60)/60/60, 24)) "LEFT_HOUR"
+		     , TRUNC(MOD((DEADLINE - SYSDATE) * (24*60*60)/60, 60)) "LEFT_MINUTE"
+		     , LOCATION_X, LOCATION_Y
+		     , CONTENT
+		     , (SELECT NVL(MAX(NAME), NULL) FROM BUYPOST_PHOTO WHERE BUYPOST_CODE = BP.CODE) "CONTENT_PHOTO_NAME"
+		     , (SELECT MAIN_CATE_CODE FROM SUB_CATE WHERE CODE = BP.SUB_CATE_CODE) "MAIN_CATE_CODE", SUB_CATE_CODE
+		     , (SELECT M.NAME FROM MAIN_CATE M JOIN SUB_CATE S ON M.CODE = S.MAIN_CATE_CODE WHERE S.CODE = BP.SUB_CATE_CODE) "MAIN_CATE_NAME"
+		     , (SELECT NAME FROM SUB_CATE WHERE CODE = BP.SUB_CATE_CODE) "SUB_CATE_NAME"
+		FROM BUYPOST BP
+		WHERE CODE = #{code}
+	</select>
+	
+	<!-- 참여자 목록 -->
+	<select id="participant_info" resultType="com.test.mybatis.MemberDTO">
+		SELECT P.NICKNAME, P.PHOTO_NAME
+		FROM BUYPOST_PARTICIPANT B JOIN VIEW_PROFILE P
+		    ON B.MEMBER_CODE = P.MEMBER_CODE
+		WHERE BUYPOST_CODE = #{code}	
+		ORDER BY TO_NUMBER(SUBSTR(B.CODE, 5)) ASC
+	</select>
+		
+	<!--============================== 공동구매 게시물 상세보기 ==============================-->	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

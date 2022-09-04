@@ -2,9 +2,15 @@ package com.test.mybatis;
 
 public class BuypostDTO
 {
+	// 공동구매 목록
 	private String code, title, amount, buy_number, goods_num, count, goods_photo_name
 		, left_day, left_hour, left_minute, left_second
 		, region, sub_cate_code, main_cate_code, write_datetime, deadline, content;
+	
+	// 추가) 공동구매 게시물 상세보기
+	private String member_code, nickname, photo_name, url, expiration_datetime, price
+		, trade_datetime, location_x, location_y, content_photo_name
+		, sub_cate_name, main_cate_name;
 
 	public String getCode()
 	{
@@ -176,5 +182,124 @@ public class BuypostDTO
 		this.content = content;
 	}
 
-	
+	public String getMember_code()
+	{
+		return member_code;
+	}
+
+	public void setMember_code(String member_code)
+	{
+		this.member_code = member_code;
+	}
+
+	public String getNickname()
+	{
+		return nickname;
+	}
+
+	public void setNickname(String nickname)
+	{
+		this.nickname = nickname;
+	}
+
+	public String getPhoto_name()
+	{
+		return photo_name;
+	}
+
+	public void setPhoto_name(String photo_name)
+	{
+		this.photo_name = photo_name;
+	}
+
+	public String getUrl()
+	{
+		return url;
+	}
+
+	public void setUrl(String url)
+	{
+		this.url = url;
+	}
+
+	public String getExpiration_datetime()
+	{
+		return expiration_datetime;
+	}
+
+	public void setExpiration_datetime(String expiration_datetime)
+	{
+		this.expiration_datetime = expiration_datetime;
+	}
+
+	public String getPrice()
+	{
+		return price;
+	}
+
+	public void setPrice(String price)
+	{
+		this.price = price;
+	}
+
+	public String getTrade_datetime()
+	{
+		return trade_datetime;
+	}
+
+	public void setTrade_datetime(String trade_datetime)
+	{
+		this.trade_datetime = trade_datetime;
+	}
+
+	public String getLocation_x()
+	{
+		return location_x;
+	}
+
+	public void setLocation_x(String location_x)
+	{
+		this.location_x = location_x;
+	}
+
+	public String getLocation_y()
+	{
+		return location_y;
+	}
+
+	public void setLocation_y(String location_y)
+	{
+		this.location_y = location_y;
+	}
+
+	public String getContent_photo_name()
+	{
+		return content_photo_name;
+	}
+
+	public void setContent_photo_name(String content_photo_name)
+	{
+		this.content_photo_name = content_photo_name;
+	}
+
+	public String getSub_cate_name()
+	{
+		return sub_cate_name;
+	}
+
+	public void setSub_cate_name(String sub_cate_name)
+	{
+		this.sub_cate_name = sub_cate_name;
+	}
+
+	public String getMain_cate_name()
+	{
+		return main_cate_name;
+	}
+
+	public void setMain_cate_name(String main_cate_name)
+	{
+		this.main_cate_name = main_cate_name;
+	}
+
 }

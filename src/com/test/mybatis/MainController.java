@@ -59,7 +59,7 @@ public class MainController
 	public String footer() {
 		return "/WEB-INF/view/user_footer.jsp";
 	}
-	
+	// 공동구매 목록 -----------------------------------------------------------------------------
 	// 메인
 	@RequestMapping("/main.lion")
 	public String main(HttpServletRequest request, Model model) 
@@ -87,7 +87,7 @@ public class MainController
 	public String map(HttpServletRequest request, Model model) 
 	{
 		return "/WEB-INF/view/user_map_main.jsp";
-	}
+	}	
 	
 	// 공동구매 목록 - 카테고리
 	@RequestMapping("/buypostcategory.lion")
@@ -223,8 +223,25 @@ public class MainController
 		model.addAttribute("mainCateList", mainCateList);
 		model.addAttribute("pagination", search);
 		model.addAttribute("buypostList", buypostList_search);
-		
 		return "/WEB-INF/view/user_buypost_search.jsp";
 	}
+	// ----------------------------------------------------------------------------- 공동구매 목록 
 	
+	// 공동구매 게시물 상세보기 ------------------------------------------------------------------
+	
+	// 상세보기
+	@RequestMapping("/buypostarticle.lion")
+	public String buypostArticle(HttpServletRequest request, Model model) 
+	{
+		String code = request.getParameter("code");
+		System.out.println(code);
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		BuypostDTO buypostArticle = dao.buypostArticle(code);
+		ArrayList<MemberDTO> participant_info = dao.participant_info(code);
+		
+		model.addAttribute("buypost", buypostArticle);
+		model.addAttribute("participant_info", participant_info);
+		return "/WEB-INF/view/user_buypostArticle.jsp";
+	}
+	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
 }

@@ -28,8 +28,10 @@ marker.setMap(map);
 */
 
 // 게시물 생성 시, 저장되는 위도/경도 값 가져옴
-var lat=37.5566851;
-var lng=126.9196569;
+//var lat=37.5566851;
+//var lng=126.9196569;
+var lat = document.getElementById('location_x').value;
+var lng = document.getElementById('location_y').value;
 
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -77,6 +79,7 @@ function getAddr(lat,lng){
 				zip_code: "" 
             */
             document.getElementById("detailAddr").value = result[0].address.address_name;
+            document.getElementById("trade_location").innerHTML = result[0].address.address_name;
         }
     };
 
