@@ -1,6 +1,7 @@
 package com.test.mybatis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.test.util.Search_buypost;
 
@@ -40,25 +41,34 @@ public interface IBuypostDAO
 	
 	// 공동구매 게시물 내용
 	//--▷ 상세보기
-	public BuypostDTO buypostArticle(String code);
+	public BuypostDTO buypostArticle(String buypost_code);
 	//--▷ 참여자 목록
-	public ArrayList<MemberDTO> participant_info(String code);
-	//--▷ 댓글목록
+	public ArrayList<MemberDTO> participant_info(String buypost_code);
+
+	//----[[ 댓글 ]]
+	//--▷ 고정 댓글 코드
+	public String fixReplyCode(String buypost_code);
+	//--▷ 댓글 목록
+	public ArrayList<BuypostReplyDTO> replyList(String buypost_code);
+	//--▷ 댓글 등록
+	public void insertReply(BuypostReplyDTO dto);
+	//--▷ 댓글 수정
+	public void updateReply(BuypostReplyDTO dto);
+	//--▷ 댓글 삭제
+	public void deleteReply(String reply_code);
+	//--▷ 댓글 고정하기
+	public void fixReply(String reply_code);
+	//--▷ 댓글 고정취소
+	public void noFixReply(String buypost_code);
+	
 	//--▷ 회원의 진행자/미참여자/참여자 여부
 	//--▷ 공동구매 상태(모집,진행,완료,모집실패,취소)
 	
 	// 찜
 	//--▷ 찜 추가
 	
-	// 댓글
-	//--▷ 댓글 등록
-	//--▷ 댓글 수정
-	//--▷ 댓글 삭제
-	//--▷ 댓글 고정
-	//--▷ 댓글 고정 취소
-	//--▷ 신고 팝업 (메인카테이름,서브카테이름)
-	
 	// 신고
+	//--▷ 신고 팝업 (메인카테이름,서브카테이름)
 	//--▷ 게시물 신고
 	//--▷ 댓글 신고
 	

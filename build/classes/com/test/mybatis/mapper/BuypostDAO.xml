@@ -200,6 +200,59 @@
 		WHERE BUYPOST_CODE = #{code}	
 		ORDER BY TO_NUMBER(SUBSTR(B.CODE, 5)) ASC
 	</select>
+	
+	<!-- 고정 댓글 코드 -->
+	<select id="fixReplyCode" resultType="java.lang.String">
+		SELECT CODE
+		FROM VIEW_REPLYLIST
+		WHERE REPLY_FIX = (SELECT MAX(REPLY_FIX) FROM VIEW_REPLYLIST WHERE BUYPOST_CODE = #{code})	
+	</select>
+	
+	<!-- 댓글 목록 -->
+	<select id="replyList" resultType="com.test.mybatis.BuypostReplyDTO">
+		SELECT BUYPOST_CODE, CODE, CONTENT, MEMBER_CODE, REPLY_FIX, NICKNAME, PHOTO_NAME
+		FROM VIEW_REPLYLIST
+		WHERE REPLY_FIX = (SELECT MAX(REPLY_FIX) FROM VIEW_REPLYLIST WHERE BUYPOST_CODE = #{code})
+		UNION ALL
+		SELECT BUYPOST_CODE, CODE, CONTENT, MEMBER_CODE, REPLY_FIX, NICKNAME, PHOTO_NAME
+		FROM VIEW_REPLYLIST
+		WHERE BUYPOST_CODE = #{code}
+		  AND (NOT REPLY_FIX IN (SELECT MAX(REPLY_FIX) FROM VIEW_REPLYLIST WHERE BUYPOST_CODE = #{code})
+		        OR REPLY_FIX IS NULL)
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply">
+		INSERT INTO BUYPOST_REPLY(CODE, CONTENT, WRITE_DATETIME, MEMBER_CODE, BUYPOST_CODE)
+		VALUES('BPR'||BUYPOST_REPLY_SEQ.NEXTVAL, #{content}, SYSDATE, #{member_code}, #{buypost_code})	
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply">
+		UPDATE BUYPOST_REPLY
+		SET CONTENT = #{content}, UPDATE_DATETIME = SYSDATE
+		WHERE CODE = #{code}	
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE BUYPOST_REPLY
+		WHERE CODE = #{code}	
+	</delete>
+	
+	<!-- 댓글 고정하기 -->
+	<insert id="fixReply">
+		INSERT INTO BUYPOST_REPLY_FIX(CODE, DATETIME, BUYPOST_REPLY_CODE)
+		VALUES('BPRF'||BUYPOST_REPLY_FIX_SEQ.NEXTVAL, SYSDATE, #{code})	
+	</insert>
+	
+	<!-- 댓글 고정취소 -->
+	<delete id="noFixReply">
+		DELETE BUYPOST_REPLY_FIX
+		WHERE BUYPOST_REPLY_CODE IN (SELECT CODE
+		                             FROM BUYPOST_REPLY
+		                             WHERE BUYPOST_CODE = #{code})	
+	</delete>
 		
 	<!--============================== 공동구매 게시물 상세보기 ==============================-->	
 	

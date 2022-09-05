@@ -234,14 +234,114 @@ public class MainController
 	public String buypostArticle(HttpServletRequest request, Model model) 
 	{
 		String code = request.getParameter("code");
-		System.out.println(code);
 		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
 		BuypostDTO buypostArticle = dao.buypostArticle(code);
 		ArrayList<MemberDTO> participant_info = dao.participant_info(code);
+		String fixReplyCode = dao.fixReplyCode(code);
+		ArrayList<BuypostReplyDTO> replyList = dao.replyList(code);
 		
 		model.addAttribute("buypost", buypostArticle);
 		model.addAttribute("participant_info", participant_info);
+		model.addAttribute("fixReplyCode", fixReplyCode);
+		model.addAttribute("replyList", replyList);
 		return "/WEB-INF/view/user_buypostArticle.jsp";
 	}
+	
+	// 댓글 등록
+	@RequestMapping("/insertbuypostreply.lion")
+	public String insertBuypostReply(HttpServletRequest request, Model model, BuypostReplyDTO reply) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		dao.insertReply(reply);
+		return "redirect:buypostarticle.lion?code=" + reply.getBuypost_code();
+	}
+	
+	// 댓글 수정
+	@RequestMapping("/updatebuypostreply.lion")
+	public String updateBuypostReply(HttpServletRequest request, Model model, BuypostReplyDTO reply) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		dao.updateReply(reply);
+		return "redirect:buypostarticle.lion?code=" + reply.getBuypost_code();
+	}
+	
+	// 댓글 삭제
+	@RequestMapping("/deletebuypostreply.lion")
+	public String updateBuypostReply(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		String buypost_code = request.getParameter("buypost");
+		String reply_code = request.getParameter("reply");
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		dao.deleteReply(reply_code);
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
+	}
+	
+	// 댓글 고정하기
+	@RequestMapping("/fixbuypostreply.lion")
+	public String fixBuypostReply(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		String buypost_code = request.getParameter("buypost");
+		String reply_code = request.getParameter("reply");
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		dao.fixReply(reply_code);
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
+	}
+	
+	// 댓글 고정취소
+	@RequestMapping("/nofixbuypostreply.lion")
+	public String noFixBuypostReply(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		String buypost_code = request.getParameter("buypost");
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		dao.noFixReply(buypost_code);
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
+	}
+	
+	
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
 }
