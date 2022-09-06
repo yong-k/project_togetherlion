@@ -233,7 +233,10 @@ public class MainController
 	@RequestMapping("/buypostarticle.lion")
 	public String buypostArticle(HttpServletRequest request, Model model) 
 	{
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
 		String code = request.getParameter("code");
+		
 		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
 		if (dao.isBlindBuypost(code) > 0)
 		{
@@ -247,6 +250,14 @@ public class MainController
 			ArrayList<BuypostReplyDTO> replyList = dao.replyList(code);
 			
 			model.addAttribute("buypost", buypostArticle);
+			if (member_code != null)
+			{
+				HashMap<String, String> params = new HashMap<String, String>();
+				params.put("member_code", member_code);
+				params.put("buypost_code", code);
+				int isWishlist = dao.isWishlist(params);
+				model.addAttribute("isWishlist", isWishlist);
+			}
 			model.addAttribute("participant_info", participant_info);
 			model.addAttribute("fixReplyCode", fixReplyCode);
 			model.addAttribute("replyList", replyList);
@@ -432,6 +443,52 @@ public class MainController
 		}
 		
 		return "redirect:reportbuypost.lion?type="+type+"&code="+code;
+	}
+	
+	// 찜 등록
+	@RequestMapping("/insertwishlist.lion")
+	public String insertWishlist(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		String buypost_code = request.getParameter("code");
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("member_code", member_code);
+		params.put("buypost_code", buypost_code);
+		dao.insertWishlist(params);
+		
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
+	}
+	
+	// 찜 해제
+	@RequestMapping("/deletewishlist.lion")
+	public String deleteWishlist(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		String buypost_code = request.getParameter("code");
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("member_code", member_code);
+		params.put("buypost_code", buypost_code);
+		dao.deleteWishlist(params);
+		
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
 	}
 	
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기

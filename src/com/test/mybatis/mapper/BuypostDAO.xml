@@ -312,6 +312,27 @@
 		VALUES('BPRRI'||BUYPOST_RE_REPORT_IN_SEQ.NEXTVAL, SYSDATE, #{reply_code}, #{member_code}, #{main_cate_code})	
 	</insert>
 	
+	
+	<!-- 찜 -->
+	<!-- 회원의 해당 게시물 찜 여부 -->
+	<select id="isWishlist" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM WISHLIST
+		WHERE MEMBER_CODE = #{member_code} AND BUYPOST_CODE = #{buypost_code}	
+	</select>
+	
+	<!-- 찜 등록 -->
+	<insert id="insertWishlist">
+		INSERT INTO WISHLIST(CODE, DATETIME, BUYPOST_CODE, MEMBER_CODE)
+		VALUES('WL'||WISHLIST_SEQ.NEXTVAL, SYSDATE, #{buypost_code}, #{member_code})	
+	</insert>
+	
+	<!-- 찜 해제 -->
+	<delete id="deleteWishlist">
+		DELETE WISHLIST
+		WHERE MEMBER_CODE = #{member_code} AND BUYPOST_CODE = #{buypost_code}		
+	</delete>
+	
 	<!--============================== 공동구매 게시물 상세보기 ==============================-->	
 	
 	

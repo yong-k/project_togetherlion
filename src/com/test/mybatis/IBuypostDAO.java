@@ -81,15 +81,18 @@ public interface IBuypostDAO
 	public int isBlindBuypostReply(String reply_code);
 	//--▷ 댓글 신고 접수 
 	public void insertReportBuypostReply(HashMap<String, String> params);
+
+	//--찜
+	//--▷ 회원의 해당 게시물 찜 여부
+	public int isWishlist(HashMap<String, String> params);
+	//--▷ 찜 등록
+	public void insertWishlist(HashMap<String, String> params);
+	//--▷ 찜 해제
+	public void deleteWishlist(HashMap<String, String> params);
 	
 	//--▷ 회원의 진행자/미참여자/참여자 여부
 	//--▷ 공동구매 상태(모집,진행,완료,모집실패,취소)
-	
-	// 찜
-	//--▷ 찜 추가
-	
 
-	
 	// 버튼
 	//--▷ <참여하기>
 	//--▷ <추가참여>
