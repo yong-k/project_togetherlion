@@ -61,16 +61,34 @@ public interface IBuypostDAO
 	//--▷ 댓글 고정취소
 	public void noFixReply(String buypost_code);
 	
+	//----[[ 신고 ]]
+	//--신고 팝업 
+	//--▷ (공통) 메인 카테고리
+	public ArrayList<ReportMainCategoryDTO> reportMaincateList();
+	//--▷ (공통) 서브 카테고리
+	public ArrayList<ReportSubCategoryDTO> reportSubcateList();
+	//--▷ 게시물 신고 팝업 (작성자, 제목)
+	public BuypostReportDTO reportBuypost(String buypost_code);
+	//--▷ 댓글 신고 팝업   (작성자, 내용)
+	public BuypostReplyReportDTO reportBuypostReply(String reply_code);
+	
+	//--신고 접수
+	//--▷ 블라인드 게시물인지 확인
+	public int isBlindBuypost(String buypost_code);
+	//--▷ 게시물 신고 접수
+	public void insertReportBuypost(HashMap<String, String> params);
+	//--▷ 블라인드 댓글인지 확인
+	public int isBlindBuypostReply(String reply_code);
+	//--▷ 댓글 신고 접수 
+	public void insertReportBuypostReply(HashMap<String, String> params);
+	
 	//--▷ 회원의 진행자/미참여자/참여자 여부
 	//--▷ 공동구매 상태(모집,진행,완료,모집실패,취소)
 	
 	// 찜
 	//--▷ 찜 추가
 	
-	// 신고
-	//--▷ 신고 팝업 (메인카테이름,서브카테이름)
-	//--▷ 게시물 신고
-	//--▷ 댓글 신고
+
 	
 	// 버튼
 	//--▷ <참여하기>

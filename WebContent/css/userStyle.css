@@ -3362,6 +3362,15 @@ input.buypost-addr {
 	border-radius: 5px;
 	font-weight: 900;
 }
+div#blindBox {
+    width: 97.5%;
+    height: 400px;
+    padding-left: 5%;
+    text-align: center;
+}
+span#blind-ment {
+    font-size: 18px;
+}
 img#content_img {
     height: 500px;
 }
@@ -4787,12 +4796,23 @@ body.popup {
 	position: relative;
 	font-size: 24px;
 }
+h2#reply {
+    display: none;
+}
 
 hr.report-line {
 	border-top: 2px solid #fca652;
 	margin-left: -15px;
 }
-
+.report-info {
+    text-align: left;
+}
+span.bar {
+    margin-left: 1%;
+    margin-right: 1%;
+    color: #cccccc;
+    font-weight: normal;
+}
 button.btn.btn-primary.lion-primary-btn.reportBtn {
 	width: 103.3%;
 	margin-left: -3.5%;

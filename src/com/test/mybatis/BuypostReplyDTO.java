@@ -3,7 +3,7 @@ package com.test.mybatis;
 public class BuypostReplyDTO
 {
 	private String code, content, write_datetime, member_code, buypost_code
-				 , reply_fix, nickname, photo_name;
+				 , reply_fix, nickname, photo_name, is_blind;
 
 	public String getCode()
 	{
@@ -84,6 +84,15 @@ public class BuypostReplyDTO
 	{
 		this.photo_name = photo_name;
 	}
-	
+
+	public String getIs_blind()
+	{
+		return is_blind;
+	}
+
+	public void setIs_blind(String is_blind)
+	{
+		this.is_blind = is_blind;
+	}
 	
 }

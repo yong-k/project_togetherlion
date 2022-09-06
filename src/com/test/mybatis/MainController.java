@@ -235,15 +235,22 @@ public class MainController
 	{
 		String code = request.getParameter("code");
 		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
-		BuypostDTO buypostArticle = dao.buypostArticle(code);
-		ArrayList<MemberDTO> participant_info = dao.participant_info(code);
-		String fixReplyCode = dao.fixReplyCode(code);
-		ArrayList<BuypostReplyDTO> replyList = dao.replyList(code);
-		
-		model.addAttribute("buypost", buypostArticle);
-		model.addAttribute("participant_info", participant_info);
-		model.addAttribute("fixReplyCode", fixReplyCode);
-		model.addAttribute("replyList", replyList);
+		if (dao.isBlindBuypost(code) > 0)
+		{
+			model.addAttribute("blind", dao.isBlindBuypost(code));
+		}
+		else
+		{
+			BuypostDTO buypostArticle = dao.buypostArticle(code);
+			ArrayList<MemberDTO> participant_info = dao.participant_info(code);
+			String fixReplyCode = dao.fixReplyCode(code);
+			ArrayList<BuypostReplyDTO> replyList = dao.replyList(code);
+			
+			model.addAttribute("buypost", buypostArticle);
+			model.addAttribute("participant_info", participant_info);
+			model.addAttribute("fixReplyCode", fixReplyCode);
+			model.addAttribute("replyList", replyList);
+		}
 		return "/WEB-INF/view/user_buypostArticle.jsp";
 	}
 	
@@ -342,6 +349,90 @@ public class MainController
 		return "redirect:buypostarticle.lion?code=" + buypost_code;
 	}
 	
+	// 신고팝업
+	@RequestMapping("/reportbuypost.lion")
+	public String reportBuypost(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<ReportMainCategoryDTO> reportMaincateList = dao.reportMaincateList();
+		ArrayList<ReportSubCategoryDTO> reportSubcateList = dao.reportSubcateList();
+		String type = request.getParameter("type");
+		String code = request.getParameter("code");
+		if (type.equalsIgnoreCase("buypost"))
+		{
+			BuypostReportDTO buypostReport = dao.reportBuypost(code);
+			model.addAttribute("report", buypostReport);
+		}
+		else if (type.equalsIgnoreCase("reply"))
+		{
+			BuypostReplyReportDTO buypostReplyReport = dao.reportBuypostReply(code);
+			model.addAttribute("report", buypostReplyReport);
+		}
+		
+		model.addAttribute("reportMaincateList", reportMaincateList);
+		model.addAttribute("reportSubcateList", reportSubcateList);
+		return "/WEB-INF/view/user_buypost_report_popup.jsp";
+	}
+	
+	// 신고접수
+	@RequestMapping("/insertreportbuypost.lion")
+	public String insertReportBuypost(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		
+		String type = request.getParameter("type");
+		String code = request.getParameter("code");
+		String main_cate_code = request.getParameter("cate");
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("member_code", member_code);
+		params.put("main_cate_code", main_cate_code);
+		if (type.equalsIgnoreCase("buypost"))
+		{
+			params.put("buypost_code", code);
+			
+			// 블라인드 게시물이면 신고 X
+			if (dao.isBlindBuypost(code) > 0)
+				model.addAttribute("res", "disable");
+			else
+			{
+				dao.insertReportBuypost(params);
+				model.addAttribute("res", "ok");
+			}
+		}
+		else if (type.equalsIgnoreCase("reply"))
+		{
+			params.put("reply_code", code);
+			
+			// 블라인드 댓글이면 신고 X
+			if (dao.isBlindBuypostReply(code) > 0)
+				model.addAttribute("res", "disable");
+			else
+			{
+				dao.insertReportBuypostReply(params);
+				model.addAttribute("res", "ok");
+			}
+		}
+		
+		return "redirect:reportbuypost.lion?type="+type+"&code="+code;
+	}
 	
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
 }
