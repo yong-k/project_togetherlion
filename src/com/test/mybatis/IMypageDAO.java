@@ -3,6 +3,8 @@ package com.test.mybatis;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.test.util.Search_buypost;
+
 public interface IMypageDAO
 {
 	// 회원정보(프사,닉네임,매너지수)
@@ -14,7 +16,18 @@ public interface IMypageDAO
 	
 	/* MY 공구 */
 	/* 게시물관리 */
+	
+	
+	
 	/* 찜 */
+	// 찜한 게시물 있는지 확인
+	public int hasWishlist(String member_code);
+	// 찜 목록 개수
+	public int count_wishlist(String member_code);
+	// 찜 목록
+	public ArrayList<BuypostDTO> wishlist(Search_buypost search) throws Exception;
+	// 찜 삭제
+	public void deleteWishlist(String wish_code);
 	
 	
 	/* 포인트 */

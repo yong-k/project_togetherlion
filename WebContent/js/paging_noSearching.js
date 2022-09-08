@@ -18,7 +18,7 @@
 		{
 			if (url.indexOf('page') != -1)
 			{
-				url = url.substring(0, url.indexOf('page'));
+				url = url.substring(0, url.lastIndexOf('page'));
 				url += "page=" + page;
 			}
 			else
@@ -46,7 +46,7 @@
 		{
 			if (url.indexOf('page') != -1)
 			{
-				url = url.substring(0, url.indexOf('page'));
+				url = url.substring(0, url.lastIndexOf('page'));
 				url += "page=" + page;
 			}
 			else
@@ -75,7 +75,7 @@
 		{
 			if (url.indexOf('page') != -1)
 			{
-				url = url.substring(0, url.indexOf('page'));
+				url = url.substring(0, url.lastIndexOf('page'));
 				url += "page=" + page;
 			}
 			else

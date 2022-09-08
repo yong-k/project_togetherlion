@@ -94,8 +94,8 @@
 
 				<c:forEach var="buypost" items="${buypostList }" >
 	                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">    
-	                	<a href="buypostarticle.lion?code=${buypost.code }">            	
-		                    <div class="featured__item">
+	                    <div class="featured__item">
+	                    	<a href="buypostarticle.lion?code=${buypost.code }">
 		                        <div class="featured__item__pic set-bg" data-setbg="img/buypost/${buypost.goods_photo_name }">
 		                        	<span class="timeLeft">
 		                        	<c:choose>

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.test.util.Search_buypost;
 
 @Controller
 public class MypageController
@@ -61,6 +64,57 @@ public class MypageController
 	// ------------------------------------- 게시물 관리 --------------------------------------
 	
 	// ------------------------------------------ 찜 ------------------------------------------
+	// 찜
+	@RequestMapping("/mypage_wishlist.lion")
+	public String mypageWishlist(HttpServletRequest request, Model model
+			  , @RequestParam(required = false, defaultValue = "1") int page
+			  , @RequestParam(required = false, defaultValue = "1") int range) throws Exception
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		Search_buypost search = new Search_buypost();
+		search.setListSize(12);
+		search.setMember_code(member_code);
+		
+		int listCnt = dao.count_wishlist(member_code);
+		search.pageInfo(page, range, listCnt);
+		ArrayList<BuypostDTO> wishlist = dao.wishlist(search);
+		
+		model.addAttribute("hasWishlist", dao.hasWishlist(member_code));
+		model.addAttribute("pagination", search);
+		model.addAttribute("wishlist", wishlist);
+		return "/WEB-INF/view/user_mypage_wishlist.jsp";
+	}
+	
+	// 찜 삭제
+	@RequestMapping("/mypage_deletewish.lion")
+	public String mypageDeleteWish(HttpServletRequest request, Model model)
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		String wishValues = request.getParameter("value");
+		wishValues = (wishValues.replaceAll("WL", "', 'WL")).substring(3) + "'";
+		
+		IMypageDAO dao = sqlSession.getMapper(IMypageDAO.class);
+		dao.deleteWishlist(wishValues);
+		return "redirect:mypage_wishlist.lion";
+	}
+	
 	// ------------------------------------------ 찜 ------------------------------------------
 	
 	// ---------------------------------------- 포인트 ----------------------------------------

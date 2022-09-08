@@ -19,7 +19,7 @@
 				<ul>
 					<li><a href="user_mypage_myBuypost.jsp">MY 공구<i class="bi bi-chevron-right"></i></a></li>
 					<li><a href="myarticle.lion">게시물 관리<i class="bi bi-chevron-right"></i></a></li>
-					<li><a href="user_mypage_wishlist.jsp">찜<i class="bi bi-chevron-right"></i></a></li>
+					<li><a href="<%=cp%>/mypage_wishlist.lion">찜<i class="bi bi-chevron-right"></i></a></li>
 					<li><a href="<%=cp %>/mypage_point.lion">포인트<i class="bi bi-chevron-right"></i></a></li>
 					<li><a href="<%=cp %>/mypage_pwcheckform.lion">개인 정보 수정<i class="bi bi-chevron-right"></i></a></li>
 				</ul>

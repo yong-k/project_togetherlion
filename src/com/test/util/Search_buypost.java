@@ -2,7 +2,7 @@ package com.test.util;
 
 public class Search_buypost extends Pagination
 {
-	private String user_region, main_cate_code, sub_cate_code;
+	private String user_region, main_cate_code, sub_cate_code, member_code;
 	private String searchType;
 
 	public String getUser_region()
@@ -33,6 +33,16 @@ public class Search_buypost extends Pagination
 	public void setSub_cate_code(String sub_cate_code)
 	{
 		this.sub_cate_code = sub_cate_code;
+	}
+	
+	public String getMember_code()
+	{
+		return member_code;
+	}
+
+	public void setMember_code(String member_code)
+	{
+		this.member_code = member_code;
 	}
 
 	public String getSearchType()

@@ -6,6 +6,7 @@ public class BuypostDTO
 	private String code, title, amount, buy_number, goods_num, count, goods_photo_name
 		, left_day, left_hour, left_minute, left_second
 		, region, sub_cate_code, main_cate_code, write_datetime, deadline, content;
+	private String is_blind, wish_code;
 	
 	// 추가) 공동구매 게시물 상세보기
 	private String member_code, nickname, photo_name, url, expiration_datetime, price
@@ -302,4 +303,24 @@ public class BuypostDTO
 		this.main_cate_name = main_cate_name;
 	}
 
+	public String getIs_blind()
+	{
+		return is_blind;
+	}
+
+	public void setIs_blind(String is_blind)
+	{
+		this.is_blind = is_blind;
+	}
+
+	public String getWish_code()
+	{
+		return wish_code;
+	}
+
+	public void setWish_code(String wish_code)
+	{
+		this.wish_code = wish_code;
+	}
+	
 }

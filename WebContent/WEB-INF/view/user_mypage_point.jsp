@@ -115,7 +115,7 @@
 			<div class="row featured__filter">
 
 				<!-- import mypage_MENUBAR -->
-				<c:import url="user_mypage_menubar.jsp"></c:import>
+				<c:import url="/mypagemenubar.lion"></c:import>
 
 				<div class="col-lg-9 col-md-7">
 					<div class="product__discount myPoint-title-box">

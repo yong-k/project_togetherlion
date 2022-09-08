@@ -64,6 +64,47 @@
 	<!-- ==================================== 게시물 관리 =================================== -->
 	
 	<!-- ======================================== 찜 ======================================== -->
+	<!-- 찜한 게시물 있는지 확인 -->
+	<select id="hasWishlist" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM WISHLIST
+		WHERE MEMBER_CODE = #{member_code}	
+	</select>
+	
+	<!-- 찜 목록 개수 -->
+	<select id="count_wishlist" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM VIEW_WISHLIST
+		WHERE CODE IN (SELECT BUYPOST_CODE FROM WISHLIST WHERE MEMBER_CODE = #{member_code})	
+	</select>
+	
+	<!-- 찜 목록 -->
+	<select id="wishlist" resultType="com.test.mybatis.BuypostDTO">
+		SELECT CODE, TITLE, AMOUNT, COUNT, GOODS_PHOTO_NAME, LEFT_DAY, LEFT_HOUR, LEFT_MINUTE, IS_BLIND, WISH_CODE
+		FROM
+		(
+		    SELECT ROWNUM RNUM, T.*
+		    FROM
+		    (
+		        SELECT CODE, TITLE, AMOUNT, BUY_NUMBER||'/'||GOODS_NUM "COUNT", GOODS_PHOTO_NAME
+		             , LEFT_DAY, LEFT_HOUR, LEFT_MINUTE, IS_BLIND
+		             , (SELECT CODE
+		                FROM WISHLIST
+		                WHERE BUYPOST_CODE = W.CODE) "WISH_CODE"		             
+		        FROM VIEW_WISHLIST W
+		        WHERE CODE IN (SELECT BUYPOST_CODE FROM WISHLIST WHERE MEMBER_CODE = #{member_code})
+		    ) T
+		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
+		)
+		WHERE RNUM <![CDATA[>=]]> #{startList}
+	</select>
+	
+	<!-- 찜 삭제 -->
+	<delete id="deleteWishlist">
+		DELETE WISHLIST
+		WHERE CODE IN (${wish_code})	
+	</delete>
+	
 	<!-- ======================================== 찜 ======================================== -->
 	
 	<!-- ====================================== 포인트 ====================================== -->

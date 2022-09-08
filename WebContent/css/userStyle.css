@@ -994,6 +994,9 @@ span.timeLeft {
 	border-radius: 15px;
 	padding: 10px 10px;
 }
+span#endTime {
+    background: #6e6d6d;
+}
 
 i.bi.bi-cart4 {
 	font-size: 28px;
