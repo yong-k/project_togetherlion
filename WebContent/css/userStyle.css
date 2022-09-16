@@ -1807,7 +1807,10 @@ section.cscenterSection {
 .product__details__text p {
 	margin-bottom: 45px;
 }
-
+button.hostBtn {
+    width: 28% !important;
+    padding: 12px 27px 12px !important;
+}
 .product__details__text .primary-btn {
 	padding: 12px 36px 12px;
 	margin-right: 6px;
@@ -3385,7 +3388,9 @@ span.buyNum {
 	font-size: 22px;
 	margin-left: 57%;
 }
-
+button.end-middle-btn {
+    width: 40% !important;
+}
 button.primary-btn.buypost-end-btn {
 	background-color: #b3b1b1;
 }
@@ -4895,7 +4900,11 @@ button.cancelBtn:disabled, button.cancelBtn:disabled:hover {
 	font-size: 16px;
 	font-weight: bold;
 }
-
+input.pay-txtbox {
+    border: none;
+    font-weight: bold;
+    width: 100%;
+}
 .buypostPayTable .payNotice {
 	display: inline-block;
 	margin-top: 4px;

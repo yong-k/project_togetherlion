@@ -90,12 +90,21 @@ public interface IBuypostDAO
 	//--▷ 찜 해제
 	public void deleteWishlist(HashMap<String, String> params);
 	
-	//--▷ 회원의 진행자/미참여자/참여자 여부
 	//--▷ 공동구매 상태(모집,진행,완료,모집실패,취소)
+	public String buypostStatus(String buypost_code);
+	//--▷ 회원의 진행자/미참여자/참여자 여부
+	public String memberInBuypostStatus(HashMap<String, String> params);
 
 	// 버튼
 	//--▷ <참여하기>
+	// 참여팝업: 회원 보유 포인트
+	public String pointAmount(String member_code);
+	// 공동구매 참여
+	public void insertParticipant(ParticipantDTO participant);
+	
 	//--▷ <추가참여>
+	public void updateParticipant(ParticipantDTO participant);
+	
 	//--▷ <참여취소>
 	//--▷ <진행취소>, 모집실패, 신고승인취소 게시물
 	

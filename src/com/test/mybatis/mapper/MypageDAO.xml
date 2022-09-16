@@ -22,7 +22,7 @@
 	
 	<!-- 포인트 총액 -->
 	<select id="pointAmount" resultType="java.lang.String">
-		SELECT TO_CHAR(NVL(SUM(AMOUNT), 0), 'FM999,999,999,999')
+		SELECT TO_CHAR(SUM(NVL(AMOUNT, 0)), 'FM999,999,999,999') 
 		FROM
 		(
 		    <!-- 충전 -->
@@ -30,23 +30,23 @@
 		    FROM CHARGE C
 		        JOIN ACCOUNT A
 		            ON C.ACCOUNT_CODE = A.CODE
-		    UNION        
+		    UNION ALL       
 		    <!-- 결제 -->
 		    SELECT NVL(AMOUNT, 0)*-1 "AMOUNT", MEMBER_CODE
 		    FROM PAYMENT
-		    UNION
+		    UNION ALL
 		    <!-- 인출 -->
 		    SELECT NVL(W.AMOUNT, 0)*-1 "AMOUNT", A.MEMBER_CODE
 		    FROM WITHDRAWAL W
 		        JOIN ACCOUNT A
 		            ON W.ACCOUNT_CODE = A.CODE
-		    UNION
+		    UNION ALL
 		    <!-- 환불 -->
 		    SELECT NVL(R.AMOUNT, 0) "AMOUNT", P.MEMBER_CODE
 		    FROM REFUND R 
 		        JOIN PAYMENT P 
 		            ON R.PAYMENT_CODE = P.CODE
-		    UNION
+		    UNION ALL
 		    <!-- 지급 -->
 		    SELECT NVL(CO.AMOUNT, 0) "AMOUNT", B.MEMBER_CODE
 		    FROM COMPLETE CO

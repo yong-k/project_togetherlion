@@ -188,6 +188,7 @@
 		     , (SELECT MAIN_CATE_CODE FROM SUB_CATE WHERE CODE = BP.SUB_CATE_CODE) "MAIN_CATE_CODE", SUB_CATE_CODE
 		     , (SELECT M.NAME FROM MAIN_CATE M JOIN SUB_CATE S ON M.CODE = S.MAIN_CATE_CODE WHERE S.CODE = BP.SUB_CATE_CODE) "MAIN_CATE_NAME"
 		     , (SELECT NAME FROM SUB_CATE WHERE CODE = BP.SUB_CATE_CODE) "SUB_CATE_NAME"
+		     , (SELECT COUNT(*)-1 FROM BUYPOST_PARTICIPANT WHERE BUYPOST_CODE = BP.CODE) "PARTICIPANT_NUM"
 		FROM BUYPOST BP
 		WHERE CODE = #{code}
 	</select>
@@ -332,6 +333,77 @@
 		DELETE WISHLIST
 		WHERE MEMBER_CODE = #{member_code} AND BUYPOST_CODE = #{buypost_code}		
 	</delete>
+	
+	
+	<!-- 버튼 관련 -->
+	<!-- 공동구매 상태(모집,진행,완료,모집실패,취소) -->
+	<select id="buypostStatus" resultType="java.lang.String">
+		SELECT STATUS 
+		FROM VIEW_BUYPOST_STATUS
+		WHERE CODE = #{buypost_code}	
+	</select>
+	
+	<!-- 회원의 진행자/미참여자/참여자 여부 -->
+	<select id="memberInBuypostStatus" resultType="java.lang.String">
+		SELECT CASE WHEN (MEMBER_CODE = #{member_code}) THEN 'HOST'
+		            WHEN (SELECT COUNT(*)
+		                  FROM BUYPOST_PARTICIPANT
+		                  WHERE BUYPOST_CODE = B.CODE AND MEMBER_CODE = #{member_code}) > 0 THEN 'PARTICIPANT'
+		            ELSE 'NOT'
+		       END "IS_PARTICIPANT"
+		FROM BUYPOST B
+		WHERE CODE = #{buypost_code}	
+	</select>
+	
+	<!-- 참여팝업: 회원 보유 포인트 -->
+	<!-- 포인트 총액 -->
+	<select id="pointAmount" resultType="java.lang.String">
+		SELECT TO_CHAR(SUM(NVL(AMOUNT, 0)), 'FM999,999,999,999') 
+		FROM
+		(
+		    <!-- 충전 -->
+		    SELECT NVL(C.AMOUNT, 0) "AMOUNT", A.MEMBER_CODE
+		    FROM CHARGE C
+		        JOIN ACCOUNT A
+		            ON C.ACCOUNT_CODE = A.CODE
+		    UNION ALL       
+		    <!-- 결제 -->
+		    SELECT NVL(AMOUNT, 0)*-1 "AMOUNT", MEMBER_CODE
+		    FROM PAYMENT
+		    UNION ALL
+		    <!-- 인출 -->
+		    SELECT NVL(W.AMOUNT, 0)*-1 "AMOUNT", A.MEMBER_CODE
+		    FROM WITHDRAWAL W
+		        JOIN ACCOUNT A
+		            ON W.ACCOUNT_CODE = A.CODE
+		    UNION ALL
+		    <!-- 환불 -->
+		    SELECT NVL(R.AMOUNT, 0) "AMOUNT", P.MEMBER_CODE
+		    FROM REFUND R 
+		        JOIN PAYMENT P 
+		            ON R.PAYMENT_CODE = P.CODE
+		    UNION ALL
+		    <!-- 지급 -->
+		    SELECT NVL(CO.AMOUNT, 0) "AMOUNT", B.MEMBER_CODE
+		    FROM COMPLETE CO
+		        JOIN BUYPOST B
+		        ON CO.BUYPOST_CODE = B.CODE
+		)
+		WHERE MEMBER_CODE = #{member_code}	
+	</select>	
+	
+	<!-- <참여하기> -->
+	<select id="insertParticipant" statementType="CALLABLE">
+		{CALL PRC_BP_PARTICIPATE
+			(#{amount}, #{buypost_code}, #{member_code}, #{buy_number})}
+	</select>
+	
+	<!-- <추가참여> -->
+	<select id="updateParticipant" statementType="CALLABLE">
+		{CALL PRC_BP_PARTICIPATE_ADD
+			(#{amount}, #{buypost_code}, #{member_code}, #{buy_number})}	
+	</select>
+	
 	
 	<!--============================== 공동구매 게시물 상세보기 ==============================-->	
 	

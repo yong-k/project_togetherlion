@@ -11,7 +11,7 @@ public class BuypostDTO
 	// 추가) 공동구매 게시물 상세보기
 	private String member_code, nickname, photo_name, url, expiration_datetime, price
 		, trade_datetime, location_x, location_y, content_photo_name
-		, sub_cate_name, main_cate_name;
+		, sub_cate_name, main_cate_name, participant_num;
 
 	public String getCode()
 	{
@@ -321,6 +321,16 @@ public class BuypostDTO
 	public void setWish_code(String wish_code)
 	{
 		this.wish_code = wish_code;
+	}
+
+	public String getParticipant_num()
+	{
+		return participant_num;
+	}
+
+	public void setParticipant_num(String participant_num)
+	{
+		this.participant_num = participant_num;
 	}
 	
 }
