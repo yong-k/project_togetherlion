@@ -52,6 +52,16 @@ div#swal2-html-container {
   			});
 
 		}
+		
+		if ('<%=request.getParameter("status")%>' === 'allcancel')
+		{
+			Swal.fire({
+	  			  icon: 'success',
+	  			  html: '공동구매 진행 취소처리되었습니다.',
+	  			  text: '포인트는 2~3일 이내에 환불될 예정입니다.',
+	  			  confirmButtonText: '확인'
+	  			});
+		}
 	});
 	
 	function map()

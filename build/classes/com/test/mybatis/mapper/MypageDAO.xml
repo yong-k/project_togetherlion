@@ -119,20 +119,20 @@
 		         , '+ '||TO_CHAR(C.AMOUNT, 'FM999,999,999,999') "AMOUNT", A.MEMBER_CODE
 		    FROM CHARGE C JOIN ACCOUNT A
 		        ON C.ACCOUNT_CODE = A.CODE
-		    UNION
+		    UNION ALL 
 		    <!-- 결제(타입 | 공동구매 참여 | 처리일 | 공동구매코드 | 공동구매이름 | -금액) -->
 		    SELECT 'pay' "TYPE", '공동구매 참여' "NAME", DATETIME, BUYPOST_CODE
 		         , (SELECT TITLE FROM BUYPOST WHERE CODE = P.BUYPOST_CODE) "BUYPOST_TITLE"
 		         , '- '||TO_CHAR(AMOUNT, 'FM999,999,999,999') "AMOUNT", MEMBER_CODE 
 		    FROM PAYMENT P
-		    UNION
+		    UNION ALL
 		    <!-- 인출(타입 | 포인트 인출 | 처리일 | -금액) -->
 		    SELECT 'withdraw' "TYPE", '포인트 인출' "NAME", W.DATETIME
 		         , '' "BUYPOST_CODE", '' "BUYPOST_TITLE"
 		         , '- '||TO_CHAR(W.AMOUNT, 'FM999,999,999,999') "AMOUNT", A.MEMBER_CODE
 		    FROM WITHDRAWAL W JOIN ACCOUNT A
 		        ON W.ACCOUNT_CODE = A.CODE
-		    UNION
+		    UNION ALL
 		    <!-- 환불(타입 | 취소된 공동구매(사유) | 처리일 | 공동구매코드 | 공동구매이름 | +금액) -->
 		    SELECT 'refund' "TYPE", '취소된 공동구매(' || (SELECT REASON FROM REFUND_REASON WHERE CODE = R.REFUND_REASON_CODE) || ')' "NAME"
 		         , R.DATETIME, P.BUYPOST_CODE
@@ -140,7 +140,7 @@
 		         , '+ '||TO_CHAR(R.AMOUNT, 'FM999,999,999,999') "AMOUNT", P.MEMBER_CODE
 		    FROM REFUND R JOIN PAYMENT P 
 		        ON R.PAYMENT_CODE = P.CODE
-		    UNION
+		    UNION ALL
 		    <!-- 지급(타입 | 공동구매 진행 완료 | 처리일 | 공동구매코드 | 공동구매이름 | +금액) -->
 		    SELECT 'complete' "TYPE", '공동구매 진행 완료' "NAME", CO.DATETIME
 		         , B.CODE "BUYPOST_CODE", B.TITLE "BUYPOST_TITLE"

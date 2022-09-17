@@ -562,6 +562,53 @@ public class MainController
 		model.addAttribute("status", "add");
 		return "redirect:buypostpay.lion?type=participant";
 	}
+	
+	// <참여 취소>
+	@RequestMapping("/deleteparticipant.lion")
+	public String deleteParticipant(HttpServletRequest request, Model model, ParticipantDTO participant) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
 		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		String buypost_code = request.getParameter("buypost_code");
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("buypost_code", buypost_code);
+		params.put("member_code", member_code);
+		
+		System.out.println(params.get("buypost_code"));
+		System.out.println(params.get("member_code"));
+		dao.deleteParticipant(params);
+		System.out.println("ge");
+		model.addAttribute("status", "cancel");
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
+	}
+	
+	// <진행 취소>
+	@RequestMapping("/cancelbuypost.lion")
+	public String cancelBuypost(HttpServletRequest request, Model model, ParticipantDTO participant) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		String buypost_code = request.getParameter("buypost_code");
+		dao.cancleBuypost(buypost_code);
+		
+		model.addAttribute("status", "allcancel");
+		return "redirect:main.lion";
+	}
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
 }

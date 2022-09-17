@@ -106,7 +106,10 @@ public interface IBuypostDAO
 	public void updateParticipant(ParticipantDTO participant);
 	
 	//--▷ <참여취소>
+	public void deleteParticipant(HashMap<String, String> params);
+	
 	//--▷ <진행취소>, 모집실패, 신고승인취소 게시물
+	public void cancleBuypost(String buypost_code);
 	
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
 	 

@@ -404,6 +404,16 @@
 			(#{amount}, #{buypost_code}, #{member_code}, #{buy_number})}	
 	</select>
 	
+	<!-- <참여취소> -->
+	<select id="deleteParticipant" statementType="CALLABLE">
+		{CALL PRC_BP_PARTICIPANT_CANCEL (#{buypost_code}, #{member_code})}	
+	</select>
+	
+	<!-- <진행취소>, 모집실패, 신고승인취소 게시물 -->
+	<select id="cancleBuypost" statementType="CALLABLE">
+		{CALL PRC_BP_HOST_CANCEL (#{buypost_code})}	
+	</select>
+	
 	
 	<!--============================== 공동구매 게시물 상세보기 ==============================-->	
 	
