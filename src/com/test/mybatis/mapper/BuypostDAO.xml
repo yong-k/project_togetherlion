@@ -72,7 +72,7 @@
 		FROM VIEW_BUYPOSTLIST
 		WHERE REGION LIKE '%'||#{user_region}||'%'
 		  AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
-		  AND WRITE_DATETIME <![CDATA[<]]> SYSDATE - 7	
+		  AND WRITE_DATETIME <![CDATA[>=]]> SYSDATE - 7	
 	</select>
 	
 	<!-- 최근공구 -->
@@ -88,7 +88,7 @@
 		        FROM VIEW_BUYPOSTLIST
 		        WHERE REGION LIKE '%'||#{user_region}||'%'
 		          AND MAIN_CATE_CODE LIKE '%'||#{main_cate_code}||'%'
-		          AND WRITE_DATETIME <![CDATA[<]]> SYSDATE - 7
+		          AND WRITE_DATETIME <![CDATA[>=]]> SYSDATE - 7
 		    ) T
 		    WHERE ROWNUM <![CDATA[<]]> #{startList} + #{listSize}
 		)
@@ -414,8 +414,36 @@
 		{CALL PRC_BP_HOST_CANCEL (#{buypost_code})}	
 	</select>
 	
+	<!--============================== 공동구매 게시물 상세보기 ==============================-->
 	
-	<!--============================== 공동구매 게시물 상세보기 ==============================-->	
+	<!--=============================== 공동구매 게시물 작성폼 ===============================-->
+	
+	<!-- 대분류에 맞는 소분류 목록 -->
+	<select id="subCateList" resultType="com.test.mybatis.SubCategoryDTO">
+		SELECT CODE, NAME, MAIN_CATE_CODE
+		FROM SUB_CATE
+		WHERE MAIN_CATE_CODE = #{main_cate_code}	
+	</select>
+	
+	<!-- 공동구매 게시물 INSERT -->
+	<select id="insertBuypost" statementType="CALLABLE">
+		{CALL PRC_BP_INSERT
+			(#{amount}, #{member_code}, #{title}, #{goods_photo_path}, #{url}, #{content, jdbcType=VARCHAR}
+		   , #{expiration_datetime}, #{total_price}, #{goods_num}, #{deadline}, #{trade_datetime}
+		   , #{location_x}, #{location_y}, #{region}, #{sub_cate_code}, #{goods_photo_name}
+		   , #{content_photo_name, jdbcType=VARCHAR}, #{content_photo_path, jdbcType=VARCHAR}, #{buy_number})}
+	</select>
+	
+	<!-- 회원이 가장 최근에 쓴 공동구매 게시물 코드(INSERT 후, 게시물 상세보기) -->
+	<select id="showInsertBuypost" resultType="java.lang.String">
+		SELECT NVL2(MAX(TO_NUMBER(SUBSTR(CODE, 3))), 'BP'||MAX(TO_NUMBER(SUBSTR(CODE, 3))), NULL) "CODE"
+		FROM BUYPOST
+		WHERE MEMBER_CODE = #{member_code}
+		  AND TITLE LIKE #{title}	
+	</select>	
+
+	
+	<!--=============================== 공동구매 게시물 작성폼 ===============================-->
 	
 	
 

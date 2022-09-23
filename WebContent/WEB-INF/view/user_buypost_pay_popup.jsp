@@ -105,12 +105,20 @@ button.swal2-cancel.swal2-styled:focus {
 		$(".buypostPayBtn").click(function()
 	   	{
 			let btn = '<%=request.getParameter("btn")%>';
-			if (btn === 'first')
-				$('#buypostPay-form').attr('action', 'insertparticipant.lion');
-			else if (btn === 'more')
-				$('#buypostPay-form').attr('action', 'updateparticipant.lion');
+			let type = '<%=request.getParameter("type")%>';
 			
-			$('#buypostPay-form').submit();
+			if (btn === 'first') {
+				$('#buypostPay-form').attr('action', 'insertparticipant.lion');
+				$('#buypostPay-form').submit();
+			}
+			else if (btn === 'more') {
+				$('#buypostPay-form').attr('action', 'updateparticipant.lion');
+				$('#buypostPay-form').submit();
+			}
+			else if (type === 'host') {
+				window.close();
+			}
+			
 	    });
     });
 	
@@ -183,9 +191,11 @@ button.swal2-cancel.swal2-styled:focus {
 							<%
 							if (request.getParameter("type").equals("host")) {
 							%>
-							<span class="payNotice hostMsg">* 참여자가 내용 수정이 불가합니다. (진행 취소 후 재작성)</span><br />
+							<span class="payNotice hostMsg">* 참여자가 있으면 글 수정이 불가하므로 작성하신 내용을<br /> 
+															&nbsp;&nbsp;&nbsp;다시 한 번 확인해주세요.(진행 취소 후 재작성)</span><br />
 							<span class="payNotice hostMsg">* 진행 취소 시, 포인트는 환불 처리됩니다.</span><br />
-							<span class="payNotice hostMsg">* 공동구매 마감 24시간 전에는 수정 및 취소 불가합니다.</span>
+							<span class="payNotice hostMsg">* 게시물 신고 승인 및 작성자 영구정지 시,<br />
+															&nbsp;&nbsp;&nbsp;공동구매는 취소처리되고, 포인트는 환불 처리됩니다.</span>
 							<%
 							} else if (request.getParameter("type").equals("participant")) {
 							%>

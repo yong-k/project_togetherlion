@@ -143,8 +143,8 @@
 						</div>
 						<div class="header__cart">
 							<ul>
-								<li><a href="<%=cp%>/mypage_wishlist.lion"><i class="fa fa-heart-o"></i></a></li>
-								<li><a href="<%=cp %>/user/user_buypostInsertForm.jsp"><i class="bi bi-pencil-square"></i></a></li>
+								<li><a href="mypage_wishlist.lion"><i class="fa fa-heart-o"></i></a></li>
+								<li><a href="buypostinsertform.lion"><i class="bi bi-pencil-square"></i></a></li>
 							</ul>
 						</div>
 					</div>

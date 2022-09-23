@@ -112,5 +112,17 @@ public interface IBuypostDAO
 	public void cancleBuypost(String buypost_code);
 	
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
+	
+	// 공동구매 게시물 작성폼 --------------------------------------------------------------------
+	//--▷ 대분류에 맞는 소분류 목록
+	public ArrayList<SubCategoryDTO> subCateList(String main_cate_code);
+	
+	//--▷ 공동구매 게시물 INSERT
+	public void insertBuypost(BuypostDTO buypost);
+	
+	//--▷ 회원이 가장 최근에 쓴 공동구매 게시물 코드(INSERT 후, 게시물 상세보기)
+	public String showInsertBuypost(HashMap<String, String> params);
+
+	// -------------------------------------------------------------------- 공동구매 게시물 작성폼
 	 
 }

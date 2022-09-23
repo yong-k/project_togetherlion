@@ -1,5 +1,6 @@
 package com.test.mybatis;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.test.util.Pagination;
 import com.test.util.Search_buypost;
 
@@ -582,10 +585,7 @@ public class MainController
 		params.put("buypost_code", buypost_code);
 		params.put("member_code", member_code);
 		
-		System.out.println(params.get("buypost_code"));
-		System.out.println(params.get("member_code"));
 		dao.deleteParticipant(params);
-		System.out.println("ge");
 		model.addAttribute("status", "cancel");
 		return "redirect:buypostarticle.lion?code=" + buypost_code;
 	}
@@ -611,4 +611,134 @@ public class MainController
 		return "redirect:main.lion";
 	}
 	// ------------------------------------------------------------------ 공동구매 게시물 상세보기
+	
+	
+	// 공동구매 게시물 작성 ----------------------------------------------------------------------
+	
+	// 공동구매 게시물 작성폼
+	@RequestMapping("/buypostinsertform.lion")
+	public String buypostInsertForm(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<MainCategoryDTO> mainCateList = dao.mainCateList();
+
+		model.addAttribute("mainCateList", mainCateList);
+		return "/WEB-INF/view/user_buypostInsertForm.jsp";
+	}
+	
+	// 대분류에 따른 소분류 목록 가져오기
+	@RequestMapping("/buypostsubcate.lion")
+	public String buypostSubCate(HttpServletRequest request, Model model)
+	{
+		String ajaxCode = "buypostSubcate";
+		String main_cate_code = request.getParameter("code");
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		ArrayList<SubCategoryDTO> subCateList = dao.subCateList(main_cate_code);
+		
+		model.addAttribute("ajaxCode", ajaxCode);
+		model.addAttribute("subCateList", subCateList);
+		return "/WEB-INF/view/user_buypostInsertForm_ajax.jsp";
+	}
+		
+	// 공동구매 게시물 - 지도팝업
+	@RequestMapping("/buypostmap.lion")
+	public String buypostMap(HttpServletRequest request, Model model) 
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+
+		return "/WEB-INF/view/user_map_buypost.jsp";
+	}
+	
+	// 공동구매 게시물 insert
+	@RequestMapping("/buypostinsert.lion")
+	public String insertBuypost(HttpServletRequest request, Model model) throws IOException
+	{
+		// member_code(세션값) 확인
+		HttpSession session = request.getSession();
+		String member_code = (String)session.getAttribute("member_code");
+		if (member_code == null)
+		{
+			model.addAttribute("errCase", "login");
+			return "redirect:loginform.lion";
+		}
+		
+		// 파일이 저장될 서버의 경로
+		String savePath = request.getServletContext().getRealPath("img/buypost");
+		
+		// 파일 크기 15MB로 제한
+		int sizeLimit = 1024*1024*15;
+		
+		// HttpServletRequest request	: request 객체
+		// String saveDirectory			: 저장될 서버 경로
+		// int maxPostSize				: 파일 최대 크기
+		// String encoding				: 인코딩 방식
+		// FileRenamePolicy				: 같은 이름의 파일명 방지 처리
+		// 아래와 같이 MultipartRequest 를 생성만 해주면 파일이 업로드된다.(파일 자체의 업로드 완료)
+		MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
+		
+		// ================== 아래는 전송 받은 데이터를 DB 테이블에 저장하기 위한 작업 ==================
+		
+		// MultipartRequest 로 전송받은 데이터를 불러온다.
+		// enctype을 "multipart/form-data"로 선언하고 submit 한 데이터들은
+		// request 객체가 아닌 MultipartRequest 객체로 불러와야 한다.
+		BuypostDTO buypost = new BuypostDTO();
+		buypost.setAmount(multi.getParameter("amount"));
+		buypost.setMember_code(member_code);
+		String title = multi.getParameter("title");
+		buypost.setTitle(title);
+		String goods_photo_name = multi.getFilesystemName("goods_photo_name");
+		String fileFullPath = savePath + "/" + goods_photo_name;
+		buypost.setGoods_photo_name(goods_photo_name);
+		buypost.setGoods_photo_path(fileFullPath);
+		buypost.setUrl(multi.getParameter("url"));
+		buypost.setContent(multi.getParameter("content"));
+		buypost.setExpiration_datetime(multi.getParameter("expiration_datetime"));
+		buypost.setTotal_price(multi.getParameter("total_price"));
+		buypost.setGoods_num(multi.getParameter("goods_num"));
+		buypost.setGoods_num(multi.getParameter("goods_num"));
+		buypost.setDeadline(multi.getParameter("deadline"));
+		buypost.setTrade_datetime(multi.getParameter("trade_datetime"));
+		buypost.setLocation_x(multi.getParameter("location_x"));
+		buypost.setLocation_y(multi.getParameter("location_y"));
+		buypost.setRegion(multi.getParameter("region"));
+		buypost.setSub_cate_code(multi.getParameter("sub_cate_code"));		
+		buypost.setBuy_number(multi.getParameter("buy_number"));
+		String content_photo_name = multi.getFilesystemName("content_photo_name");
+		buypost.setContent_photo_name(content_photo_name);
+		if (content_photo_name != null) {
+			buypost.setContent_photo_path(fileFullPath);
+		}
+			 
+		IBuypostDAO dao = sqlSession.getMapper(IBuypostDAO.class);
+		dao.insertBuypost(buypost);
+		
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("member_code", member_code);
+		params.put("title", title);
+		String buypost_code = dao.showInsertBuypost(params);
+		if (buypost_code == null) {
+			model.addAttribute("errorCode", "insert");
+			return "redirect:buypostinsertform.lion";
+		}
+		
+		return "redirect:buypostarticle.lion?code=" + buypost_code;
+	}
+	
+	// ---------------------------------------------------------------------- 공동구매 게시물 작성
 }

@@ -8,11 +8,15 @@ public class BuypostDTO
 		, region, sub_cate_code, main_cate_code, write_datetime, deadline, content;
 	private String is_blind, wish_code;
 	
-	// 추가) 공동구매 게시물 상세보기
+	// +) 공동구매 게시물 상세보기
 	private String member_code, nickname, photo_name, url, expiration_datetime, price
 		, trade_datetime, location_x, location_y, content_photo_name
 		, sub_cate_name, main_cate_name, participant_num;
+	
+	// +) 공동구매 게시물 작성폼
+	private String goods_photo_path, total_price, content_photo_path;
 
+	
 	public String getCode()
 	{
 		return code;
@@ -331,6 +335,36 @@ public class BuypostDTO
 	public void setParticipant_num(String participant_num)
 	{
 		this.participant_num = participant_num;
+	}
+
+	public String getGoods_photo_path()
+	{
+		return goods_photo_path;
+	}
+
+	public void setGoods_photo_path(String goods_photo_path)
+	{
+		this.goods_photo_path = goods_photo_path;
+	}
+
+	public String getTotal_price()
+	{
+		return total_price;
+	}
+
+	public void setTotal_price(String total_price)
+	{
+		this.total_price = total_price;
+	}
+
+	public String getContent_photo_path()
+	{
+		return content_photo_path;
+	}
+
+	public void setContent_photo_path(String content_photo_path)
+	{
+		this.content_photo_path = content_photo_path;
 	}
 	
 }
