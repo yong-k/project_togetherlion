@@ -7,12 +7,33 @@
 
 그럼 **같이사자**와 함께 **공구**해요~~🎵
 
+<br>
 
 ## 🥝 같이사자의 주요 기능
 - 지도에서 선택한 지역구에서 진행 중인 공동구매를 확인할 수 있습니다.
 - 참여하고 싶은 공동구매가 있다면, 구매를 원하는 개수를 선택하고 포인트 결제 후, 참여할 수 있습니다.
-- 모든 참여자들이 **구매확정**을 하면, 공동구매가 완료됩니다!
+- 모든 참여자들이 구매확정을 하면, 공동구매가 완료됩니다!
 - 마이페이지에서 진행/침여한 공동구매 목록 확인, 포인트 충전 등을 할 수 있습니다.
+
+<br>
+
+## 🦁 Introduction
+![00_메인화면](https://user-images.githubusercontent.com/99342672/198884944-3996f61b-dc93-4f45-900d-ae1d1acc6a3c.png)
+
+<br>
+
+## 📚 Tech Stack
+<div align='left'>
+ <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/>
+ <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/>
+ <img src="https://img.shields.io/badge/JavaScript-FFE400?style=for-the-badge&logo=JavaScript&logoColor=black">
+ <br>
+ <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+ <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=Oracle&logoColor=white"/>
+</div>
+
+<br>
 
 ## 🥞 Member Info.
 | Member | e-mail |
