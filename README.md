@@ -22,6 +22,12 @@
 
 <br>
 
+
+## ⚙️ DB
+![yong_final_ERD](https://user-images.githubusercontent.com/99342672/205446566-7e7ef015-7eaa-4344-bbad-0329b817e897.png)
+
+<br>
+
 ## 📚 Tech Stack
 <div align='left'>
  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
