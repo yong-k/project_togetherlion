@@ -58,13 +58,13 @@ Link: https://www.erdcloud.com/d/4HjJATBWgjeRvRSZK
 
 ## 🎞 스토리보드 (카카오오븐 사용)
 <b>메인</b><br>
-![스토리보드_메인](https://github.com/yong-k/readmePractice/assets/99342672/cb6b5ff3-5818-4128-ad36-7ee4cfbf1eef)
+![스토리보드_메인](https://github.com/yong-k/project_togetherlion/assets/99342672/ca026100-e39d-44d1-a261-dc6f232107e6)
 <br><br><br>
 <b>공동구매 게시물 - 회원(공동구매 미참여)</b><br>
-![스토리보드_공동구매게시물](https://github.com/yong-k/readmePractice/assets/99342672/5f2a5751-e9eb-47d9-ae94-070e5f605890)
+![스토리보드_공동구매게시물](https://github.com/yong-k/project_togetherlion/assets/99342672/f073e9de-b922-4f94-bad3-ab40ddf8171b)
 <br><br><br>
 <b>마이페이지 메인</b><br>
-![스토리보드_마이페이지](https://github.com/yong-k/readmePractice/assets/99342672/d90b3012-1d9e-4d75-9420-ddbc0e1578f7)
+![스토리보드_마이페이지](https://github.com/yong-k/project_togetherlion/assets/99342672/361ca650-f84d-4c5a-afc5-8f10b04ad237)
 <br><br>
 
 <br>
@@ -77,22 +77,22 @@ Link: https://www.erdcloud.com/d/4HjJATBWgjeRvRSZK
 ![00_메인화면](https://user-images.githubusercontent.com/99342672/198884944-3996f61b-dc93-4f45-900d-ae1d1acc6a3c.png)
 <br><br><br>
 <b>회원가입</b> &nbsp;&nbsp;[(Click!)블로그GO: 회원가입 더 자세히 보러 가기](https://yong-codinglog.tistory.com/7)<br>
-![02-1_경고문구](https://github.com/yong-k/readmePractice/assets/99342672/9387682f-ed94-4cd0-bdb2-08f5ab8e14ea)
+![02-1_경고문구](https://github.com/yong-k/project_togetherlion/assets/99342672/5d674f97-0bc6-41e1-bf6f-3559536e2565)
 <br><br><br>
 <b>공동구매 게시물 (글 작성자 입장)</b> &nbsp;&nbsp;[(Click!)블로그GO: 공동구매 더 자세히 보러 가기](https://yong-codinglog.tistory.com/category/PROJECT/%EA%B0%99%EC%9D%B4%EC%82%AC%EC%9E%90%28%EA%B3%B5%EB%8F%99%EA%B5%AC%EB%A7%A4%29?page=1)<br>
-![13_9-5_글작성완료_1](https://github.com/yong-k/readmePractice/assets/99342672/1c831ad8-7671-4d90-922b-c0824f3e1dab)
+![13_9-5_글작성완료_1](https://github.com/yong-k/project_togetherlion/assets/99342672/b45a56b7-250e-4af9-94a5-a2010334a53e)
 <br><br><br>
 <b>공동구매 게시물 (비작성자 회원 입장)</b> &nbsp;&nbsp;[(Click!)블로그GO: 공동구매 더 자세히 보러 가기](https://yong-codinglog.tistory.com/category/PROJECT/%EA%B0%99%EC%9D%B4%EC%82%AC%EC%9E%90%28%EA%B3%B5%EB%8F%99%EA%B5%AC%EB%A7%A4%29?page=1)<br>
-![12-9-8_신고할 게시물](https://github.com/yong-k/readmePractice/assets/99342672/c9f3233f-ae3e-4720-b450-0bb5b146bc78)
+![12-9-8_신고할 게시물](https://github.com/yong-k/project_togetherlion/assets/99342672/512ec5be-36de-4bb6-9b5d-690d10a8ff4f)
 <br><br><br>
 <b>마이페이지 > 회원 헤더</b> &nbsp;&nbsp;[(Click!)블로그GO: 마이페이지 더 자세히 보러 가기](https://yong-codinglog.tistory.com/9)<br>
-![06_마이페이지헤더1_hover](https://github.com/yong-k/readmePractice/assets/99342672/478771ec-d2ad-4d7d-9ae3-7ce498518228)
+![06_마이페이지헤더1_hover](https://github.com/yong-k/project_togetherlion/assets/99342672/34959478-ed2f-4640-a4fe-cc5062215971)
 <br><br><br>
 <b>포인트 충전</b> &nbsp;&nbsp;[(Click!)블로그GO: 포인트 더 자세히 보러 가기](https://yong-codinglog.tistory.com/18)<br>
-![09-2-1_마이페이지_포인트메인_목록예시(전체)](https://github.com/yong-k/readmePractice/assets/99342672/8b29d058-abbe-46a5-8eef-5de5796d11c6)
+![09-2-1_마이페이지_포인트메인_목록예시(전체)](https://github.com/yong-k/project_togetherlion/assets/99342672/576f5667-e4f0-4a40-a2eb-afc9686f3a32)
 <br><br><br>
 <b>댓글 신고</b> &nbsp;&nbsp;[(Click!)블로그GO: 신고 더 자세히 보러 가기](https://yong-codinglog.tistory.com/31)<br>
-![12-9-2_댓글신고팝업](https://github.com/yong-k/readmePractice/assets/99342672/3152b004-5d63-4afe-b00b-b383e9401c62)
+![12-9-2_댓글신고팝업](https://github.com/yong-k/project_togetherlion/assets/99342672/ebcaff2d-94f8-40d3-a2a3-e4b49ca5b358)
 <br><br><br>
 
 <br>
