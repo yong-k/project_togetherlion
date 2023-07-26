@@ -28,7 +28,7 @@
 
 📌 <b>Target</b> : 20,30대 대학생 혹은 1인 가구
 
-📌 <b>Reference Site</b> : 당근마켓(idea), 마켓컬리(UI)
+📌 <b>Reference Site</b> : [당근마켓(idea)](https://www.daangn.com), [마켓컬리(UI)](https://www.kurly.com/main)
 
 📌 <b>개요</b>: 인터넷 쇼핑을 하다보면, 혼자 사기에 양이 많거나 무료 배송비 기준을 채우느라 굳이 필요 없는 상품을 담았던 적이 있습니다. <br>그래서 소비자들이 상품을 더 합리적/효율적으로 구입할 수 있도록 도움을 주는 웹 애플리케이션을 개발했습니다.
 
